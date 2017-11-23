@@ -1,0 +1,19 @@
+{
+  "name": "recocolor",
+  "version": "0.0.1",
+  "description": "Convert color",
+  "main": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meganedogYuu/recoColor.git"
+  },
+  "author": {
+    "name": "Yuki Takara",
+    "url": "http://yuu.1000quu.com/"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/meganedogYuu/recoColor"
+}
