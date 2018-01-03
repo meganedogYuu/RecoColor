@@ -18,6 +18,10 @@
   "homepage": "https://github.com/meganedogYuu/recoColor",
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-typescript": "^3.2.3"
+    "gulp-notify": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-typescript": "^3.2.3",
+    "gulp-watch": "^4.3.11",
+    "typescript": "^2.6.2"
   }
 }
