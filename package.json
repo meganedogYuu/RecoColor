@@ -4,7 +4,10 @@
   "description": "Convert color",
   "main": "./index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "gulp watch",
+    "build": "gulp ts-build",
+    "clean-install": "rm -rf ./node_modules && rm -rf ~/.npm && npm install"
   },
   "repository": {
     "type": "git",
