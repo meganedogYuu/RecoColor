@@ -15,5 +15,9 @@
     "url": "http://yuu.1000quu.com/"
   },
   "license": "MIT",
-  "homepage": "https://github.com/meganedogYuu/recoColor"
+  "homepage": "https://github.com/meganedogYuu/recoColor",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.3"
+  }
 }
