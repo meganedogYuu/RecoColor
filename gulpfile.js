@@ -6,8 +6,8 @@ const watch = require('gulp-watch');
 
 // ファイルパスの定義
 const paths = {
-  "src": "dest/**/*.ts",
-  "dest": "src/",
+  "src": "src/**/*.ts",
+  "dest": "lib/",
   "tsconfig": "./tsconfig.json"
 };
 
