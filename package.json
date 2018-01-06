@@ -8,7 +8,7 @@
     "watch": "gulp watch",
     "build": "gulp ts-build",
     "lint": "tslint 'src/**/*.ts'",
-    "clean-install": "rm -rf ./node_modules && rm -rf ~/.npm && npm install"
+    "clean-install": "rm -rf ./node_modules && rm -rf ~/.npm && yarn install"
   },
   "repository": {
     "type": "git",
