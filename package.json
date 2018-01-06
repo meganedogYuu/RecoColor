@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "gulp watch",
     "build": "gulp ts-build",
+    "lint": "tslint 'src/**/*.ts'",
     "clean-install": "rm -rf ./node_modules && rm -rf ~/.npm && npm install"
   },
   "repository": {
@@ -25,6 +26,8 @@
     "gulp-plumber": "^1.1.0",
     "gulp-typescript": "^3.2.3",
     "gulp-watch": "^4.3.11",
+    "tslint": "^5.8.0",
+    "tslint-config-airbnb": "^5.4.2",
     "typescript": "^2.6.2"
   }
 }
