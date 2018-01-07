@@ -24,3 +24,28 @@ export function rgbToRgbColor(any: any): RgbColor {
 
   return new RgbColor({ r: 0, g: 0, b: 0 });
 }
+
+/**
+ * hex値をRgbColorクラスに変換する
+ *
+ * @param {string} hex
+ * @returns {RgbColor}
+ */
+export function hexToRgbColor(hex: string): RgbColor {
+
+  if (!isHex(hex)) return new RgbColor({ r: 0, g: 0, b: 0 });
+
+  // "#"がある場合はなくす
+  const exclusionHex: string = hex.includes('#') ? hex.replace('#', '') : hex;
+
+  // 強制的に6文字のhex値にする
+  const sixCharacterHex: string = exclusionHex.length === 3
+    ? exclusionHex.split('').reduce((previous, current) => `${previous}${current}${current}`, '')
+    : exclusionHex;
+
+  const r: number = parseInt(sixCharacterHex.substring(0, 2), 16);
+  const g: number = parseInt(sixCharacterHex.substring(2, 4), 16);
+  const b: number = parseInt(sixCharacterHex.substring(4, 6), 16);
+
+  return new RgbColor({ r, g, b });
+}
