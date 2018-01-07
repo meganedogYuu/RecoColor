@@ -93,3 +93,15 @@ export function isHex(val: string): boolean {
   // 0~fの値であること
   return (/^[0-9a-fA-F]*$/.test(hex));
 }
+
+/**
+ * 受け取った値がどのタイプに相当するか判定し名前を返す
+ *
+ * @param any
+ * @returns {string} "RGB", "Hex", "none"の3種類
+ */
+export function getType(any: any): string {
+  if (isRgb(any)) return 'RGB';
+  if (isHex(any)) return 'Hex';
+  return 'none';
+}
