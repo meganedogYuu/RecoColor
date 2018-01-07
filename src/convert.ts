@@ -2,6 +2,12 @@ import { isRgb, isHex } from './check';
 import { RgbColor } from './Class/RgbColor';
 import { typeOf } from './util';
 
+/**
+ * rgb値をRgbColorクラスに変換する
+ *
+ * @param any
+ * @returns {RgbColor}
+ */
 export function rgbToRgbColor(any: any): RgbColor {
 
   if (!isRgb(any)) return new RgbColor({ r: 0, g: 0, b: 0 });
@@ -24,6 +30,7 @@ export function rgbToRgbColor(any: any): RgbColor {
 
   return new RgbColor({ r: 0, g: 0, b: 0 });
 }
+
 
 /**
  * hex値をRgbColorクラスに変換する
