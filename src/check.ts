@@ -1,6 +1,8 @@
+import { isRgbLength, isRgbNumberFromArray, typeOf } from './util';
+
 /**
  * RGB値かの判定を行う
- * OK: [10,10,10], "rgb(10, 10, 10)", "RGB(10, 10, 10)"
+ * OK: [10,10,10], "rgb(10, 10, 10)", "RGB(10, 10, 10)", {r: 10, g, 20, b:30}
  *
  * 条件:
  * - 配列の場合
@@ -11,6 +13,9 @@
  *   - rgbの文字列の後の数値が()で囲まれていること
  *   - ()の中の数値が","で区切られた数値が3つあること
  *   - 3つの数値が0 ~ 255の数値であること
+ * - オブジェクト型の場合:
+ *   - r・g・b それぞれのkeyが存在すること
+ *   - それぞれのkeyに設定された値が数値でありかつ0~255であること
  *
  * @param val
  * @returns {boolean}
@@ -18,7 +23,7 @@
 export function isRgb(val: any): boolean {
   // 配列の場合
   if (val instanceof Array) {
-    // 配列の全ての数値が0~255であること
+    // 全要素のケタ数が3ケタであり、全要素の値が0~255であること
     return isRgbLength(val) && isRgbNumberFromArray(val);
   }
 
@@ -34,39 +39,20 @@ export function isRgb(val: any): boolean {
 
     // 数値が3ケタであり、数値が全て0~255であること
     return (isRgbLength(numArr) && isRgbNumberFromArray(numArr));
+  }
 
+  // オブジェクト型の場合
+  if (typeOf(val) === 'object') {
+    // RGBそれぞれの値を取得
+    const r: number = parseInt(val.r, 10);
+    const g: number = parseInt(val.g, 10);
+    const b: number = parseInt(val.b, 10);
+
+    // 全ての値が0~255であるかの確認
+    return isRgbNumberFromArray([r, g, b]);
   }
 
   return false;
-
-  /**
-   * 受け取った配列が3ケタであるかの判定をする
-   *
-   * @param {any[]} val
-   * @returns {boolean}
-   */
-  function isRgbLength(val: any[]): boolean {
-    return val.length === 3;
-  }
-
-  /**
-   * 受け取った数値が0 ~ 255のRGBの数値であるか判定する
-   *
-   * @param {number} num
-   * @returns {boolean}
-   */
-  function isRgbNumberFromNumber(num: number): boolean {
-    return 0 <= num && num <= 255;
-  }
-
-  /**
-   * 受け取った配列の数値が全て0 ~ 255のRGBの数値であるか判定する
-   * @param {number[]} arr
-   * @returns {boolean}
-   */
-  function isRgbNumberFromArray(arr: number[]): boolean {
-    return arr.every(e => isRgbNumberFromNumber(e));
-  }
 }
 
 /**
