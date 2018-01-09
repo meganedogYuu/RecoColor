@@ -64,16 +64,20 @@ export function isRgb(val: any): boolean {
  * - #を外した状態で3ケタ・6ケタであること
  * - 0~fの値であること
  *
- * @param {string} val
+ * @param {any} val
  * @returns {boolean}
  */
-export function isHex(val: string): boolean {
+export function isHex(val: any): boolean {
+  // 文字列かの判定
+  if (typeof val !== 'string') return false;
+
+  const str: string = val;
 
   // "#"が付く場合は最初につくこと
-  if (val.includes('#') && !/^#.+/.test(val)) return false;
+  if (str.includes('#') && !/^#.+/.test(str)) return false;
 
   // #を外した状態で3ケタ・6ケタであること
-  const hex: string = val.includes('#') ? val.replace('#', '') : val;
+  const hex: string = str.includes('#') ? str.replace('#', '') : str;
   if (hex.length !== 3 && hex.length !== 6) return false;
 
   // 0~fの値であること
