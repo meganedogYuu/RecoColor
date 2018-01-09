@@ -4,7 +4,7 @@
   "description": "Convert color",
   "main": "./index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha spec/*.js",
     "watch": "gulp watch",
     "build": "gulp ts-build",
     "lint": "tslint 'src/**/*.ts'",
@@ -21,13 +21,13 @@
   "license": "MIT",
   "homepage": "https://github.com/meganedogYuu/recoColor",
   "devDependencies": {
+    "chai": "^4.1.2",
     "gulp": "^3.9.1",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-typescript": "^3.2.3",
     "gulp-watch": "^4.3.11",
     "mocha": "^4.1.0",
-    "chai": "^4.1.2",
     "tslint": "^5.8.0",
     "tslint-config-airbnb": "^5.4.2",
     "typescript": "^2.6.2"
