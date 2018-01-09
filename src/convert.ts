@@ -56,3 +56,19 @@ export function hexToRgbColor(hex: string): RgbColor {
 
   return new RgbColor({ r, g, b });
 }
+
+
+/**
+ * RgbColorオブジェクトをhex値に変換する
+ *
+ * @param {RgbColor} rgbColor
+ * @returns {string}
+ */
+export function rgbColorToHex(rgbColor: RgbColor): string {
+  return `${numberToTwoDigitHex(rgbColor.r)}${numberToTwoDigitHex(rgbColor.g)}${numberToTwoDigitHex(rgbColor.b)}`;
+
+  function numberToTwoDigitHex(num: number): string {
+    const hex = num.toString(16);
+    return hex.length === 1 ? `0${hex}` : `${hex}`;
+  }
+}
