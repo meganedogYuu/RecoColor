@@ -38,3 +38,13 @@ export function typeOf(obj) {
   const toString = Object.prototype.toString;
   return toString.call(obj).slice(8, -1).toLowerCase();
 }
+
+/**
+ * null もしくは undefined の場合 true を返す
+ *
+ * @param obj
+ * @returns {boolean}
+ */
+export function isNullOrUndefined(obj: any): boolean {
+  return (obj === undefined || obj === null);
+}
