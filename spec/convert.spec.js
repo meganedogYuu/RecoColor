@@ -1,6 +1,6 @@
 const chai = require('chai');
 const assert = chai.assert;
-const convert = require('../lib/convert.js');
+const convert = require('../lib/Utility/convert.js');
 const rgbColor = require('../lib/Class/RgbColor');
 
 describe('rgbToRgbColorのtest', () => {

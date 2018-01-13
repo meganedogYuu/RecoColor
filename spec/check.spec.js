@@ -1,6 +1,6 @@
 const chai = require('chai');
 const assert = chai.assert;
-const check = require('../lib/check.js');
+const check = require('../lib/Utility/check.js');
 
 describe('isRgbのtest', () => {
   describe('isRgb 正常値のテスト', () => {
