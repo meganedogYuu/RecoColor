@@ -34,7 +34,7 @@ export function isRgbNumberFromArray(arr: number[]): boolean {
  * @param obj
  * @returns {string}
  */
-export function typeOf(obj) {
+export function typeOf(obj): string {
   const toString = Object.prototype.toString;
   return toString.call(obj).slice(8, -1).toLowerCase();
 }
