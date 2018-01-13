@@ -1,6 +1,7 @@
 import { isRgb, isHex } from './check';
 import { RgbColor } from './Class/RgbColor';
 import { typeOf } from './util';
+import { isNullOrUndefined } from './util';
 
 /**
  * rgb値をRgbColorクラスに変換する
@@ -10,7 +11,7 @@ import { typeOf } from './util';
  */
 export function rgbToRgbColor(any: any): RgbColor {
 
-  if (!isRgb(any)) return new RgbColor({ r: 0, g: 0, b: 0 });
+  if (!isRgb(any)) return;
 
   // 配列の場合
   if (any instanceof Array) {
@@ -40,7 +41,7 @@ export function rgbToRgbColor(any: any): RgbColor {
  */
 export function hexToRgbColor(hex: string): RgbColor {
 
-  if (!isHex(hex)) return new RgbColor({ r: 0, g: 0, b: 0 });
+  if (!isHex(hex)) return;
 
   // "#"がある場合はなくす
   const exclusionHex: string = hex.includes('#') ? hex.replace('#', '') : hex;
@@ -65,6 +66,9 @@ export function hexToRgbColor(hex: string): RgbColor {
  * @returns {string}
  */
 export function rgbColorToHex(rgbColor: RgbColor): string {
+
+  if (isNullOrUndefined(rgbColor)) return;
+
   return `${numberToTwoDigitHex(rgbColor.r)}${numberToTwoDigitHex(rgbColor.g)}${numberToTwoDigitHex(rgbColor.b)}`;
 
   function numberToTwoDigitHex(num: number): string {
