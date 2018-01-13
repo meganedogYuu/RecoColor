@@ -1,7 +1,6 @@
 import { isRgb, isHex } from './check';
-import { RgbColor } from './Class/RgbColor';
-import { typeOf } from './util';
-import { isNullOrUndefined } from './util';
+import { RgbColor } from '../class/RgbColor';
+import { typeOf, isNullOrUndefined } from './util';
 
 /**
  * rgb値をRgbColorクラスに変換する
