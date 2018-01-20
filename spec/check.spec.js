@@ -58,7 +58,7 @@ describe('getTypeのtest', () => {
 
   describe('getType hex のテスト', () => {
     const any = ['#fff000', '#fff', 'ffffff', 'fff'];
-    const correct = 'Hex';
+    const correct = 'HEX';
 
     any.forEach(e => {
       it(`${e} is ${correct}`, () => {
