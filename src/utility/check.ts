@@ -88,10 +88,10 @@ export function isHex(val: any): boolean {
  * 受け取った値がどのタイプに相当するか判定し名前を返す
  *
  * @param any
- * @returns {string} "RGB", "Hex", "none"の3種類
+ * @returns {string} "RGB", "HEX", "none"の3種類
  */
 export function getType(any: any): string {
   if (isRgb(any)) return 'RGB';
-  if (isHex(any)) return 'Hex';
+  if (isHex(any)) return 'HEX';
   return 'none';
 }
