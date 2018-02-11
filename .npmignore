@@ -1,0 +1,5 @@
+spec/
+src/
+.idea/
+tsconfig.json
+tslint.json
