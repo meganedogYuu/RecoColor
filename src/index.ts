@@ -8,7 +8,7 @@ export default class RecoColor {
 
   private _originalColor: any;
   private _option: { key?: string };
-  private _rgbColor: RgbColor;
+  private _rgbColor;
 
   constructor(color: any, opts: { key?: string }) {
     this._originalColor = (color) ? color : '';
