@@ -1,7 +1,7 @@
 import { isRgb, isHex, getType } from './utility/check';
 import { rgbToRgbColor, hexToRgbColor, rgbColorToHex } from './utility/convert';
 import { isNullOrUndefined } from './utility/util';
-import { RgbColor } from './Class/RgbColor';
+import { RgbColor } from './member/RgbColor';
 
 
 export default class RecoColor {

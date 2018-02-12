@@ -1,5 +1,5 @@
 import { isRgb, isHex } from './check';
-import { RgbColor } from '../class/RgbColor';
+import { RgbColor } from '../member/RgbColor';
 import { typeOf, isNullOrUndefined } from './util';
 
 /**
