@@ -75,3 +75,21 @@ export function rgbColorToHex(rgbColor: RgbColor): string {
     return hex.length === 1 ? `0${hex}` : `${hex}`;
   }
 }
+
+/**
+ * 受け取ったRgbColorの反対色を求め、RgbColorとして返す
+ *
+ * @param {RgbColor} rgbColor
+ * @returns {RgbColor}
+ */
+export function getClashingColorFrom(rgbColor: RgbColor): RgbColor {
+
+  return new RgbColor({ r: getClashing(rgbColor.r), g: getClashing(rgbColor.g), b: getClashing(rgbColor.b) });
+
+  // 受け取った色の反対色にあたる値を取得する
+  function getClashing(num: number): number {
+    const maxValue = 255;
+    return maxValue - num;
+  }
+}
+
