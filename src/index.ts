@@ -1,5 +1,5 @@
 import { isRgb, isHex, getType } from './utility/check';
-import { rgbToRgbColor, hexToRgbColor, rgbColorToHex } from './utility/convert';
+import { rgbToRgbColor, hexToRgbColor, rgbColorToHex, getClashingColorFrom } from './utility/convert';
 import { isNullOrUndefined } from './utility/util';
 import { RgbColor } from './member/RgbColor';
 
@@ -118,6 +118,16 @@ export default class RecoColor {
     return this._rgbColor.b;
   }
 
+  /**
+   * 反対色を求める
+   *
+   * @returns {{r: number; g: number; b: number}}
+   */
+  public getClashingColor(): { r: number, g: number, b: number } {
+    if (isNullOrUndefined(this._rgbColor)) return;
+    const clashingColor: RgbColor = getClashingColorFrom(this._rgbColor);
+    return clashingColor.getObject();
+  }
 
   /**
    * this._originalColor から this._rgbColor に値を設定する
