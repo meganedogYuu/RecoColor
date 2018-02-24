@@ -203,6 +203,27 @@ color. getBlue()  // undefined
 ```
 
 
+#### getClashingColor
+
+反対色の値をRGBのオブジェクトで取得
+（設定した値が正しくない場合は `undefined` を返します）
+
+```javascript
+const color = new recoColor("#fff");
+color. getClashingColor()  // {r:0, g:0, b:0}
+
+const color = new recoColor("000");
+color. getClashingColor()  // {r: 255, g: 255, b: 255}
+
+const color = new recoColor([30, 10, 240]);
+color. getClashingColor()  // {r: 225, g: 245, b: 15}
+
+const color = new recoColor("rgb(200, 10, 1)");
+color. getClashingColor()  // {r: 55, g: 245, b: 254}
+
+const color = new recoColor("#ffff");
+color. getClashingColor()  // undefined
+```
 
 #### isRgb
 
