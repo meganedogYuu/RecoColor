@@ -80,13 +80,13 @@ color.set("00f0ab");
 
 ```javascript
 const color = new recoColor("#fff");
-color.getOriginal()  // "#fff"
+color.getOriginal();  // "#fff"
 
 const color = new recoColor([0, 10, 255]);
-color.getOriginal()  // [0, 10, 255]
+color.getOriginal();  // [0, 10, 255]
 
 const color = new recoColor("1234567");
-color.getOriginal()  // "1234567" => 誤った値でも取得可能 
+color.getOriginal();  // "1234567" => 誤った値でも取得可能 
 ```
 
 #### getType
@@ -96,13 +96,13 @@ color.getOriginal()  // "1234567" => 誤った値でも取得可能
 
 ```javascript
 const color = new recoColor([0, 10, 255]);
-color. getType()  // "RGB"
+color. getType();  // "RGB"
 
 const color = new recoColor("#fff");
-color. getType()  // "HEX"
+color. getType();  // "HEX"
 
 const color = new recoColor("1234567");
-color.getOriginal()  // "none"
+color.getOriginal();  // "none"
 ```
 
 #### getRgb
@@ -112,16 +112,16 @@ RGB値で表した場合の値をオブジェクト型で取得
 
 ```javascript
 const color = new recoColor("#fff");
-color. getRgb()  // {r: 255, g: 255, b: 255}
+color. getRgb();  // {r: 255, g: 255, b: 255}
 
 const color = new recoColor("abc");
-color. getRgb()  // {r: 170, g: 187, b: 204}
+color. getRgb();  // {r: 170, g: 187, b: 204}
 
 const color = new recoColor([0, 10, 255]);
-color. getRgb()  // {r: 0, g: 10, b: 255}
+color. getRgb();  // {r: 0, g: 10, b: 255}
 
 const color = new recoColor("#ffff");
-color. getRgb()  // undefined
+color. getRgb();  // undefined
 ```
 
 #### getHex
@@ -131,16 +131,16 @@ HEX値で表した場合の値を取得
 
 ```javascript
 const color = new recoColor("#fff");
-color. getHex()  // "ffffff"
+color. getHex();  // "ffffff"
 
 const color = new recoColor("abc");
-color. getHex()  // "aabbcc"
+color. getHex();  // "aabbcc"
 
 const color = new recoColor([0, 10, 255]);
-color. getHex()  // "000aff"
+color. getHex();  // "000aff"
 
 const color = new recoColor("#ffff");
-color. getHex()  // undefined
+color. getHex();  // undefined
 ```
 
 #### getRed
@@ -150,16 +150,16 @@ Rの値を数値で取得
 
 ```javascript
 const color = new recoColor("#fff");
-color. getRed()  // 255
+color. getRed();  // 255
 
 const color = new recoColor("abc");
-color. getRed()  // 170
+color. getRed();  // 170
 
 const color = new recoColor([0, 10, 255]);
-color. getRed()  // 0
+color. getRed();  // 0
 
 const color = new recoColor("#ffff");
-color. getRed()  // undefined
+color. getRed();  // undefined
 ```
 
 
@@ -170,16 +170,16 @@ Gの値を数値で取得
 
 ```javascript
 const color = new recoColor("#fff");
-color. getGreen()  // 255
+color. getGreen();  // 255
 
 const color = new recoColor("abc");
-color. getGreen()  // 180
+color. getGreen();  // 180
 
 const color = new recoColor([0, 10, 255]);
-color. getGreen()  // 10
+color. getGreen();  // 10
 
 const color = new recoColor("#ffff");
-color. getGreen()  // undefined
+color. getGreen();  // undefined
 ```
 
 
@@ -190,16 +190,16 @@ Bの値を数値で取得
 
 ```javascript
 const color = new recoColor("#fff");
-color. getBlue()  // 255
+color. getBlue();  // 255
 
 const color = new recoColor("abc");
-color. getBlue()  // 204
+color. getBlue();  // 204
 
 const color = new recoColor([0, 10, 255]);
-color. getBlue()  // 255
+color. getBlue();  // 255
 
 const color = new recoColor("#ffff");
-color. getBlue()  // undefined
+color. getBlue();  // undefined
 ```
 
 
@@ -210,19 +210,19 @@ color. getBlue()  // undefined
 
 ```javascript
 const color = new recoColor("#fff");
-color. getClashingColor()  // {r:0, g:0, b:0}
+color. getClashingColor();  // {r:0, g:0, b:0}
 
 const color = new recoColor("000");
-color. getClashingColor()  // {r: 255, g: 255, b: 255}
+color. getClashingColor();  // {r: 255, g: 255, b: 255}
 
 const color = new recoColor([30, 10, 240]);
-color. getClashingColor()  // {r: 225, g: 245, b: 15}
+color. getClashingColor();  // {r: 225, g: 245, b: 15}
 
 const color = new recoColor("rgb(200, 10, 1)");
-color. getClashingColor()  // {r: 55, g: 245, b: 254}
+color. getClashingColor();  // {r: 55, g: 245, b: 254}
 
 const color = new recoColor("#ffff");
-color. getClashingColor()  // undefined
+color. getClashingColor();  // undefined
 ```
 
 #### isRgb
@@ -231,10 +231,10 @@ color. getClashingColor()  // undefined
 
 ```javascript
 const color = new recoColor([0, 10, 255]);
-color.isHex()  // true
+color.isHex();  // true
 
 const color = new recoColor("#fff");
-color.isHex()  // false
+color.isHex();  // false
 ```
 
 
@@ -244,8 +244,8 @@ color.isHex()  // false
 
 ```javascript
 const color = new recoColor([0, 10, 255]);
-color.isHex()  // false
+color.isHex();  // false
 
 const color = new recoColor("#fff");
-color.isHex()  // true
+color.isHex();  // true
 ```
