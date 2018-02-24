@@ -4,7 +4,7 @@ const recoColor = require('../index');
 
 describe('RecoColor test', () => {
   describe('isRgb test', () => {
-    describe('isRgb trueの場合のテスト', () => {
+    describe('isRgb true の場合のテスト', () => {
       const tests = [[0, 10, 255], 'rgb(0, 120, 255)', 'RGB(0, 255, 255)', 'RGB(0,255,255)', {r: 0, g: 0, b: 255}];
 
       tests.forEach((element) => {
@@ -13,7 +13,7 @@ describe('RecoColor test', () => {
       });
     });
 
-    describe('isRgb falseの場合のテスト', () => {
+    describe('isRgb false の場合のテスト', () => {
       const tests = [[0, 255, 255, 255], [-10, 255, 255], [255, 255,  256], 'rgb 255, 255, 255', 'rgb(255, 255, 255', 'rgb(255, 255, a)', 'rgb(255, 255, 255, 255)', '{r: 0, g:0, b:255}', {r: 0, g:0, b:256}, {r: -1, g:0, b:255}, {r: -1, g:0, b:"a"}, "#fff", "#fff000", null];
 
       tests.forEach((element) => {
@@ -24,7 +24,7 @@ describe('RecoColor test', () => {
   });
 
   describe('isHex test', () => {
-    describe('isHex trueの場合のテスト', () => {
+    describe('isHex true の場合のテスト', () => {
       const tests = ['#fff', '#000000', 'abc', '00f0ab'];
 
       tests.forEach((element) => {
@@ -33,7 +33,7 @@ describe('RecoColor test', () => {
       });
     });
 
-    describe('isHex falseの場合のテスト', () => {
+    describe('isHex false の場合のテスト', () => {
       const tests = ['#ffff', '#fffffff', '$fff', '#ffg', 'null', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(0, 255, 255)', null];
 
       tests.forEach((element) => {
@@ -77,7 +77,7 @@ describe('RecoColor test', () => {
   });
 
   describe('getHex test', () => {
-    describe('正常値の場合の HEX値 を取得する', () => {
+    describe('正常値の場合の HEX 値 を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
       const answers = ['ffffff', 'aabbcc', '00f0ab', '000aff', '0078ff', 'b4145a', '140ab4'];
 
@@ -123,7 +123,7 @@ describe('RecoColor test', () => {
   });
 
   describe('getRed test', () => {
-    describe('正常値の場合の Redの値 を取得する', () => {
+    describe('正常値の場合の Red の値 を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
       const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180},];
 
@@ -146,7 +146,7 @@ describe('RecoColor test', () => {
   });
 
   describe('getGreen test', () => {
-    describe('正常値の場合の Greenの値 を取得する', () => {
+    describe('正常値の場合の Green の値 を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
       const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180},];
 
@@ -169,7 +169,7 @@ describe('RecoColor test', () => {
   });
 
   describe('getBlue test', () => {
-    describe('正常値の場合の Blueの値 を取得する', () => {
+    describe('正常値の場合の Blue の値 を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
       const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180},];
 

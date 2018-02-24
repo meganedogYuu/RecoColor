@@ -3,7 +3,7 @@ const assert = chai.assert;
 const convert = require('../lib/utility/convert.js');
 const rgbColor = require('../lib/member/RgbColor');
 
-describe('rgbToRgbColorのtest', () => {
+describe('rgbToRgbColor の test', () => {
   describe('rgbToRgbColor 正常値のテスト', () => {
     const rgbes = [[0, 10, 255], 'rgb(0, 120, 255)', 'RGB(0, 255, 255)', 'RGB(0,255,255)', {r: 0, g:0, b:255}];
     const answers = [{r:0, g:10, b:255}, {r:0, g:120, b:255}, {r:0, g:255, b:255}, {r:0, g:255, b:255}, {r:0, g:0, b:255}];
@@ -31,7 +31,7 @@ describe('rgbToRgbColorのtest', () => {
 });
 
 
-describe('hexToRgbColorのtest', () => {
+describe('hexToRgbColor の test', () => {
   describe('hexToRgbColor 正常値のテスト', () => {
     const rgbes = ['#fff', '#000000', 'abc', '00f0ab'];
     const answers = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}];
@@ -59,7 +59,7 @@ describe('hexToRgbColorのtest', () => {
 });
 
 
-describe('getClashingColorFromのtest', () => {
+describe('getClashingColorFrom の test', () => {
   describe('getClashingColorFrom 正常値のテスト', () => {
     const colors = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}];
     const answers = [{r:0, g:0, b:0}, {r:255, g:255, b:255}, {r:85, g:68, b:51}, {r:255, g:15, b:84}];

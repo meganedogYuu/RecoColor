@@ -2,7 +2,7 @@ const chai = require('chai');
 const assert = chai.assert;
 const check = require('../lib/utility/check.js');
 
-describe('isRgbのtest', () => {
+describe('isRgb の test', () => {
   describe('isRgb 正常値のテスト', () => {
     const rgbes = [[255, 255, 255], [0, 255, 255], 'rgb(0, 255, 255)', 'RGB(0, 255, 255)', 'RGB(0,255,255)', {r: 0, g:0, b:255}];
 
@@ -23,7 +23,7 @@ describe('isRgbのtest', () => {
   });
 });
 
-describe('isHexのtest', () => {
+describe('isHex の test', () => {
   describe('isHex 正常値のテスト', () => {
     const hexes = ['#fff000', '#fff', 'ffffff', 'fff'];
 
@@ -44,7 +44,7 @@ describe('isHexのtest', () => {
   });
 });
 
-describe('getTypeのtest', () => {
+describe('getType の test', () => {
   describe('getType RGB のテスト', () => {
     const any = [[255, 255, 255], [0, 255, 255], 'rgb(0, 255, 255)', 'RGB(0, 255, 255)', 'RGB(0,255,255)'];
     const correct = 'RGB';
