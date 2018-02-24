@@ -57,3 +57,22 @@ describe('hexToRgbColorのtest', () => {
     });
   });
 });
+
+
+describe('getClashingColorFromのtest', () => {
+  describe('getClashingColorFrom 正常値のテスト', () => {
+    const colors = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}];
+    const answers = [{r:0, g:0, b:0}, {r:255, g:255, b:255}, {r:85, g:68, b:51}, {r:255, g:15, b:84}];
+
+    colors.forEach((element, index) => {
+      it(`convert ${element} to clashing color`, () => {
+        const color = new rgbColor.RgbColor(element);
+        const result = convert.getClashingColorFrom(color);
+        const answer = new rgbColor.RgbColor(answers[index]);
+        assert.strictEqual(result.r, answer.r);
+        assert.strictEqual(result.g, answer.g);
+        assert.strictEqual(result.b, answer.b);
+      });
+    });
+  });
+});
