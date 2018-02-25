@@ -215,4 +215,29 @@ describe('RecoColor test', () => {
       });
     });
   });
+
+  describe('getComplementaryColor test', () => {
+    describe('正常値の場合の getComplementaryColor の値 を取得する', () => {
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
+      const answers = [{r: 255, g: 255, b: 255}, {r: 0, g: 0, b: 0}, {r: 220, g: 240, b: 10}, {r: 1, g: 191, b: 200}];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} getComplementaryColor is r: ${answers[index].r} g: ${answers[index].g} b: ${answers[index].b}`, () => {
+          assert.strictEqual(color.getComplementaryColor().r, answers[index].r);
+          assert.strictEqual(color.getComplementaryColor().g, answers[index].g);
+          assert.strictEqual(color.getComplementaryColor().b, answers[index].b);
+        });
+      });
+    });
+
+    describe('異常値の場合は undefined を取得する', () => {
+      const tests = ['#ffff', '#fffffff', '$fff', '#ffg', [0, 10, 255, 255], 'rgb(0, 120, 255, 0)', 'RGBA(180, 20, 90)', {r: 256, g: 10, b: 180}];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} getClashingColor is undefined`, () => { assert.strictEqual(color.getBlue(), undefined) });
+      });
+    });
+  });
 });
