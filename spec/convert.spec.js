@@ -76,3 +76,22 @@ describe('getClashingColorFrom の test', () => {
     });
   });
 });
+
+
+describe('getComplementaryColorFrom の test', () => {
+  describe('getComplementaryColorFrom 正常値のテスト', () => {
+    const colors = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:20, g:80, b:100}];
+    const answers = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:204, g:187, b:170}, {r:100, g:40, b:20}];
+
+    colors.forEach((element, index) => {
+      it(`convert ${element} to complementary color`, () => {
+        const color = new rgbColor.RgbColor(element);
+        const result = convert.getComplementaryColorFrom(color);
+        const answer = new rgbColor.RgbColor(answers[index]);
+        assert.strictEqual(result.r, answer.r);
+        assert.strictEqual(result.g, answer.g);
+        assert.strictEqual(result.b, answer.b);
+      });
+    });
+  });
+});
