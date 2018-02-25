@@ -93,3 +93,22 @@ export function getClashingColorFrom(rgbColor: RgbColor): RgbColor {
   }
 }
 
+
+/**
+ * 受け取ったRgbColorの補色を求め、RgbColorとして返す
+ *
+ * @param {RgbColor} rgbColor
+ * @returns {RgbColor}
+ */
+export function getComplementaryColorFrom(rgbColor: RgbColor): RgbColor {
+  // 最小値と最大値から補色を求めるための元となる数値を求める
+  const min = Math.min.apply(null, [rgbColor.r, rgbColor.g, rgbColor.b]);
+  const max = Math.max.apply(null, [rgbColor.r, rgbColor.g, rgbColor.b]);
+  const foundationValue = min + max;
+
+  return new RgbColor({
+    r: (foundationValue - rgbColor.r),
+    g: (foundationValue - rgbColor.g),
+    b: (foundationValue - rgbColor.b)
+  });
+}
