@@ -1,8 +1,7 @@
 import { isRgb, isHex, getType } from './utility/check';
-import { rgbToRgbColor, hexToRgbColor, rgbColorToHex, getClashingColorFrom } from './utility/convert';
 import { isNullOrUndefined } from './utility/util';
 import { RgbColor } from './member/RgbColor';
-
+import * as convert from './utility/convert';
 
 export default class RecoColor {
 
@@ -71,7 +70,7 @@ export default class RecoColor {
    */
   public getHex(): string {
     if (isNullOrUndefined(this._rgbColor)) return;
-    return rgbColorToHex(this._rgbColor);
+    return convert.rgbColorToHex(this._rgbColor);
   }
 
   /**
@@ -125,7 +124,7 @@ export default class RecoColor {
    */
   public getClashingColor(): { r: number, g: number, b: number } {
     if (isNullOrUndefined(this._rgbColor)) return;
-    const clashingColor: RgbColor = getClashingColorFrom(this._rgbColor);
+    const clashingColor: RgbColor = convert.getClashingColorFrom(this._rgbColor);
     return clashingColor.getObject();
   }
 
@@ -133,7 +132,7 @@ export default class RecoColor {
    * this._originalColor から this._rgbColor に値を設定する
    */
   private initSetting(): void {
-    if (isRgb(this._originalColor)) this._rgbColor = rgbToRgbColor(this._originalColor);
-    if (isHex(this._originalColor)) this._rgbColor = hexToRgbColor(this._originalColor);
+    if (isRgb(this._originalColor)) this._rgbColor = convert.rgbToRgbColor(this._originalColor);
+    if (isHex(this._originalColor)) this._rgbColor = convert.hexToRgbColor(this._originalColor);
   }
 }
