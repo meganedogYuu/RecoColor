@@ -129,6 +129,17 @@ export default class RecoColor {
   }
 
   /**
+   * 補色を求める
+   *
+   * @returns {{r: number; g: number; b: number}}
+   */
+  public getComplementaryColor(): { r: number, g: number, b: number } {
+    if (isNullOrUndefined(this._rgbColor)) return;
+    const complementaryColor: RgbColor = convert.getComplementaryColorFrom(this._rgbColor);
+    return complementaryColor.getObject();
+  }
+
+  /**
    * this._originalColor から this._rgbColor に値を設定する
    */
   private initSetting(): void {
