@@ -192,7 +192,7 @@ describe('RecoColor test', () => {
   });
 
   describe('getClashingColor test', () => {
-    describe('正常値の場合の getClashingColor の値 を取得する', () => {
+    describe('正常値の場合の getClashingColor の値 を取得する（オプション指定なし）', () => {
       const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
       const answers = [{r: 0, g: 0, b: 0}, {r: 255, g: 255, b: 255}, {r: 225, g: 245, b: 15}, {r: 55, g: 245, b: 254}];
 
@@ -202,6 +202,32 @@ describe('RecoColor test', () => {
           assert.strictEqual(color.getClashingColor().r, answers[index].r);
           assert.strictEqual(color.getClashingColor().g, answers[index].g);
           assert.strictEqual(color.getClashingColor().b, answers[index].b);
+        });
+      });
+    });
+
+    describe('正常値の場合の getClashingColor の値 を取得する（オプション指定 hex）', () => {
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
+      const answers = ['000000', 'ffffff', 'e1f50f', '37f5fe'];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} getClashingColor is ${answers[index]}`, () => {
+          assert.strictEqual(color.getClashingColor('HEX'), answers[index]);
+        });
+      });
+    });
+
+    describe('正常値の場合の getClashingColor の値 を取得する（オプション指定 失敗）', () => {
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
+      const answers = [{r: 0, g: 0, b: 0}, {r: 255, g: 255, b: 255}, {r: 225, g: 245, b: 15}, {r: 55, g: 245, b: 254}];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} getClashingColor is r: ${answers[index].r} g: ${answers[index].g} b: ${answers[index].b}`, () => {
+          assert.strictEqual(color.getClashingColor('Hez').r, answers[index].r);
+          assert.strictEqual(color.getClashingColor('Hez').g, answers[index].g);
+          assert.strictEqual(color.getClashingColor('Hez').b, answers[index].b);
         });
       });
     });
