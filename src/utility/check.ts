@@ -1,4 +1,5 @@
 import { isRgbLength, isRgbNumberFromArray, typeOf } from './util';
+import { ColorType } from '../member/ColorType';
 
 /**
  * RGB値かの判定を行う
@@ -94,4 +95,19 @@ export function getType(any: any): string {
   if (isRgb(any)) return 'RGB';
   if (isHex(any)) return 'HEX';
   return 'none';
+}
+
+/**
+ * 引数で受け取ったオプション名の文字列から色のタイプを判定する
+ * 'HEX' or 'Hex' or 'hex' の場合のみ ColorType.Hex を返す
+ * それ以外の場合は ColorType.Rgb を返す
+ *
+ * @param {string} optionName
+ * @returns {ColorType}
+ */
+export function getColorTypeFrom(optionName: string): ColorType {
+  if (optionName === 'HEX' || optionName === 'Hex' || optionName === 'hex') {
+    return ColorType.Hex;
+  }
+  return ColorType.Rgb;
 }
