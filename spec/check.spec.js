@@ -1,6 +1,7 @@
 const chai = require('chai');
 const assert = chai.assert;
 const check = require('../lib/utility/check.js');
+const ColorType = require('../lib/member/ColorType.js');
 
 describe('isRgb の test', () => {
   describe('isRgb 正常値のテスト', () => {
@@ -77,4 +78,28 @@ describe('getType の test', () => {
       });
     });
   });
+});
+
+
+describe('getColorTypeFrom の test', () => {
+  describe('getColorTypeFrom HEX のテスト', () => {
+    const any = ['HEX', 'Hex', 'hex'];
+
+    any.forEach(e => {
+      it(`${e} is HEX`, () => {
+        assert.strictEqual(check.getColorTypeFrom(e), ColorType.ColorType.Hex)
+      });
+    });
+  });
+
+  describe('getColorTypeFrom HEX以外 のテスト', () => {
+    const any = ['RGB', 'Rgb', 'Hez', 'Hex '];
+
+    any.forEach(e => {
+      it(`${e} is RGB`, () => {
+        assert.strictEqual(check.getColorTypeFrom(e), ColorType.ColorType.Rgb)
+      });
+    });
+  });
+
 });
