@@ -1,6 +1,7 @@
-import { isRgb, isHex, getType } from './utility/check';
+import { isRgb, isHex, getType, getColorTypeFrom } from './utility/check';
 import { isNullOrUndefined } from './utility/util';
 import { RgbColor } from './member/RgbColor';
+import { ColorType } from './member/ColorType';
 import * as convert from './utility/convert';
 
 export default class RecoColor {
@@ -119,12 +120,20 @@ export default class RecoColor {
 
   /**
    * 反対色を求める
+   * option に 'HEX' 'Hex' 'hex' のどれかを指定された場合は HEX値の文字列 を返す
+   * それ以外の場合は RGBのオブジェクト を返す
    *
-   * @returns {{r: number; g: number; b: number}}
+   * @returns {{r: number; g: number; b: number}} | string
    */
-  public getClashingColor(): { r: number, g: number, b: number } {
+  public getClashingColor(option: string = 'RGB'): { r: number, g: number, b: number } | string {
     if (isNullOrUndefined(this._rgbColor)) return;
+    // 反対色の RgbColor を取得
     const clashingColor: RgbColor = convert.getClashingColorFrom(this._rgbColor);
+
+    // option で HEX の指定がある場合HEX値を返す、それ以外の場合 RGBのオブジェクト を返す
+    if (getColorTypeFrom(option) === ColorType.Hex) {
+      return convert.rgbColorToHex(clashingColor);
+    }
     return clashingColor.getObject();
   }
 
