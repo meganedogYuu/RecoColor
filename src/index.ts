@@ -139,12 +139,20 @@ export default class RecoColor {
 
   /**
    * 補色を求める
+   * option に 'HEX' 'Hex' 'hex' のどれかを指定された場合は HEX値の文字列 を返す
+   * それ以外の場合は RGBのオブジェクト を返す
    *
    * @returns {{r: number; g: number; b: number}}
    */
-  public getComplementaryColor(): { r: number, g: number, b: number } {
+  public getComplementaryColor(option: string = 'RGB'): { r: number, g: number, b: number } | string {
     if (isNullOrUndefined(this._rgbColor)) return;
+    // 補色の RgbColor を取得
     const complementaryColor: RgbColor = convert.getComplementaryColorFrom(this._rgbColor);
+
+    // option で HEX の指定がある場合HEX値を返す、それ以外の場合 RGBのオブジェクト を返す
+    if (getColorTypeFrom(option) === ColorType.Hex) {
+      return convert.rgbColorToHex(complementaryColor);
+    }
     return complementaryColor.getObject();
   }
 
