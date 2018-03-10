@@ -243,7 +243,33 @@ describe('RecoColor test', () => {
   });
 
   describe('getComplementaryColor test', () => {
-    describe('正常値の場合の getComplementaryColor の値 を取得する', () => {
+    describe('正常値の場合の getComplementaryColor の値 を取得する（オプション指定なし）', () => {
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
+      const answers = [{r: 255, g: 255, b: 255}, {r: 0, g: 0, b: 0}, {r: 220, g: 240, b: 10}, {r: 1, g: 191, b: 200}];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} getComplementaryColor is r: ${answers[index].r} g: ${answers[index].g} b: ${answers[index].b}`, () => {
+          assert.strictEqual(color.getComplementaryColor().r, answers[index].r);
+          assert.strictEqual(color.getComplementaryColor().g, answers[index].g);
+          assert.strictEqual(color.getComplementaryColor().b, answers[index].b);
+        });
+      });
+    });
+
+    describe('正常値の場合の getComplementaryColor の値 を取得する（オプション指定 hex）', () => {
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
+      const answers = ['ffffff', '000000', 'dcf00a', '01bfc8'];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} getComplementaryColor is ${answers[index]}`, () => {
+          assert.strictEqual(color.getComplementaryColor('HEX'), answers[index]);
+        });
+      });
+    });
+
+    describe('正常値の場合の getComplementaryColor の値 を取得する（オプション指定 失敗）', () => {
       const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
       const answers = [{r: 255, g: 255, b: 255}, {r: 0, g: 0, b: 0}, {r: 220, g: 240, b: 10}, {r: 1, g: 191, b: 200}];
 
