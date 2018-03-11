@@ -1,4 +1,4 @@
-# RecoColor [![Build Status](https://travis-ci.org/meganedogYuu/recoColor.svg?branch=master)](https://travis-ci.org/meganedogYuu/recoColor)
+# RecoColor [![Build Status](https://travis-ci.org/meganedogYuu/recoColor.svg?branch=master)](https://travis-ci.org/meganedogYuu/recoColor) [![npm version](https://badge.fury.io/js/recocolor.svg)](https://badge.fury.io/js/recocolor)
 
 色の変換・確認を行うライブラリ
 
