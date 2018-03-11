@@ -7,3 +7,4 @@ tsconfig.json
 tslint.json
 package-lock.json
 yarn.lock
+myDoc/
