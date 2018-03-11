@@ -205,7 +205,9 @@ color. getBlue();  // undefined
 
 #### getClashingColor
 
-反対色の値をRGBのオブジェクトで取得
+反対色の値を RGBのオブジェクト もしくは HEX値 で取得  
+HEX値で取得する場合、引数で 'HEX' 'Hex' 'hex' いずれかの文字列を渡す  
+それ以外の場合 RGBのオブジェクト を返す  
 （設定した値が正しくない場合は `undefined` を返します）
 
 ```javascript
@@ -221,13 +223,24 @@ color. getClashingColor();  // {r: 225, g: 245, b: 15}
 const color = new recoColor("rgb(200, 10, 1)");
 color. getClashingColor();  // {r: 55, g: 245, b: 254}
 
+const color = new recoColor("#fff");
+color. getClashingColor('HEX');  // "000000"
+
+const color = new recoColor([30, 10, 240]);
+color. getClashingColor('Hex');  // "e1f50f"
+
+const color = new recoColor("rgb(200, 10, 1)");
+color. getClashingColor('hex');  // "37f5fe"
+
 const color = new recoColor("#ffff");
 color. getClashingColor();  // undefined
 ```
 
 #### getComplementaryColor
 
-補色の値をRGBのオブジェクトで取得
+補色の値を RGBのオブジェクト もしくは HEX値 で取得  
+HEX値で取得する場合、引数で 'HEX' 'Hex' 'hex' いずれかの文字列を渡す  
+それ以外の場合 RGBのオブジェクト を返す  
 （設定した値が正しくない場合は `undefined` を返します）
 
 ```javascript
@@ -242,6 +255,15 @@ color. getComplementaryColor();  // {r: 225, g: 245, b: 15}
 
 const color = new recoColor("rgb(200, 10, 1)");
 color. getComplementaryColor();  // {r: 1, g: 191, b: 200}
+
+const color = new recoColor("#fff");
+color. getComplementaryColor('HEX');  // "ffffff"
+
+const color = new recoColor([30, 10, 240]);
+color. getComplementaryColor('Hex');  // "dcf00a"
+
+const color = new recoColor("rgb(200, 10, 1)");
+color. getComplementaryColor('hex');  // "01bfc8"
 
 const color = new recoColor("#ffff");
 color. getComplementaryColor();  // undefined
