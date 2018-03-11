@@ -1,4 +1,4 @@
-# recoColor
+# recoColor [![Build Status](https://travis-ci.org/meganedogYuu/recoColor.svg?branch=master)](https://travis-ci.org/meganedogYuu/recoColor)
 
 色の変換・確認を行うライブラリ
 
