@@ -119,6 +119,27 @@ export default class RecoColor {
   }
 
   /**
+   * HSVのオブジェクト型で表した場合の値を返す
+   * それぞれのとれる値の範囲は以下とし、小数点第一位を四捨五入した値を返す
+   * H： 0 ~ 360
+   * S： 0 ~ 100
+   * V： 0 ~ 100
+   * 設定した値が正しくない場合は undefined を返す
+   *
+   * @returns {{h: number; s: number; v: number}}
+   */
+  public getHsv(): { h: number, s: number, v: number } {
+    if (isNullOrUndefined(this._rgbColor)) return;
+
+    // 丸めていない値を取得
+    const hsv = convert.rgbColorToHsv(this._rgbColor);
+
+    return { h: Math.round(hsv.h), s: Math.round(hsv.s), v: Math.round(hsv.v) };
+  }
+
+
+
+  /**
    * 反対色を求める
    * option に 'HEX' 'Hex' 'hex' のどれかを指定された場合は HEX値の文字列 を返す
    * それ以外の場合は RGBのオブジェクト を返す
