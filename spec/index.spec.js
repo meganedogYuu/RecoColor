@@ -191,6 +191,31 @@ describe('RecoColor test', () => {
     });
   });
 
+  describe('getHsv test', () => {
+    describe('正常値の場合の Blue の値 を取得する', () => {
+      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
+      const answers = [{h: 0, s: 0, v: 100}, {h: 210, s: 17, v: 80}, {h: 163, s: 100, v: 94}, {h: 238, s: 100, v: 100}, {h: 212, s: 100, v: 100}, {h: 334, s: 89, v: 71}, {h: 244, s: 94, v: 71}];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} hsv is h: ${answers[index].h}, s: ${answers[index].s}, v: ${answers[index].v}`, () => {
+          assert.strictEqual(color.getHsv().h, answers[index].h);
+          assert.strictEqual(color.getHsv().s, answers[index].s);
+          assert.strictEqual(color.getHsv().v, answers[index].v);
+        });
+      });
+    });
+
+    describe('異常値の場合は undefined を取得する', () => {
+      const tests = ['#ffff', '#fffffff', '$fff', '#ffg', [0, 10, 255, 255], 'rgb(0, 120, 255, 0)', 'RGBA(180, 20, 90)', {r: 256, g: 10, b: 180}];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} hsv is undefined`, () => { assert.strictEqual(color.getHsv(), undefined) });
+      });
+    });
+  });
+
   describe('getClashingColor test', () => {
     describe('正常値の場合の getClashingColor の値 を取得する（オプション指定なし）', () => {
       const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
