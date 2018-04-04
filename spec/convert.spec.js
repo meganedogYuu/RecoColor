@@ -58,6 +58,25 @@ describe('hexToRgbColor の test', () => {
   });
 });
 
+describe('rgbColorToHsv の test', () => {
+  describe('rgbColorToHsv 正常値のテスト', () => {
+    const rgbes = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}];
+    const answers = [{h:0, s:0, v:100}, {h:0, s:0, v:0}, {h:210, s:16, v:80}, {h:162, s:100, v:94}];
+
+    rgbes.forEach((element, index) => {
+      it(`convert ${element} to rgbColorToHsv`, () => {
+        const color = new rgbColor.RgbColor(element);
+        const result = convert.rgbColorToHsv(color);
+        // rgbColorToHsv は小数点に処理をせずに取得する
+        // その状態のままだと比較がしづらいため切り捨てを行う
+        assert.strictEqual(Math.floor(result.h), answers[index].h);
+        assert.strictEqual(Math.floor(result.s), answers[index].s);
+        assert.strictEqual(Math.floor(result.v), answers[index].v);
+      });
+    });
+  });
+});
+
 
 describe('getClashingColorFrom の test', () => {
   describe('getClashingColorFrom 正常値のテスト', () => {
