@@ -28,6 +28,18 @@ export function isRgbNumberFromArray(arr: number[]): boolean {
 }
 
 /**
+ * 受け取ったhsvのオブジェクトの値が正しい値かを判定する
+ * - h・・0 ~ 360
+ * - s・・0 ~ 100
+ * - v・・0 ~ 100
+ * @param {{h: number; s: number; v: number}} obj
+ * @returns {boolean}
+ */
+export function isHsvNumberFromObject(obj: {h: number, s: number, v: number}): boolean {
+  return (0 <= obj.h && obj.h <= 360) && (0 <= obj.s && obj.s <= 100) && (0 <= obj.v && obj.v <= 100);
+}
+
+/**
  * オブジェクトの型を判定するためのメソッド
  * Object型を判定するために使う
  *
