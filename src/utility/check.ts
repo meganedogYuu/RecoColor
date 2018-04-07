@@ -1,4 +1,4 @@
-import { isRgbLength, isRgbNumberFromArray, typeOf } from './util';
+import { isRgbLength, isRgbNumberFromArray, isHsvNumberFromObject, typeOf } from './util';
 import { ColorType } from '../member/ColorType';
 
 /**
@@ -84,6 +84,57 @@ export function isHex(val: any): boolean {
   // 0~fの値であること
   return (/^[0-9a-fA-F]*$/.test(hex));
 }
+
+/**
+ * HSV値かの判定を行う
+ * OK: "hsv(30, 20, 10)", "HSV(30, 20, 10)", {h:30, s: 20, v: 10}
+ *
+ * 条件:
+ * - 配列はRGBとして判定するためHSVでは使用出来ない
+ * - 文字列:
+ *   - hsv という文字が大文字・小文字問わず頭に指定されていること
+ *   - rgbの文字列の後の数値が()で囲まれていること
+ *   - ()の中の数値が","で区切られた数値が3つあること
+ * - オブジェクト型:
+ *   - h・s・v 全てに値が設定されていること
+ * - 文字列・オブジェクト共通:
+ *   - 以下の値であること
+ *     - h・・0 ~ 360
+ *     - s・・0 ~ 100
+ *     - v・・0 ~ 100
+ *
+ * @param val
+ * @returns {boolean}
+ */
+export function isHsv(val: any): boolean {
+  // 文字列の場合
+  if (typeof val === 'string') {
+    // 先頭文字列が"hsv"で始まること、()で囲んでいること
+    const regexp = new RegExp(/^hsv\(.+\)/, 'i');
+    if (!regexp.test(val)) return false;
+
+    // ","でsplitした数値の配列にする
+    const strArr: string[] = val.replace(/^hsv\((.+)\)/i, '$1').split(',');
+    const numArr: number[] = strArr.map(str => parseInt(str, 10));
+
+    // 配列からhsvの値を取得し、正常値の中に入っているか判定する
+    const [h, s, v] = [numArr[0], numArr[1], numArr[2]];
+    return isHsvNumberFromObject({ h, s, v });
+  }
+
+  // オブジェクト型の場合
+  if (typeOf(val) === 'object') {
+    // HSV それぞれの値を取得
+    const h: number = parseInt(val.h, 10);
+    const s: number = parseInt(val.s, 10);
+    const v: number = parseInt(val.v, 10);
+
+    return isHsvNumberFromObject({ h, s, v });
+  }
+
+  return false;
+}
+
 
 /**
  * 受け取った値がどのタイプに相当するか判定し名前を返す
