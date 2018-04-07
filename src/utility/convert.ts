@@ -1,4 +1,4 @@
-import { isRgb, isHex } from './check';
+import { isRgb, isHex, isHsv } from './check';
 import { RgbColor } from '../member/RgbColor';
 import { typeOf, isNullOrUndefined } from './util';
 
@@ -55,6 +55,59 @@ export function hexToRgbColor(hex: string): RgbColor {
   const b: number = parseInt(sixCharacterHex.substring(4, 6), 16);
 
   return new RgbColor({ r, g, b });
+}
+
+/**
+ * HSV値をRgbColorクラスに変換する
+ *
+ * @param any
+ * @returns {RgbColor}
+ */
+export function hsvToRgbColor(any: any): RgbColor {
+  // HSVの値でなかった場合はそのままreturn
+  if (!isHsv(any)) return;
+
+  let h: number;
+  let s: number;
+  let v: number;
+
+  // 文字列の場合
+  if (typeof any === 'string') {
+    // HSVそれぞれの値を取得
+    const hsvArr: number[] = any.replace(/hsv\((.+)\)/i, '$1').split(',').map(e => parseInt(e, 10));
+    [h, s, v] = [hsvArr[0], hsvArr[1], hsvArr[2]];
+  }
+
+  // オブジェクト型の場合
+  if (typeOf(any) === 'object') {
+    [h, s, v] = [any.h, any.s, any.v];
+  }
+
+  // HSV値 から RGB のオブジェクトを取得
+  const rgb = hsvToRgbObject({ h, s, v });
+  // 四捨五入したRGBの値をRgbColorにして返す
+  return new RgbColor({ r: Math.round(rgb.r), g: Math.round(rgb.g), b: Math.round(rgb.b) });
+
+
+  // HSVのオブジェクトをRGBのオブジェクトにして返す
+  function hsvToRgbObject(hsv: { h: number, s: number, v: number }): { r: number, g: number, b: number } {
+    // RGBのどれかの最大値・最小値を求める
+    const max = hsv.v / 100 * 255;
+    const min = max - ((hsv.s / 100) * max);
+
+    // 色相によって求め方が変わるため、色相の値から計算を行い、RGBのオブジェクトにして返す
+    // 補足：
+    // 色相（h）が 0 は赤（h: 0, s: 100, v:100）は (r: 255, g: 0, b: 0)
+    // 値が増える毎に 緑 を混ぜる事になり、hの値が120の時 緑 になる（h: 120, s: 100, v:100）は (r: 0, g: 255, b: 0)
+    // 更にhの値が増えると 青 を混ぜる事になり、hの値が240の時 青 になる（h: 240, s: 100, v:100）は (r: 0, g: 0, b: 255)
+    // 更にhの値が増えると 赤 を混ぜる事になり、hの値が360の時 赤 に戻る（h: 360, s: 100, v:100）は (r: 255, g: 0, b: 0)
+    if (0 <= hsv.h && hsv.h <= 60) return { r: max, g: (hsv.h / 60) * (max - min) + min, b: min };
+    if (60 < hsv.h && hsv.h <= 120) return { r: ((120 - hsv.h) / 60) * (max - min) + min, g: max, b: min };
+    if (120 < hsv.h && hsv.h <= 180) return { r: min, g: max, b: ((hsv.h - 120) / 60) * (max - min) + min };
+    if (180 < hsv.h && hsv.h <= 240) return { r: min, g: ((240 - hsv.h) / 60) * (max - min) + min, b: max };
+    if (240 < hsv.h && hsv.h <= 300) return { r: ((hsv.h - 240) / 60) * (max - min) + min, g: min, b: max };
+    if (300 < hsv.h && hsv.h <= 360) return { r: max, g: min, b: ((360 - hsv.h) / 60) * (max - min) + min };
+  }
 }
 
 
