@@ -43,6 +43,25 @@ describe('RecoColor test', () => {
     });
   });
 
+  describe('isHsv の test', () => {
+    describe('isHsv true の場合のテスト', () => {
+      const tests = ['hsv(360, 0, 0)', 'HSV(0, 100, 100)', {h: 360, s: 0, v:0}, {h: 100, s: 50, v:100}];
+
+      tests.forEach(element => {
+        let color = new recoColor(element);
+        it(`${element} isHsv true`, () => { assert.isTrue(color.isHsv()) });
+      });
+    });
+    describe('isHsv false の場合のテスト', () => {
+      const tests = ['#fff000', 'rgb(255, 255, 255)', 'hsl(360, 0, 0)', 'hsv(361, 0, 0)', 'hsv(360, -10, 0)', {h: 360, s: 0, r:0}, {h: 400, s: 0, r:0}, [0, 120, 255] , null];
+
+      tests.forEach(element => {
+        let color = new recoColor(element);
+        it(`${element} isHsv false`, () => { assert.isFalse(color.isHsv()) });
+      });
+    });
+  });
+
   describe('getOriginal test', () => {
     describe('最初に設定した値が取得出来るか', () => {
       const tests = ['#fff', '#000000', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', [0, 255, 255, 255]];

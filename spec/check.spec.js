@@ -45,6 +45,27 @@ describe('isHex の test', () => {
   });
 });
 
+describe('isHsv の test', () => {
+  describe('isHsv 正常値のテスト', () => {
+    const hsvs = ['hsv(360, 0, 0)', 'HSV(0, 100, 100)', {h: 360, s: 0, v:0}, {h: 100, s: 50, v:100}];
+
+    hsvs.forEach(e => {
+      it(`hsvs test ${e}`, () => {
+        assert.isTrue(check.isHsv(e))
+      });
+    });
+  });
+  describe('isHsv 異常値のテスト', () => {
+    const hsvs = ['#fff000', 'rgb(255, 255, 255)', 'hsl(360, 0, 0)', 'hsv(361, 0, 0)', 'hsv(360, -10, 0)', {h: 360, s: 0, r:0}, {h: 400, s: 0, r:0}];
+
+    hsvs.forEach(e => {
+      it(`hsvs test ${e}`, () => {
+        assert.isFalse(check.isHsv(e))
+      });
+    });
+  });
+});
+
 describe('getType の test', () => {
   describe('getType RGB のテスト', () => {
     const any = [[255, 255, 255], [0, 255, 255], 'rgb(0, 255, 255)', 'RGB(0, 255, 255)', 'RGB(0,255,255)'];
