@@ -1,4 +1,4 @@
-import { isRgbLength, isRgbNumberFromArray, isHsvNumberFromObject, typeOf } from './util';
+import * as util from './util';
 import { ColorType } from '../member/ColorType';
 
 /**
@@ -25,7 +25,7 @@ export function isRgb(val: any): boolean {
   // 配列の場合
   if (val instanceof Array) {
     // 全要素のケタ数が3ケタであり、全要素の値が0~255であること
-    return isRgbLength(val) && isRgbNumberFromArray(val);
+    return util.isRgbLength(val) && util.isRgbNumberFromArray(val);
   }
 
   // 文字列の場合
@@ -39,18 +39,18 @@ export function isRgb(val: any): boolean {
     const numArr: number[] = strArr.map(str => parseInt(str, 10));
 
     // 数値が3ケタであり、数値が全て0~255であること
-    return (isRgbLength(numArr) && isRgbNumberFromArray(numArr));
+    return (util.isRgbLength(numArr) && util.isRgbNumberFromArray(numArr));
   }
 
   // オブジェクト型の場合
-  if (typeOf(val) === 'object') {
+  if (util.typeOf(val) === 'object') {
     // RGBそれぞれの値を取得
     const r: number = parseInt(val.r, 10);
     const g: number = parseInt(val.g, 10);
     const b: number = parseInt(val.b, 10);
 
     // 全ての値が0~255であるかの確認
-    return isRgbNumberFromArray([r, g, b]);
+    return util.isRgbNumberFromArray([r, g, b]);
   }
 
   return false;
@@ -119,17 +119,17 @@ export function isHsv(val: any): boolean {
 
     // 配列からhsvの値を取得し、正常値の中に入っているか判定する
     const [h, s, v] = [numArr[0], numArr[1], numArr[2]];
-    return isHsvNumberFromObject({ h, s, v });
+    return util.isHsvNumberFromObject({ h, s, v });
   }
 
   // オブジェクト型の場合
-  if (typeOf(val) === 'object') {
+  if (util.typeOf(val) === 'object') {
     // HSV それぞれの値を取得
     const h: number = parseInt(val.h, 10);
     const s: number = parseInt(val.s, 10);
     const v: number = parseInt(val.v, 10);
 
-    return isHsvNumberFromObject({ h, s, v });
+    return util.isHsvNumberFromObject({ h, s, v });
   }
 
   return false;
