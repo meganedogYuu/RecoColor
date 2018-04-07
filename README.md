@@ -203,6 +203,32 @@ color.getBlue();  // undefined
 ```
 
 
+#### getHsv
+
+HSVのオブジェクト型で表した場合の値を取得  
+それぞれのとれる値の範囲は以下のようになり、小数点第一位を四捨五入した値で取得します
+
+- H： 0 ~ 360
+- S： 0 ~ 100
+- V： 0 ~ 100
+
+（設定した値が正しくない場合は `undefined` を返します）
+
+```javascript
+const color = new RecoColor("#fff");
+color.getHsv();  // {h: 0, s: 0, v: 100}
+
+const color = new RecoColor("abc");
+color.getHsv();  // {h: 210, s: 17, v: 80}
+
+const color = new RecoColor([0, 10, 255]);
+color.getHsv();  // {h: 238, s: 100, v: 100}
+
+const color = new RecoColor("#ffff");
+color.getHsv();  // undefined
+```
+
+
 #### getClashingColor
 
 反対色の値を RGBのオブジェクト もしくは HEX値 で取得  
