@@ -1,6 +1,6 @@
 import { isRgb, isHex, isHsv } from './check';
 import { RgbColor } from '../member/RgbColor';
-import { typeOf, isNullOrUndefined } from './util';
+import { typeOf } from './util';
 
 /**
  * rgb値をRgbColorクラスに変換する
@@ -112,16 +112,14 @@ export function hsvToRgbColor(any: any): RgbColor {
 
 
 /**
- * RgbColorオブジェクトをhex値に変換する
+ * Rgbオブジェクトをhex値に変換する
  *
- * @param {RgbColor} rgbColor
+ * @param {{r: number; g: number; b: number}} rgb
  * @returns {string}
  */
-export function rgbColorToHex(rgbColor: RgbColor): string {
+export function rgbToHex(rgb: { r: number, g: number, b: number }): string {
 
-  if (isNullOrUndefined(rgbColor)) return;
-
-  return `${numberToTwoDigitHex(rgbColor.r)}${numberToTwoDigitHex(rgbColor.g)}${numberToTwoDigitHex(rgbColor.b)}`;
+  return `${numberToTwoDigitHex(rgb.r)}${numberToTwoDigitHex(rgb.g)}${numberToTwoDigitHex(rgb.b)}`;
 
   function numberToTwoDigitHex(num: number): string {
     const hex = num.toString(16);

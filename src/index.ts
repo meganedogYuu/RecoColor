@@ -80,7 +80,7 @@ export default class RecoColor {
    */
   public getHex(): string {
     if (isNullOrUndefined(this._rgbColor)) return;
-    return convert.rgbColorToHex(this._rgbColor);
+    return convert.rgbToHex(this._rgbColor.getObject());
   }
 
   /**
@@ -162,7 +162,7 @@ export default class RecoColor {
 
     // option で HEX の指定がある場合HEX値を返す、それ以外の場合 RGBのオブジェクト を返す
     if (getColorTypeFrom(option) === ColorType.Hex) {
-      return convert.rgbColorToHex(clashingColor);
+      return convert.rgbToHex(clashingColor.getObject());
     }
     return clashingColor.getObject();
   }
@@ -181,7 +181,7 @@ export default class RecoColor {
 
     // option で HEX の指定がある場合HEX値を返す、それ以外の場合 RGBのオブジェクト を返す
     if (getColorTypeFrom(option) === ColorType.Hex) {
-      return convert.rgbColorToHex(complementaryColor);
+      return convert.rgbToHex(complementaryColor.getObject());
     }
     return complementaryColor.getObject();
   }
