@@ -1,4 +1,4 @@
-import { isRgb, isHex, getType, getColorTypeFrom } from './utility/check';
+import { isRgb, isHex, isHsv, getType, getColorTypeFrom } from './utility/check';
 import { isNullOrUndefined } from './utility/util';
 import { RgbColor } from './member/RgbColor';
 import { ColorType } from './member/ColorType';
@@ -43,6 +43,15 @@ export default class RecoColor {
    */
   public isHex(): boolean {
     return isHex(this._originalColor);
+  }
+
+  /**
+   * 設定した色が HSV かを判定する
+   *
+   * @returns {boolean}
+   */
+  public isHsv(): boolean {
+    return isHsv(this._originalColor);
   }
 
   /**
