@@ -31,27 +31,26 @@ describe('rgbToRgbColor の test', () => {
 });
 
 
-describe('hexToRgbColor の test', () => {
-  describe('hexToRgbColor 正常値のテスト', () => {
+describe('hexToRgb の test', () => {
+  describe('hexToRgb 正常値のテスト', () => {
     const rgbes = ['#fff', '#000000', 'abc', '00f0ab'];
     const answers = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}];
 
     rgbes.forEach((element, index) => {
-      it(`convert ${element} to hexToRgbColor`, () => {
-        const result = convert.hexToRgbColor(element);
-        const answer = new rgbColor.RgbColor(answers[index]);
-        assert.strictEqual(result.r, answer.r);
-        assert.strictEqual(result.g, answer.g);
-        assert.strictEqual(result.b, answer.b);
+      it(`convert ${element} to hexToRgb`, () => {
+        const result = convert.hexToRgb(element);
+        assert.strictEqual(result.r, answers[index].r);
+        assert.strictEqual(result.g, answers[index].g);
+        assert.strictEqual(result.b, answers[index].b);
       });
     });
   });
-  describe('hexToRgbColor 異常値のテスト', () => {
+  describe('hexToRgb 異常値のテスト', () => {
     const rgbes = ['#ffff', '#fffffff', '$fff', '#ffg', 'null', null];
 
     rgbes.forEach((element, index) => {
       it(`convert ${element} to RgbColor`, () => {
-        const result = convert.rgbToRgbColor(element);
+        const result = convert.hexToRgb(element);
         assert.strictEqual(result, undefined);
       });
     });

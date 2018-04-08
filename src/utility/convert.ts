@@ -33,12 +33,12 @@ export function rgbToRgbColor(any: any): RgbColor {
 
 
 /**
- * hex値をRgbColorクラスに変換する
+ * hex値をRgbオブジェクトに変換する
  *
  * @param {string} hex
- * @returns {RgbColor}
+ * @returns {{r: number; g: number; b: number}}
  */
-export function hexToRgbColor(hex: string): RgbColor {
+export function hexToRgb(hex: string): { r: number, g: number, b: number } {
 
   if (!isHex(hex)) return;
 
@@ -54,7 +54,7 @@ export function hexToRgbColor(hex: string): RgbColor {
   const g: number = parseInt(sixCharacterHex.substring(2, 4), 16);
   const b: number = parseInt(sixCharacterHex.substring(4, 6), 16);
 
-  return new RgbColor({ r, g, b });
+  return { r, g, b };
 }
 
 /**

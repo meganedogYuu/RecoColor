@@ -191,6 +191,9 @@ export default class RecoColor {
    */
   private initSetting(): void {
     if (isRgb(this._originalColor)) this._rgbColor = convert.rgbToRgbColor(this._originalColor);
-    if (isHex(this._originalColor)) this._rgbColor = convert.hexToRgbColor(this._originalColor);
+    if (isHex(this._originalColor)) {
+      const obj: { r: number, g: number, b: number } = convert.hexToRgb(this._originalColor);
+      this._rgbColor = new RgbColor(obj);
+    }
   }
 }
