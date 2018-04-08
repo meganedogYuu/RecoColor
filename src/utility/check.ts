@@ -140,7 +140,7 @@ export function isHsv(val: any): boolean {
  * 受け取った値がどのタイプに相当するか判定し名前を返す
  *
  * @param any
- * @returns {string} "RGB", "HEX", "none"の3種類
+ * @returns {string} "RGB", "HEX", "HSV", "none"の3種類
  */
 export function getType(any: any): string {
   if (isRgb(any)) return 'RGB';

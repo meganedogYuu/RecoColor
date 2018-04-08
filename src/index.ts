@@ -64,7 +64,7 @@ export default class RecoColor {
   }
 
   /**
-   * 設定した色のタイプを "RGB", "HEX", "none" の中から返す
+   * 設定した色のタイプを "RGB", "HEX", "HSV", "none" の中から返す
    *
    * @returns {string}
    */
@@ -193,6 +193,7 @@ export default class RecoColor {
     const obj: { r: number, g: number, b: number }
       = isRgb(this._originalColor) ? convert.rgbToRgbObject(this._originalColor)
       : isHex(this._originalColor) ? convert.hexToRgb(this._originalColor)
+      : isHsv(this._originalColor) ? convert.hsvToRgb(this._originalColor)
       : undefined;
 
     if (!isNullOrUndefined(obj)) this._rgbColor = new RgbColor(obj);
