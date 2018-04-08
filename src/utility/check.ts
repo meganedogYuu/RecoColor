@@ -145,6 +145,7 @@ export function isHsv(val: any): boolean {
 export function getType(any: any): string {
   if (isRgb(any)) return 'RGB';
   if (isHex(any)) return 'HEX';
+  if (isHsv(any)) return 'HSV';
   return 'none';
 }
 
