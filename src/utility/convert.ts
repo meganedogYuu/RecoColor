@@ -58,12 +58,12 @@ export function hexToRgb(hex: string): { r: number, g: number, b: number } {
 }
 
 /**
- * HSV値をRgbColorクラスに変換する
+ * HSV値をRgbオブジェクトに変換する
  *
  * @param any
- * @returns {RgbColor}
+ * @returns {{r: number; g: number; b: number}}
  */
-export function hsvToRgbColor(any: any): RgbColor {
+export function hsvToRgb(any: any): { r: number, g: number, b: number } {
   // HSVの値でなかった場合はそのままreturn
   if (!isHsv(any)) return;
 
@@ -83,31 +83,22 @@ export function hsvToRgbColor(any: any): RgbColor {
     [h, s, v] = [any.h, any.s, any.v];
   }
 
-  // HSV値 から RGB のオブジェクトを取得
-  const rgb = hsvToRgbObject({ h, s, v });
-  // 四捨五入したRGBの値をRgbColorにして返す
-  return new RgbColor({ r: Math.round(rgb.r), g: Math.round(rgb.g), b: Math.round(rgb.b) });
+  // RGBのどれかの最大値・最小値を求める
+  const max = v / 100 * 255;
+  const min = max - ((s / 100) * max);
 
-
-  // HSVのオブジェクトをRGBのオブジェクトにして返す
-  function hsvToRgbObject(hsv: { h: number, s: number, v: number }): { r: number, g: number, b: number } {
-    // RGBのどれかの最大値・最小値を求める
-    const max = hsv.v / 100 * 255;
-    const min = max - ((hsv.s / 100) * max);
-
-    // 色相によって求め方が変わるため、色相の値から計算を行い、RGBのオブジェクトにして返す
-    // 補足：
-    // 色相（h）が 0 は赤（h: 0, s: 100, v:100）は (r: 255, g: 0, b: 0)
-    // 値が増える毎に 緑 を混ぜる事になり、hの値が120の時 緑 になる（h: 120, s: 100, v:100）は (r: 0, g: 255, b: 0)
-    // 更にhの値が増えると 青 を混ぜる事になり、hの値が240の時 青 になる（h: 240, s: 100, v:100）は (r: 0, g: 0, b: 255)
-    // 更にhの値が増えると 赤 を混ぜる事になり、hの値が360の時 赤 に戻る（h: 360, s: 100, v:100）は (r: 255, g: 0, b: 0)
-    if (0 <= hsv.h && hsv.h <= 60) return { r: max, g: (hsv.h / 60) * (max - min) + min, b: min };
-    if (60 < hsv.h && hsv.h <= 120) return { r: ((120 - hsv.h) / 60) * (max - min) + min, g: max, b: min };
-    if (120 < hsv.h && hsv.h <= 180) return { r: min, g: max, b: ((hsv.h - 120) / 60) * (max - min) + min };
-    if (180 < hsv.h && hsv.h <= 240) return { r: min, g: ((240 - hsv.h) / 60) * (max - min) + min, b: max };
-    if (240 < hsv.h && hsv.h <= 300) return { r: ((hsv.h - 240) / 60) * (max - min) + min, g: min, b: max };
-    if (300 < hsv.h && hsv.h <= 360) return { r: max, g: min, b: ((360 - hsv.h) / 60) * (max - min) + min };
-  }
+  // 色相によって求め方が変わるため、色相の値から計算を行い、RGBのオブジェクトにして返す
+  // 補足：
+  // 色相（h）が 0 は赤（h: 0, s: 100, v:100）は (r: 255, g: 0, b: 0)
+  // 値が増える毎に 緑 を混ぜる事になり、hの値が120の時 緑 になる（h: 120, s: 100, v:100）は (r: 0, g: 255, b: 0)
+  // 更にhの値が増えると 青 を混ぜる事になり、hの値が240の時 青 になる（h: 240, s: 100, v:100）は (r: 0, g: 0, b: 255)
+  // 更にhの値が増えると 赤 を混ぜる事になり、hの値が360の時 赤 に戻る（h: 360, s: 100, v:100）は (r: 255, g: 0, b: 0)
+  if (0 <= h && h <= 60) return { r: max, g: (h / 60) * (max - min) + min, b: min };
+  if (60 < h && h <= 120) return { r: ((120 - h) / 60) * (max - min) + min, g: max, b: min };
+  if (120 < h && h <= 180) return { r: min, g: max, b: ((h - 120) / 60) * (max - min) + min };
+  if (180 < h && h <= 240) return { r: min, g: ((240 - h) / 60) * (max - min) + min, b: max };
+  if (240 < h && h <= 300) return { r: ((h - 240) / 60) * (max - min) + min, g: min, b: max };
+  if (300 < h && h <= 360) return { r: max, g: min, b: ((360 - h) / 60) * (max - min) + min };
 }
 
 
