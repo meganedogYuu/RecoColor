@@ -190,10 +190,11 @@ export default class RecoColor {
    * this._originalColor から this._rgbColor に値を設定する
    */
   private initSetting(): void {
-    if (isRgb(this._originalColor)) this._rgbColor = convert.rgbToRgbColor(this._originalColor);
-    if (isHex(this._originalColor)) {
-      const obj: { r: number, g: number, b: number } = convert.hexToRgb(this._originalColor);
-      this._rgbColor = new RgbColor(obj);
-    }
+    const obj: { r: number, g: number, b: number }
+      = isRgb(this._originalColor) ? convert.rgbToRgbObject(this._originalColor)
+      : isHex(this._originalColor) ? convert.hexToRgb(this._originalColor)
+      : undefined;
+
+    if (!isNullOrUndefined(obj)) this._rgbColor = new RgbColor(obj);
   }
 }

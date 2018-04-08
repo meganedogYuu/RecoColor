@@ -3,32 +3,32 @@ import { RgbColor } from '../member/RgbColor';
 import { typeOf } from './util';
 
 /**
- * rgb値をRgbColorクラスに変換する
+ * rgb値をRgbオブジェクトに変換する
  *
  * @param any
- * @returns {RgbColor}
+ * @returns {{r: number; g: number; b: number}}
  */
-export function rgbToRgbColor(any: any): RgbColor {
+export function rgbToRgbObject(any: any): { r: number, g: number, b: number } {
 
   if (!isRgb(any)) return;
 
   // 配列の場合
   if (any instanceof Array) {
-    return new RgbColor({ r: any[0], g: any[1], b: any[2] });
+    return { r: any[0], g: any[1], b: any[2] };
   }
 
   // 文字列の場合
   if (typeof any === 'string') {
     const rgbArr: number[] = any.replace(/rgb\((.+)\)/i, '$1').split(',').map(e => parseInt(e, 10));
-    return new RgbColor({ r: rgbArr[0], g: rgbArr[1], b: rgbArr[2] });
+    return { r: rgbArr[0], g: rgbArr[1], b: rgbArr[2] };
   }
 
   // オブジェクト型の場合
   if (typeOf(any) === 'object') {
-    return new RgbColor({ r: any.r, g: any.g, b: any.b });
+    return { r: any.r, g: any.g, b: any.b };
   }
 
-  return new RgbColor({ r: 0, g: 0, b: 0 });
+  return { r: 0, g: 0, b: 0 };
 }
 
 
