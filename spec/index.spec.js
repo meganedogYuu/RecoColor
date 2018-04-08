@@ -84,9 +84,9 @@ describe('RecoColor test', () => {
   });
 
   describe('getType test', () => {
-    describe('それぞれのTypeを "RGB", "HEX", "none" の中から取得する', () => {
-      const tests = ['#fff', '#000000', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(0, 255, 255)', 'RGB(0,255,255)', {r: 0, g: 0, b: 255}, [0, 255, 255, 255], '$fff', '#ffg', null];
-      const answers = ['HEX', 'HEX', 'HEX', 'HEX', 'RGB', 'RGB', 'RGB', 'RGB', 'RGB', 'none', 'none', 'none', 'none'];
+    describe('それぞれのTypeを "RGB", "HEX", "HSV", "none" の中から取得する', () => {
+      const tests = ['#fff', '#000000', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(0, 255, 255)', 'RGB(0,255,255)', {r: 0, g: 0, b: 255}, 'hsv(360, 0, 0)', {h: 360, s: 0, v:0}, [0, 255, 255, 255], '$fff', '#ffg', null];
+      const answers = ['HEX', 'HEX', 'HEX', 'HEX', 'RGB', 'RGB', 'RGB', 'RGB', 'RGB', 'HSV', 'HSV', 'none', 'none', 'none', 'none'];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);

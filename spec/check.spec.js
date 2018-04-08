@@ -89,6 +89,17 @@ describe('getType の test', () => {
     });
   });
 
+  describe('getType hsv のテスト', () => {
+    const any = ['hsv(360, 0, 0)', 'HSV(0, 100, 100)', {h: 360, s: 0, v:0}, {h: 100, s: 50, v:100}];
+    const correct = 'HSV';
+
+    any.forEach(e => {
+      it(`${e} is ${correct}`, () => {
+        assert.strictEqual(check.getType(e), correct)
+      });
+    });
+  });
+
   describe('getType none のテスト', () => {
     const any = [[0, 255, 255, 255], [-10, 255, 255], [255, 255,  256], '#ffff000', 'fffffff'];
     const correct = 'none';
