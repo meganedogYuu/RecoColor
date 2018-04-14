@@ -63,7 +63,7 @@ export function hexToRgbObject(hex: string): { r: number, g: number, b: number }
  * @param any
  * @returns {{r: number; g: number; b: number}}
  */
-export function hsvToRgb(any: any): { r: number, g: number, b: number } {
+export function hsvToRgbObject(any: any): { r: number, g: number, b: number } {
   // HSVの値でなかった場合はそのままreturn
   if (!isHsv(any)) return;
 
