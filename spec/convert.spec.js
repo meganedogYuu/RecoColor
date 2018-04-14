@@ -56,14 +56,14 @@ describe('hexToRgbObject の test', () => {
   });
 });
 
-describe('rgbToHsv の test', () => {
-  describe('rgbToHsv 正常値のテスト', () => {
+describe('rgbObjectToHsv の test', () => {
+  describe('rgbObjectToHsv 正常値のテスト', () => {
     const rgbes = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}];
     const answers = [{h:0, s:0, v:100}, {h:0, s:0, v:0}, {h:210, s:16, v:80}, {h:162, s:100, v:94}];
 
     rgbes.forEach((element, index) => {
-      it(`convert r:${element.r}, g:${element.g}, b:${element.b} to rgbToHsv`, () => {
-        const result = convert.rgbToHsv(element);
+      it(`convert r:${element.r}, g:${element.g}, b:${element.b} to Hsv`, () => {
+        const result = convert.rgbObjectToHsv(element);
         // rgbColorToHsv は小数点に処理をせずに取得する
         // その状態のままだと比較がしづらいため切り捨てを行う
         assert.strictEqual(Math.floor(result.h), answers[index].h);
