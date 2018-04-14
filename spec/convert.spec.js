@@ -56,6 +56,32 @@ describe('hexToRgbObject の test', () => {
   });
 });
 
+describe('hsvToRgbObject の test', () => {
+  describe('hsvToRgbObject 正常値のテスト', () => {
+    const hsvs = ["hsv(300, 20, 10)", "HSV(30, 100, 80)", {h:240, s: 20, v: 80}];
+    const answers = [{r:26, g:20, b:26}, {r:204, g:102, b:0}, {r:163, g:163, b:204}];
+
+    hsvs.forEach((element, index) => {
+      it(`convert ${element} to RgbObject`, () => {
+        const result = convert.hsvToRgbObject(element);
+        assert.strictEqual(Math.round(result.r), answers[index].r);
+        assert.strictEqual(Math.round(result.g), answers[index].g);
+        assert.strictEqual(Math.round(result.b), answers[index].b);
+      });
+    });
+  });
+  describe('hsvToRgbObject 異常値のテスト', () => {
+    const hsvs = ["hsv(370, 20, 10)", "HSS(30, 100, 80)", {h:240, a: 20, v: 80}, {h:361, s: 20, v: 80}, {h:361, s: 20, v: -1}];
+
+    hsvs.forEach(element => {
+      it(`convert ${element} to RgbObject`, () => {
+        const result = convert.hsvToRgbObject(element);
+        assert.strictEqual(result, undefined);
+      });
+    });
+  });
+});
+
 describe('rgbObjectToHsv の test', () => {
   describe('rgbObjectToHsv 正常値のテスト', () => {
     const rgbes = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}];
