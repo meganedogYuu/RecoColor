@@ -128,7 +128,7 @@ export function rgbObjectToHexString(rgb: { r: number, g: number, b: number }): 
  * @param {{r: number; g: number; b: number}} rgb
  * @returns { h: number; s: number; v: number }
  */
-export function rgbObjectToHsv(rgb: { r: number, g: number, b: number }): { h: number, s: number, v: number } {
+export function rgbObjectToHsvObject(rgb: { r: number, g: number, b: number }): { h: number, s: number, v: number } {
   const max = Math.max(rgb.r, rgb.g, rgb.b);
   const min = Math.min(rgb.r, rgb.g, rgb.b);
 

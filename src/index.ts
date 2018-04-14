@@ -141,7 +141,7 @@ export default class RecoColor {
     if (isNullOrUndefined(this._rgbColor)) return;
 
     // 丸めていない値を取得
-    const hsv = convert.rgbObjectToHsv(this._rgbColor.getObject());
+    const hsv = convert.rgbObjectToHsvObject(this._rgbColor.getObject());
 
     return { h: Math.round(hsv.h), s: Math.round(hsv.s), v: Math.round(hsv.v) };
   }
