@@ -74,6 +74,7 @@ export default class RecoColor {
 
   /**
    * HEX値で表した場合の値を返す
+   * 設定した値が小数点を含む値の場合、小数点第一位を四捨五入したHEX値を返す
    * 設定した値が正しくない場合は undefined を返す
    *
    * @returns {string}

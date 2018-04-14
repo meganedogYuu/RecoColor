@@ -109,9 +109,12 @@ export function hsvToRgbObject(any: any): { r: number, g: number, b: number } {
  * @returns {string}
  */
 export function rgbObjectToHexString(rgb: { r: number, g: number, b: number }): string {
+  // 小数点を含む値を受け取る可能性があるため、四捨五入を行う
+  const [r, g, b] = [Math.round(rgb.r), Math.round(rgb.g), Math.round(rgb.b)];
 
-  return `${numberToTwoDigitHex(rgb.r)}${numberToTwoDigitHex(rgb.g)}${numberToTwoDigitHex(rgb.b)}`;
+  return `${numberToTwoDigitHex(r)}${numberToTwoDigitHex(g)}${numberToTwoDigitHex(b)}`;
 
+  // 数値を2ケタの16進数文字に変換する
   function numberToTwoDigitHex(num: number): string {
     const hex = num.toString(16);
     return hex.length === 1 ? `0${hex}` : `${hex}`;

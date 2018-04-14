@@ -102,8 +102,8 @@ describe('rgbObjectToHsvObject の test', () => {
 
 describe('rgbObjectToHexString の test', () => {
   describe('rgbObjectToHexString 正常値のテスト', () => {
-    const rgbes = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}];
-    const answers = ['ffffff', '000000', 'aabbcc', '00f0ab'];
+    const rgbes = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}, { r: 71.4, g: 193.8, b: 255 }];
+    const answers = ['ffffff', '000000', 'aabbcc', '00f0ab', '47c2ff'];
 
     rgbes.forEach((element, index) => {
       it(`convert r:${element.r}, g:${element.g}, b:${element.b} to hex`, () => {
