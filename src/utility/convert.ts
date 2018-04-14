@@ -38,7 +38,7 @@ export function rgbToRgbObject(any: any): { r: number, g: number, b: number } {
  * @param {string} hex
  * @returns {{r: number; g: number; b: number}}
  */
-export function hexToRgb(hex: string): { r: number, g: number, b: number } {
+export function hexToRgbObject(hex: string): { r: number, g: number, b: number } {
 
   if (!isHex(hex)) return;
 

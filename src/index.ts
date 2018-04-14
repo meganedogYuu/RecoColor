@@ -192,7 +192,7 @@ export default class RecoColor {
   private initSetting(): void {
     const obj: { r: number, g: number, b: number }
       = isRgb(this._originalColor) ? convert.rgbToRgbObject(this._originalColor)
-      : isHex(this._originalColor) ? convert.hexToRgb(this._originalColor)
+      : isHex(this._originalColor) ? convert.hexToRgbObject(this._originalColor)
       : isHsv(this._originalColor) ? convert.hsvToRgb(this._originalColor)
       : undefined;
 
