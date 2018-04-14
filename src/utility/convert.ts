@@ -108,7 +108,7 @@ export function hsvToRgbObject(any: any): { r: number, g: number, b: number } {
  * @param {{r: number; g: number; b: number}} rgb
  * @returns {string}
  */
-export function rgbToHex(rgb: { r: number, g: number, b: number }): string {
+export function rgbObjectToHex(rgb: { r: number, g: number, b: number }): string {
 
   return `${numberToTwoDigitHex(rgb.r)}${numberToTwoDigitHex(rgb.g)}${numberToTwoDigitHex(rgb.b)}`;
 
