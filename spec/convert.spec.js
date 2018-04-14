@@ -100,14 +100,14 @@ describe('rgbObjectToHsv の test', () => {
   });
 });
 
-describe('rgbObjectToHex の test', () => {
-  describe('rgbObjectToHex 正常値のテスト', () => {
+describe('rgbObjectToHexString の test', () => {
+  describe('rgbObjectToHexString 正常値のテスト', () => {
     const rgbes = [{r:255, g:255, b:255}, {r:0, g:0, b:0}, {r:170, g:187, b:204}, {r:0, g:240, b:171}];
     const answers = ['ffffff', '000000', 'aabbcc', '00f0ab'];
 
     rgbes.forEach((element, index) => {
       it(`convert r:${element.r}, g:${element.g}, b:${element.b} to hex`, () => {
-        const result = convert.rgbObjectToHex(element);
+        const result = convert.rgbObjectToHexString(element);
         assert.strictEqual(result, answers[index]);
       });
     });
