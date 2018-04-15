@@ -303,10 +303,13 @@ color.getComplementaryColor();  // undefined
 
 ```javascript
 const color = new RecoColor([0, 10, 255]);
-color.isHex();  // true
+color.isRgb();  // true
 
 const color = new RecoColor("#fff");
-color.isHex();  // false
+color.isRgb();  // false
+
+const color = new RecoColor({h: 100, s: 50, v:100});
+color.isRgb();  // false
 ```
 
 
@@ -320,4 +323,24 @@ color.isHex();  // false
 
 const color = new RecoColor("#fff");
 color.isHex();  // true
+
+const color = new RecoColor({h: 100, s: 50, v:100});
+color.isHex();  // false
+
+```
+
+#### isHsv
+
+設定した値がHSV値か判定
+
+```javascript
+const color = new RecoColor([0, 10, 255]);
+color.isHsv();  // false
+
+const color = new RecoColor("#fff");
+color.isHsv();  // false
+
+const color = new RecoColor({h: 100, s: 50, v:100});
+color.isHsv();  // true
+
 ```
