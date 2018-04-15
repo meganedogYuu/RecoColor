@@ -1,5 +1,5 @@
 import { isRgb, isHex, isHsv, getType, getColorTypeFrom } from './utility/check';
-import { isNullOrUndefined } from './utility/util';
+import { isNullOrUndefined, highMath } from './utility/util';
 import { RgbColor } from './member/RgbColor';
 import { ColorType } from './member/ColorType';
 import * as convert from './utility/convert';
@@ -92,7 +92,8 @@ export default class RecoColor {
    */
   public getRgb(): { r: number, g: number, b: number } {
     if (isNullOrUndefined(this._rgbColor)) return;
-    return this._rgbColor.getRgbObject();
+    // 小数点の計算を行った値を返す
+    return { r: highMath(this._rgbColor.r) , g: highMath(this._rgbColor.g), b: highMath(this._rgbColor.b) };
   }
 
   /**
@@ -103,7 +104,8 @@ export default class RecoColor {
    */
   public getRed(): number {
     if (isNullOrUndefined(this._rgbColor)) return;
-    return this._rgbColor.r;
+    // 小数点の計算を行った値を返す
+    return highMath(this._rgbColor.r);
   }
 
   /**
@@ -114,7 +116,8 @@ export default class RecoColor {
    */
   public getGreen(): number {
     if (isNullOrUndefined(this._rgbColor)) return;
-    return this._rgbColor.g;
+    // 小数点の計算を行った値を返す
+    return highMath(this._rgbColor.g);
   }
 
   /**
@@ -125,7 +128,8 @@ export default class RecoColor {
    */
   public getBlue(): number {
     if (isNullOrUndefined(this._rgbColor)) return;
-    return this._rgbColor.b;
+    // 小数点の計算を行った値を返す
+    return highMath(this._rgbColor.b);
   }
 
   /**
@@ -143,8 +147,8 @@ export default class RecoColor {
 
     // 丸めていない値を取得
     const hsv = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
-
-    return { h: Math.round(hsv.h), s: Math.round(hsv.s), v: Math.round(hsv.v) };
+    // 小数点の計算を行った値を返す
+    return { h: highMath(hsv.h), s: highMath(hsv.s), v: highMath(hsv.v) };
   }
 
 
@@ -165,7 +169,10 @@ export default class RecoColor {
     if (getColorTypeFrom(option) === ColorType.Hex) {
       return convert.rgbObjectToHexString(clashingColor.getRgbObject());
     }
-    return clashingColor.getRgbObject();
+
+    // 小数点の計算を行った値を返す
+    const rgb: { r: number, g: number, b: number } = clashingColor.getRgbObject();
+    return { r: highMath(rgb.r), g: highMath(rgb.g), b: highMath(rgb.b) };
   }
 
   /**
@@ -184,7 +191,10 @@ export default class RecoColor {
     if (getColorTypeFrom(option) === ColorType.Hex) {
       return convert.rgbObjectToHexString(complementaryColor.getRgbObject());
     }
-    return complementaryColor.getRgbObject();
+
+    // 小数点の計算を行った値を返す
+    const rgb: { r: number, g: number, b: number } = complementaryColor.getRgbObject();
+    return { r: highMath(rgb.r), g: highMath(rgb.g), b: highMath(rgb.b) };
   }
 
   /**
