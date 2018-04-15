@@ -8,3 +8,4 @@ tslint.json
 package-lock.json
 yarn.lock
 myDoc/
+yarn-error.log
