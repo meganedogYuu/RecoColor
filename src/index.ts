@@ -81,7 +81,7 @@ export default class RecoColor {
    */
   public getHex(): string {
     if (isNullOrUndefined(this._rgbColor)) return;
-    return convert.rgbObjectToHexString(this._rgbColor.getObject());
+    return convert.rgbObjectToHexString(this._rgbColor.getRgbObject());
   }
 
   /**
@@ -92,7 +92,7 @@ export default class RecoColor {
    */
   public getRgb(): { r: number, g: number, b: number } {
     if (isNullOrUndefined(this._rgbColor)) return;
-    return this._rgbColor.getObject();
+    return this._rgbColor.getRgbObject();
   }
 
   /**
@@ -142,7 +142,7 @@ export default class RecoColor {
     if (isNullOrUndefined(this._rgbColor)) return;
 
     // 丸めていない値を取得
-    const hsv = convert.rgbObjectToHsvObject(this._rgbColor.getObject());
+    const hsv = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
 
     return { h: Math.round(hsv.h), s: Math.round(hsv.s), v: Math.round(hsv.v) };
   }
@@ -163,9 +163,9 @@ export default class RecoColor {
 
     // option で HEX の指定がある場合HEX値を返す、それ以外の場合 RGBのオブジェクト を返す
     if (getColorTypeFrom(option) === ColorType.Hex) {
-      return convert.rgbObjectToHexString(clashingColor.getObject());
+      return convert.rgbObjectToHexString(clashingColor.getRgbObject());
     }
-    return clashingColor.getObject();
+    return clashingColor.getRgbObject();
   }
 
   /**
@@ -182,9 +182,9 @@ export default class RecoColor {
 
     // option で HEX の指定がある場合HEX値を返す、それ以外の場合 RGBのオブジェクト を返す
     if (getColorTypeFrom(option) === ColorType.Hex) {
-      return convert.rgbObjectToHexString(complementaryColor.getObject());
+      return convert.rgbObjectToHexString(complementaryColor.getRgbObject());
     }
-    return complementaryColor.getObject();
+    return complementaryColor.getRgbObject();
   }
 
   /**

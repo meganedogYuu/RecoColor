@@ -29,7 +29,7 @@ export class RgbColor {
    *
    * @returns {{r: number; g: number; b: number}}
    */
-  getObject(): { r: number, g: number, b: number } {
+  getRgbObject(): { r: number, g: number, b: number } {
     return { r: this.r, g: this.g, b: this.b };
   }
 
