@@ -114,7 +114,7 @@ color.getOriginal();  // "1234567" => 誤った値でも取得可能
 
 #### getType
 
-設定した色のタイプを "RGB", "HEX", "none" の中から取得  
+設定した色のタイプを "RGB", "HEX", "HSV", "none" の中から取得  
 （`RecoColor`で判定が出来ない値の場合は全て "none" になります）
 
 ```javascript
@@ -124,13 +124,17 @@ color.getType();  // "RGB"
 const color = new RecoColor("#fff");
 color.getType();  // "HEX"
 
+const color = new RecoColor({h: 100, s: 50, v:100});
+color.getType();  // "HSV"
+
 const color = new RecoColor("1234567");
-color.getOriginal();  // "none"
+color.getType();  // "none"
 ```
 
 #### getRgb
 
 RGB値で表した場合の値をオブジェクト型で取得  
+設定した値が小数点を含む値の場合、小数点第一位を四捨五入したHEX値を返す  
 （設定した値が正しくない場合は `undefined` を返します）
 
 ```javascript
@@ -142,6 +146,9 @@ color.getRgb();  // {r: 170, g: 187, b: 204}
 
 const color = new RecoColor([0, 10, 255]);
 color.getRgb();  // {r: 0, g: 10, b: 255}
+
+const color = new RecoColor({h: 234, s: 50, v:96});
+color.getRgb();  // {r: 122, g: 135, b: 245}
 
 const color = new RecoColor("#ffff");
 color.getRgb();  // undefined
@@ -163,6 +170,9 @@ color.getHex();  // "aabbcc"
 const color = new RecoColor([0, 10, 255]);
 color.getHex();  // "000aff"
 
+const color = new RecoColor({h: 234, s: 50, v:96});
+color.getHex();  // "7a87f5"
+
 const color = new RecoColor("#ffff");
 color.getHex();  // undefined
 ```
@@ -170,6 +180,7 @@ color.getHex();  // undefined
 #### getRed
 
 Rの値を数値で取得  
+設定した値が小数点を含む値の場合、小数点第一位を四捨五入した値を返す  
 （設定した値が正しくない場合は `undefined` を返します）
 
 ```javascript
@@ -182,6 +193,9 @@ color.getRed();  // 170
 const color = new RecoColor([0, 10, 255]);
 color.getRed();  // 0
 
+const color = new RecoColor({h: 234, s: 50, v:96});
+color.getRed();  // 122
+
 const color = new RecoColor("#ffff");
 color.getRed();  // undefined
 ```
@@ -190,6 +204,7 @@ color.getRed();  // undefined
 #### getGreen
 
 Gの値を数値で取得  
+設定した値が小数点を含む値の場合、小数点第一位を四捨五入した値を返す  
 （設定した値が正しくない場合は `undefined` を返します）
 
 ```javascript
@@ -202,6 +217,9 @@ color.getGreen();  // 180
 const color = new RecoColor([0, 10, 255]);
 color.getGreen();  // 10
 
+const color = new RecoColor({h: 234, s: 50, v:96});
+color.getGreen();  // 135
+
 const color = new RecoColor("#ffff");
 color.getGreen();  // undefined
 ```
@@ -210,6 +228,7 @@ color.getGreen();  // undefined
 #### getBlue
 
 Bの値を数値で取得  
+設定した値が小数点を含む値の場合、小数点第一位を四捨五入した値を返す  
 （設定した値が正しくない場合は `undefined` を返します）
 
 ```javascript
@@ -222,6 +241,9 @@ color.getBlue();  // 204
 const color = new RecoColor([0, 10, 255]);
 color.getBlue();  // 255
 
+const color = new RecoColor({h: 234, s: 50, v:96});
+color.getBlue();  // 245
+
 const color = new RecoColor("#ffff");
 color.getBlue();  // undefined
 ```
@@ -230,7 +252,7 @@ color.getBlue();  // undefined
 #### getHsv
 
 HSVのオブジェクト型で表した場合の値を取得  
-それぞれのとれる値の範囲は以下のようになり、小数点第一位を四捨五入した値で取得します
+それぞれのとれる値の範囲は以下のようになり、小数点第一位を四捨五入した値で取得
 
 - H： 0 ~ 360
 - S： 0 ~ 100
@@ -257,7 +279,9 @@ color.getHsv();  // undefined
 
 反対色の値を RGBのオブジェクト もしくは HEX値 で取得  
 HEX値で取得する場合、引数で 'HEX' 'Hex' 'hex' いずれかの文字列を渡す  
+
 それ以外の場合 RGBのオブジェクト を返す  
+また、設定した値が小数点を含む値の場合、小数点第一位を四捨五入した値を返す  
 （設定した値が正しくない場合は `undefined` を返します）
 
 ```javascript
@@ -290,7 +314,9 @@ color.getClashingColor();  // undefined
 
 補色の値を RGBのオブジェクト もしくは HEX値 で取得  
 HEX値で取得する場合、引数で 'HEX' 'Hex' 'hex' いずれかの文字列を渡す  
+
 それ以外の場合 RGBのオブジェクト を返す  
+また、設定した値が小数点を含む値の場合、小数点第一位を四捨五入した値を返す  
 （設定した値が正しくない場合は `undefined` を返します）
 
 ```javascript
