@@ -64,7 +64,7 @@ describe('RecoColor test', () => {
 
   describe('getOriginal test', () => {
     describe('最初に設定した値が取得出来るか', () => {
-      const tests = ['#fff', '#000000', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', [0, 255, 255, 255]];
+      const tests = ['#fff', '#000000', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', [0, 255, 255, 255], 'HSV(0, 100, 100)', {h: 100, s: 50, v:100}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(element);
@@ -73,7 +73,7 @@ describe('RecoColor test', () => {
     });
 
     describe('set() で設定した値が取得出来るか', () => {
-      const tests = ['#fff', '#000000', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', [0, 255, 255, 255]];
+      const tests = ['#fff', '#000000', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', [0, 255, 255, 255], 'HSV(0, 100, 100)', {h: 100, s: 50, v:100}];
 
       tests.forEach((element, index) => {
         let color = new recoColor('ddd');
@@ -97,8 +97,8 @@ describe('RecoColor test', () => {
 
   describe('getHex test', () => {
     describe('正常値の場合の HEX 値 を取得する', () => {
-      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
-      const answers = ['ffffff', 'aabbcc', '00f0ab', '000aff', '0078ff', 'b4145a', '140ab4'];
+      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = ['ffffff', 'aabbcc', '00f0ab', '000aff', '0078ff', 'b4145a', '140ab4', 'ff0000', '7a87f5'];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -118,8 +118,8 @@ describe('RecoColor test', () => {
 
   describe('getRgb test', () => {
     describe('正常値の場合の RGBオブジェクト を取得する', () => {
-      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
-      const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180},];
+      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180}, {r: 255, g: 0, b: 0}, {r: 122, g: 135, b: 245}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -143,8 +143,8 @@ describe('RecoColor test', () => {
 
   describe('getRed test', () => {
     describe('正常値の場合の Red の値 を取得する', () => {
-      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
-      const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180},];
+      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180}, {r: 255, g: 0, b: 0}, {r: 122, g: 135, b: 245}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -166,8 +166,8 @@ describe('RecoColor test', () => {
 
   describe('getGreen test', () => {
     describe('正常値の場合の Green の値 を取得する', () => {
-      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
-      const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180},];
+      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180}, {r: 255, g: 0, b: 0}, {r: 122, g: 135, b: 245}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -189,8 +189,8 @@ describe('RecoColor test', () => {
 
   describe('getBlue test', () => {
     describe('正常値の場合の Blue の値 を取得する', () => {
-      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
-      const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180},];
+      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = [{r: 255, g: 255, b: 255}, {r: 170, g: 187, b: 204}, {r: 0, g: 240, b: 171}, {r: 0, g: 10, b: 255}, {r: 0, g: 120, b: 255}, {r: 180, g: 20, b: 90}, {r: 20, g: 10, b: 180}, {r: 255, g: 0, b: 0}, {r: 122, g: 135, b: 245}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -212,8 +212,8 @@ describe('RecoColor test', () => {
 
   describe('getHsv test', () => {
     describe('正常値の場合の Blue の値 を取得する', () => {
-      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}];
-      const answers = [{h: 0, s: 0, v: 100}, {h: 210, s: 17, v: 80}, {h: 163, s: 100, v: 94}, {h: 238, s: 100, v: 100}, {h: 212, s: 100, v: 100}, {h: 334, s: 89, v: 71}, {h: 244, s: 94, v: 71}];
+      const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = [{h: 0, s: 0, v: 100}, {h: 210, s: 17, v: 80}, {h: 163, s: 100, v: 94}, {h: 238, s: 100, v: 100}, {h: 212, s: 100, v: 100}, {h: 334, s: 89, v: 71}, {h: 244, s: 94, v: 71}, {h: 0, s: 100, v: 100}, {h: 234, s: 50, v: 96}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -237,8 +237,8 @@ describe('RecoColor test', () => {
 
   describe('getClashingColor test', () => {
     describe('正常値の場合の getClashingColor の値 を取得する（オプション指定なし）', () => {
-      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
-      const answers = [{r: 0, g: 0, b: 0}, {r: 255, g: 255, b: 255}, {r: 225, g: 245, b: 15}, {r: 55, g: 245, b: 254}];
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)', 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = [{r: 0, g: 0, b: 0}, {r: 255, g: 255, b: 255}, {r: 225, g: 245, b: 15}, {r: 55, g: 245, b: 254}, {r: 0, g: 255, b: 255}, {r: 133, g: 120, b: 10}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -251,8 +251,8 @@ describe('RecoColor test', () => {
     });
 
     describe('正常値の場合の getClashingColor の値 を取得する（オプション指定 hex）', () => {
-      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
-      const answers = ['000000', 'ffffff', 'e1f50f', '37f5fe'];
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)', 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = ['000000', 'ffffff', 'e1f50f', '37f5fe', '00ffff', '85780a'];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -263,8 +263,8 @@ describe('RecoColor test', () => {
     });
 
     describe('正常値の場合の getClashingColor の値 を取得する（オプション指定 失敗）', () => {
-      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
-      const answers = [{r: 0, g: 0, b: 0}, {r: 255, g: 255, b: 255}, {r: 225, g: 245, b: 15}, {r: 55, g: 245, b: 254}];
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)', 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = [{r: 0, g: 0, b: 0}, {r: 255, g: 255, b: 255}, {r: 225, g: 245, b: 15}, {r: 55, g: 245, b: 254}, {r: 0, g: 255, b: 255}, {r: 133, g: 120, b: 10}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -288,8 +288,8 @@ describe('RecoColor test', () => {
 
   describe('getComplementaryColor test', () => {
     describe('正常値の場合の getComplementaryColor の値 を取得する（オプション指定なし）', () => {
-      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
-      const answers = [{r: 255, g: 255, b: 255}, {r: 0, g: 0, b: 0}, {r: 220, g: 240, b: 10}, {r: 1, g: 191, b: 200}];
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)', 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = [{r: 255, g: 255, b: 255}, {r: 0, g: 0, b: 0}, {r: 220, g: 240, b: 10}, {r: 1, g: 191, b: 200}, {r: 0, g: 255, b: 255}, {r: 245, g: 233, b: 122}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -302,8 +302,8 @@ describe('RecoColor test', () => {
     });
 
     describe('正常値の場合の getComplementaryColor の値 を取得する（オプション指定 hex）', () => {
-      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
-      const answers = ['ffffff', '000000', 'dcf00a', '01bfc8'];
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)', 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = ['ffffff', '000000', 'dcf00a', '01bfc8', '00ffff', 'f5e97a'];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
@@ -314,8 +314,8 @@ describe('RecoColor test', () => {
     });
 
     describe('正常値の場合の getComplementaryColor の値 を取得する（オプション指定 失敗）', () => {
-      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)'];
-      const answers = [{r: 255, g: 255, b: 255}, {r: 0, g: 0, b: 0}, {r: 220, g: 240, b: 10}, {r: 1, g: 191, b: 200}];
+      const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)', 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
+      const answers = [{r: 255, g: 255, b: 255}, {r: 0, g: 0, b: 0}, {r: 220, g: 240, b: 10}, {r: 1, g: 191, b: 200}, {r: 0, g: 255, b: 255}, {r: 245, g: 233, b: 122}];
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
