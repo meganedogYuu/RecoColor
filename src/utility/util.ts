@@ -60,3 +60,40 @@ export function typeOf(obj): string {
 export function isNullOrUndefined(obj: any): boolean {
   return (obj === undefined || obj === null);
 }
+
+/**
+ * 受け取った数値（value）を指定の計算をし変換して返す
+ *
+ * type:
+ *   - "round"（四捨五入）・"ceil"（切り上げ）・"floor"（切り捨て）, "original"（そのまま）の4つを受け取る
+ *   - 大文字小文字は問わない
+ *   - 前後の空白も問わない
+ *   - 値が設定されていない、間違った文字列の場合、Roundを指定する
+ * decimal:
+ *   - 求める位
+ *
+ * ex1: highMath(12.11, 'round', 0) => 12
+ * ex2: highMath(12.11, 'ceil', 1) => 12.2
+ *
+ * @param {number} value
+ * @param {string} type
+ * @param {number} decimal
+ * @returns {number}
+ */
+export function highMath(value: number, type: string = 'round', decimal: number = 0): number {
+  // type の余計な空白を削除、小文字に変換
+  const lowerType: string = type.trim().toLowerCase();
+  // original が設定されている場合、そのままの値を返す
+  if (lowerType === 'original') return value;
+  // 該当する文字列を設定
+  const t = (lowerType === 'ceil') ? 'ceil' : (lowerType === 'floor') ? 'floor' : 'round';
+
+  switch (t) {
+  case 'round':
+    return decimal === 0 ? Math.round(value) : Math.round(value * (10 ** decimal)) / (10 ** decimal);
+  case 'ceil':
+    return decimal === 0 ? Math.ceil(value) : Math.ceil(value * (10 ** decimal)) / (10 ** decimal);
+  case 'floor':
+    return decimal === 0 ? Math.floor(value) : Math.floor(value * (10 ** decimal)) / (10 ** decimal);
+  }
+}
