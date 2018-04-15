@@ -45,7 +45,7 @@ color.set({r: 0, g: 0, b: 255});
 ```
 
 
-#### Hex
+#### HEX
 
 - 3ケタ or 6ケタ
 - `0~f` （大文字小文字どちらでもOK）
@@ -69,6 +69,29 @@ color.set("ABC");
 const color = new RecoColor();
 color.set("00f0ab");
 ```
+
+#### HSV
+
+- 文字列、オブジェクト型に対応
+- h・・0 ~ 360
+- s・・0 ~ 100
+- b・・0 ~ 100
+
+```javascript
+const color = new RecoColor("hsv(360, 0, 0)");
+const color = new RecoColor("HSV(0, 100, 100)");
+const color = new RecoColor({h: 100, s: 50, v:100});
+
+const color = new RecoColor();
+color.set("hsv(360, 0, 0)");
+
+const color = new RecoColor();
+color.set("HSV(0, 100, 100)");
+
+const color = new RecoColor();
+color.set({h: 100, s: 50, v:100});
+```
+
 
 
 ### メソッド
