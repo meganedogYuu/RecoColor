@@ -196,3 +196,22 @@ export function getComplementaryColorFrom(rgbColor: RgbColor): RgbColor {
     b: (foundationValue - rgbColor.b)
   });
 }
+
+
+/**
+ * hsvオブジェクト のH（Hue）に addHue の値を追加する
+ * hの値が360を超えた場合は、0~360の間に収まるように調整する
+ *
+ * @param {{h: number; s: number; v: number}} hsv
+ * @param {number} addHue
+ * @returns {{h: number; s: number; v: number}}
+ */
+export function addHueToHsvObject(hsv: { h: number, s: number, v: number }, addHue: number)
+  : { h: number, s: number, v: number } {
+  // 新しいHueの値を求め、360以下の値にする
+  let newHue = hsv.h + addHue;
+  while (newHue > 360) {
+    newHue -= 360;
+  }
+  return { h: newHue, s:hsv.s, v:hsv.v };
+}
