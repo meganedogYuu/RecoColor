@@ -115,7 +115,7 @@ describe('getType の test', () => {
 
 describe('getColorTypeFrom の test', () => {
   describe('getColorTypeFrom HEX のテスト', () => {
-    const any = ['HEX', 'Hex', 'hex'];
+    const any = ['HEX', 'Hex', 'hex', 'hex  ', '  hex'];
 
     any.forEach(e => {
       it(`${e} is HEX`, () => {
@@ -124,8 +124,18 @@ describe('getColorTypeFrom の test', () => {
     });
   });
 
-  describe('getColorTypeFrom HEX以外 のテスト', () => {
-    const any = ['RGB', 'Rgb', 'Hez', 'Hex '];
+  describe('getColorTypeFrom HSV のテスト', () => {
+    const any = ['HSV', 'Hsv', 'hsv', 'hsv  ', '  hsv'];
+
+    any.forEach(e => {
+      it(`${e} is HSV`, () => {
+        assert.strictEqual(check.getColorTypeFrom(e), ColorType.ColorType.Hsv)
+      });
+    });
+  });
+
+  describe('getColorTypeFrom RGB のテスト', () => {
+    const any = ['RGB', 'Rgb', 'rgb', 'rgb  ', '  rgb'];
 
     any.forEach(e => {
       it(`${e} is RGB`, () => {
@@ -134,4 +144,13 @@ describe('getColorTypeFrom の test', () => {
     });
   });
 
+  describe('getColorTypeFrom 不正値 のテスト', () => {
+    const any = ['Rgg', 'hez', 'Hsz', 'aaa', 'hs v', '', null, undefined];
+
+    any.forEach(e => {
+      it(`${e} is undefined`, () => {
+        assert.strictEqual(check.getColorTypeFrom(e), undefined)
+      });
+    });
+  });
 });
