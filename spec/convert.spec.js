@@ -151,3 +151,21 @@ describe('getComplementaryColorFrom の test', () => {
     });
   });
 });
+
+
+describe('addHueToHsvObject の test', () => {
+  describe('addHueToHsvObject 正常値のテスト', () => {
+    const questions = [{h:100, s:0, v:0}, {h:255, s:0, v:0}, {h:200, s:0, v:0}, {h:200, s:0, v:0}];
+    const addValues = [0, 105, 200, 700];
+    const answers = [{h:100, s:0, v:0}, {h:360, s:0, v:0}, {h:40, s:0, v:0}, {h:180, s:0, v:0}];
+
+    questions.forEach((element, index) => {
+      it(`convert {h:${element.h}, s:${element.s}, v:${element.v}} addValues ${addValues[index]} to {h:${answers.h}, s:${answers.s}, v:${answers.v}}`, () => {
+        const result = convert.addHueToHsvObject(questions[index], addValues[index]);
+        assert.strictEqual(result.h, answers[index].h);
+        assert.strictEqual(result.s, answers[index].s);
+        assert.strictEqual(result.v, answers[index].v);
+      });
+    });
+  });
+});
