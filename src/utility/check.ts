@@ -158,8 +158,10 @@ export function getType(any: any): string {
  * @returns {ColorType}
  */
 export function getColorTypeFrom(optionName: string): ColorType {
-  if (optionName === 'HEX' || optionName === 'Hex' || optionName === 'hex') {
-    return ColorType.Hex;
-  }
-  return ColorType.Rgb;
+  if (util.isNullOrUndefined(optionName)) return;
+  const l = optionName.toLowerCase().trim();
+  if (l === 'hex') return ColorType.Hex;
+  if (l === 'hsv') return ColorType.Hsv;
+  if (l === 'rgb') return ColorType.Rgb;
+  return;
 }
