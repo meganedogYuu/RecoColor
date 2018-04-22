@@ -1,6 +1,6 @@
 import { isRgb, isHex, isHsv } from './check';
 import { RgbColor } from '../member/RgbColor';
-import { typeOf } from './util';
+import { typeOf, highMath } from './util';
 import { ColorType } from '../member/ColorType';
 import { RgbObject } from '../interface/RgbObject';
 import { HsvObject } from '../interface/HsvObject';
@@ -240,4 +240,21 @@ export function hsvObjectsToSpecifiedType(hsvObjects: HsvObject[], type: ColorTy
   }
   // ColorType.Rgb もしくはそれ以外の場合は Rgb として返す
   return hsvObjects.map(hsv => hsvToRgbObject(hsv));
+
+/**
+ * RgbObject それぞれの値に対して、オプションで渡された計算を行う
+ *
+ * @param {RgbObject} object
+ * @param {{type: string; decimal: number}} option
+ * @returns {RgbObject}
+ */
+export function highMathToRgbObject(
+  object: RgbObject, option: {type: string, decimal: number} = { type :'round', decimal: 0 })
+  : RgbObject {
+  return {
+    r: highMath(object.r, option.type, option.decimal),
+    g: highMath(object.g, option.type, option.decimal),
+    b: highMath(object.b, option.type, option.decimal)
+  };
+
 }
