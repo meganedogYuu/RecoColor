@@ -1,6 +1,7 @@
 import { isRgb, isHex, isHsv } from './check';
 import { RgbColor } from '../member/RgbColor';
 import { typeOf } from './util';
+import { ColorType } from '../member/ColorType';
 
 /**
  * rgb値をRgbオブジェクトに変換する
@@ -214,4 +215,27 @@ export function addHueToHsvObject(hsv: { h: number, s: number, v: number }, addH
     newHue -= 360;
   }
   return { h: newHue, s:hsv.s, v:hsv.v };
+}
+
+/**
+ * hsvObjects を 指定のColorType に変換し返す
+ * ColorType が undefined など指定がされていない場合、Rgbのケースを返す
+ *
+ * @param {{h: number; s: number; v: number}[]} hsvObjects
+ * @param {ColorType} type
+ * @returns {{r: number; g: number; b: number}[] | {h: number; s: number; v: number}[] | string[]}
+ */
+export function hsvObjectsToSpecifiedType(hsvObjects: { h: number, s: number, v: number }[], type: ColorType)
+  : { r: number, g: number, b: number }[] | { h: number, s: number, v: number }[] | string[] {
+  // それぞれのtypeによってreturnする色を変更する
+  switch (type){
+  case ColorType.Hsv:
+    return hsvObjects;
+  case ColorType.Hex:
+    return hsvObjects
+      .map(hsv => hsvToRgbObject(hsv))
+      .map(rgb => rgbObjectToHexString(rgb));
+  }
+  // ColorType.Rgb もしくはそれ以外の場合は Rgb として返す
+  return hsvObjects.map(hsv => hsvToRgbObject(hsv));
 }
