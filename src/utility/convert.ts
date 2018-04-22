@@ -258,3 +258,20 @@ export function highMathToRgbObject(
   };
 
 }
+
+/**
+ * HsvObject それぞれの値に対して、オプションで渡された計算を行う
+ *
+ * @param {HsvObject} object
+ * @param {{type: string; decimal: number}} option
+ * @returns {HsvObject}
+ */
+export function highMathToHsvObject(
+  object: HsvObject, option: {type: string, decimal: number} = { type :'round', decimal: 0 })
+  : HsvObject {
+  return {
+    h: highMath(object.h, option.type, option.decimal),
+    s: highMath(object.s, option.type, option.decimal),
+    v: highMath(object.v, option.type, option.decimal)
+  };
+}
