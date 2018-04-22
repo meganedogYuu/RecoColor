@@ -220,26 +220,32 @@ export function addHueToHsvObject(hsv: HsvObject, addHue: number)
 }
 
 /**
- * hsvObjects を 指定のColorType に変換し返す
+ * hsvObjects を 指定のColorType に option で指定された方法で変換し返す
  * ColorType が undefined など指定がされていない場合、Rgbのケースを返す
  *
- * @param {{h: number; s: number; v: number}[]} hsvObjects
+ * @param {HsvObject[]} hsvObjects
  * @param {ColorType} type
- * @returns {{r: number; g: number; b: number}[] | {h: number; s: number; v: number}[] | string[]}
+ * @param {{type: string; decimal: number}} option
+ * @returns {RgbObject[] | HsvObject[] | string[]}
  */
-export function hsvObjectsToSpecifiedType(hsvObjects: HsvObject[], type: ColorType)
+export function hsvObjectsToSpecifiedType(
+  hsvObjects: HsvObject[], type: ColorType, option: {type: string, decimal: number} = { type :'round', decimal: 0 })
   : RgbObject[] | HsvObject[] | string[] {
   // それぞれのtypeによってreturnする色を変更する
   switch (type){
   case ColorType.Hsv:
-    return hsvObjects;
+    return hsvObjects.map(hsv => highMathToHsvObject(hsv));
   case ColorType.Hex:
     return hsvObjects
       .map(hsv => hsvToRgbObject(hsv))
       .map(rgb => rgbObjectToHexString(rgb));
   }
   // ColorType.Rgb もしくはそれ以外の場合は Rgb として返す
-  return hsvObjects.map(hsv => hsvToRgbObject(hsv));
+  return hsvObjects
+    .map(hsv => hsvToRgbObject(hsv))
+    .map(rgb => highMathToRgbObject(rgb));
+}
+
 
 /**
  * RgbObject それぞれの値に対して、オプションで渡された計算を行う
