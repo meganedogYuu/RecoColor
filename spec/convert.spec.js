@@ -2,6 +2,7 @@ const chai = require('chai');
 const assert = chai.assert;
 const convert = require('../lib/utility/convert.js');
 const rgbColor = require('../lib/member/RgbColor');
+const ColorType = require('../lib/member/ColorType');
 
 describe('rgbToRgbObject の test', () => {
   describe('rgbToRgbObject 正常値のテスト', () => {
@@ -165,6 +166,59 @@ describe('addHueToHsvObject の test', () => {
         assert.strictEqual(result.h, answers[index].h);
         assert.strictEqual(result.s, answers[index].s);
         assert.strictEqual(result.v, answers[index].v);
+      });
+    });
+  });
+});
+
+
+describe('hsvObjectsToSpecifiedType の test', () => {
+  describe('hsvObjectsToSpecifiedType ColorType.Hex のテスト', () => {
+    const questions = [[{h:100, s:100, v:100}, {h:255, s:50, v:90}], [{h:200, s:10, v:100}, {h:10, s:0, v:100}]];
+    const answers = [['55ff00', '8f73e6'], ['e6f7ff', 'ffffff']];
+
+    questions.forEach((element, index) => {
+
+      const answer = answers[index];
+      it(`convert ${element} to ColorType.Hex answer: ${answer}`, () => {
+        const result = convert.hsvObjectsToSpecifiedType(element, ColorType.ColorType.Hex);
+        result.forEach((hex, index) => assert.strictEqual(hex, answer[index]));
+      });
+    });
+  });
+
+  describe('hsvObjectsToSpecifiedType ColorType.Rgb のテスト', () => {
+    const questions = [[{h:100, s:100, v:100}, {h:255, s:50, v:90}], [{h:200, s:10, v:100}, {h:10, s:0, v:100}]];
+    const answers = [[{r:85, g:255, b:0}, {r:143, g:115, b:230}], [{r:230, g:247, b:255}, {r:255, g:255, b:255}]];
+
+    questions.forEach((element, index) => {
+
+      const answer = answers[index];
+      it(`convert ${element} to ColorType.Rgb answer: ${answer}`, () => {
+        const result = convert.hsvObjectsToSpecifiedType(element, ColorType.ColorType.Rgb);
+        result.forEach((rgb, index) => {
+          assert.strictEqual(Math.round(rgb.r), answer[index].r);
+          assert.strictEqual(Math.round(rgb.g), answer[index].g);
+          assert.strictEqual(Math.round(rgb.b), answer[index].b);
+        });
+      });
+    });
+  });
+
+  describe('hsvObjectsToSpecifiedType ColorType.Hsv のテスト', () => {
+    const questions = [[{h:100, s:100, v:100}, {h:255, s:50, v:90}], [{h:200, s:10, v:100}, {h:10, s:0, v:100}]];
+    const answers = [[{h:100, s:100, v:100}, {h:255, s:50, v:90}], [{h:200, s:10, v:100}, {h:10, s:0, v:100}]];
+
+    questions.forEach((element, index) => {
+
+      const answer = answers[index];
+      it(`convert ${element} to ColorType.Hsv answer: ${answer}`, () => {
+        const result = convert.hsvObjectsToSpecifiedType(element, ColorType.ColorType.Hsv);
+        result.forEach((hsv, index) => {
+          assert.strictEqual(hsv.h, answer[index].h);
+          assert.strictEqual(hsv.s, answer[index].s);
+          assert.strictEqual(hsv.v, answer[index].v);
+        });
       });
     });
   });
