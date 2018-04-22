@@ -1,3 +1,6 @@
+import { HsvObject } from '../interface/HsvObject';
+
+
 /**
  * 受け取った配列が3ケタであるかの判定をする
  *
@@ -35,7 +38,7 @@ export function isRgbNumberFromArray(arr: number[]): boolean {
  * @param {{h: number; s: number; v: number}} obj
  * @returns {boolean}
  */
-export function isHsvNumberFromObject(obj: {h: number, s: number, v: number}): boolean {
+export function isHsvNumberFromObject(obj: HsvObject): boolean {
   return (0 <= obj.h && obj.h <= 360) && (0 <= obj.s && obj.s <= 100) && (0 <= obj.v && obj.v <= 100);
 }
 
