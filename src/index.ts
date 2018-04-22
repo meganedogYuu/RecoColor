@@ -3,6 +3,8 @@ import { isNullOrUndefined, highMath } from './utility/util';
 import { RgbColor } from './member/RgbColor';
 import { ColorType } from './member/ColorType';
 import * as convert from './utility/convert';
+import { RgbObject } from './interface/RgbObject';
+import { HsvObject } from './interface/HsvObject';
 
 export default class RecoColor {
 
@@ -90,7 +92,7 @@ export default class RecoColor {
    *
    * @returns {{r: number; g: number; b: number}}
    */
-  public getRgb(): { r: number, g: number, b: number } {
+  public getRgb(): RgbObject {
     if (isNullOrUndefined(this._rgbColor)) return;
     // 小数点の計算を行った値を返す
     return { r: highMath(this._rgbColor.r) , g: highMath(this._rgbColor.g), b: highMath(this._rgbColor.b) };
@@ -142,7 +144,7 @@ export default class RecoColor {
    *
    * @returns {{h: number; s: number; v: number}}
    */
-  public getHsv(): { h: number, s: number, v: number } {
+  public getHsv(): HsvObject {
     if (isNullOrUndefined(this._rgbColor)) return;
 
     // 丸めていない値を取得
@@ -160,7 +162,7 @@ export default class RecoColor {
    *
    * @returns {{r: number; g: number; b: number}} | string
    */
-  public getClashingColor(option: string = 'RGB'): { r: number, g: number, b: number } | string {
+  public getClashingColor(option: string = 'RGB'): RgbObject | string {
     if (isNullOrUndefined(this._rgbColor)) return;
     // 反対色の RgbColor を取得
     const clashingColor: RgbColor = convert.getClashingColorFrom(this._rgbColor);
@@ -171,7 +173,7 @@ export default class RecoColor {
     }
 
     // 小数点の計算を行った値を返す
-    const rgb: { r: number, g: number, b: number } = clashingColor.getRgbObject();
+    const rgb: RgbObject = clashingColor.getRgbObject();
     return { r: highMath(rgb.r), g: highMath(rgb.g), b: highMath(rgb.b) };
   }
 
@@ -182,7 +184,7 @@ export default class RecoColor {
    *
    * @returns {{r: number; g: number; b: number}}
    */
-  public getComplementaryColor(option: string = 'RGB'): { r: number, g: number, b: number } | string {
+  public getComplementaryColor(option: string = 'RGB'): RgbObject | string {
     if (isNullOrUndefined(this._rgbColor)) return;
     // 補色の RgbColor を取得
     const complementaryColor: RgbColor = convert.getComplementaryColorFrom(this._rgbColor);
@@ -193,7 +195,7 @@ export default class RecoColor {
     }
 
     // 小数点の計算を行った値を返す
-    const rgb: { r: number, g: number, b: number } = complementaryColor.getRgbObject();
+    const rgb: RgbObject = complementaryColor.getRgbObject();
     return { r: highMath(rgb.r), g: highMath(rgb.g), b: highMath(rgb.b) };
   }
 
@@ -201,7 +203,7 @@ export default class RecoColor {
    * this._originalColor から this._rgbColor に値を設定する
    */
   private initSetting(): void {
-    const obj: { r: number, g: number, b: number }
+    const obj: RgbObject
       = isRgb(this._originalColor) ? convert.rgbToRgbObject(this._originalColor)
       : isHex(this._originalColor) ? convert.hexToRgbObject(this._originalColor)
       : isHsv(this._originalColor) ? convert.hsvToRgbObject(this._originalColor)
