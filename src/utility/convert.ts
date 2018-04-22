@@ -2,6 +2,8 @@ import { isRgb, isHex, isHsv } from './check';
 import { RgbColor } from '../member/RgbColor';
 import { typeOf } from './util';
 import { ColorType } from '../member/ColorType';
+import { RgbObject } from '../interface/RgbObject';
+import { HsvObject } from '../interface/HsvObject';
 
 /**
  * rgb値をRgbオブジェクトに変換する
@@ -9,7 +11,7 @@ import { ColorType } from '../member/ColorType';
  * @param any
  * @returns {{r: number; g: number; b: number}}
  */
-export function rgbToRgbObject(any: any): { r: number, g: number, b: number } {
+export function rgbToRgbObject(any: any): RgbObject {
 
   if (!isRgb(any)) return;
 
@@ -39,7 +41,7 @@ export function rgbToRgbObject(any: any): { r: number, g: number, b: number } {
  * @param {string} hex
  * @returns {{r: number; g: number; b: number}}
  */
-export function hexToRgbObject(hex: string): { r: number, g: number, b: number } {
+export function hexToRgbObject(hex: string): RgbObject {
 
   if (!isHex(hex)) return;
 
@@ -64,7 +66,7 @@ export function hexToRgbObject(hex: string): { r: number, g: number, b: number }
  * @param any
  * @returns {{r: number; g: number; b: number}}
  */
-export function hsvToRgbObject(any: any): { r: number, g: number, b: number } {
+export function hsvToRgbObject(any: any): RgbObject {
   // HSVの値でなかった場合はそのままreturn
   if (!isHsv(any)) return;
 
@@ -109,7 +111,7 @@ export function hsvToRgbObject(any: any): { r: number, g: number, b: number } {
  * @param {{r: number; g: number; b: number}} rgb
  * @returns {string}
  */
-export function rgbObjectToHexString(rgb: { r: number, g: number, b: number }): string {
+export function rgbObjectToHexString(rgb: RgbObject): string {
   // 小数点を含む値を受け取る可能性があるため、四捨五入を行う
   const [r, g, b] = [Math.round(rgb.r), Math.round(rgb.g), Math.round(rgb.b)];
 
@@ -132,7 +134,7 @@ export function rgbObjectToHexString(rgb: { r: number, g: number, b: number }): 
  * @param {{r: number; g: number; b: number}} rgb
  * @returns { h: number; s: number; v: number }
  */
-export function rgbObjectToHsvObject(rgb: { r: number, g: number, b: number }): { h: number, s: number, v: number } {
+export function rgbObjectToHsvObject(rgb: RgbObject): HsvObject {
   const max = Math.max(rgb.r, rgb.g, rgb.b);
   const min = Math.min(rgb.r, rgb.g, rgb.b);
 
@@ -207,7 +209,7 @@ export function getComplementaryColorFrom(rgbColor: RgbColor): RgbColor {
  * @param {number} addHue
  * @returns {{h: number; s: number; v: number}}
  */
-export function addHueToHsvObject(hsv: { h: number, s: number, v: number }, addHue: number)
+export function addHueToHsvObject(hsv: HsvObject, addHue: number)
   : { h: number, s: number, v: number } {
   // 新しいHueの値を求め、360以下の値にする
   let newHue = hsv.h + addHue;
@@ -225,8 +227,8 @@ export function addHueToHsvObject(hsv: { h: number, s: number, v: number }, addH
  * @param {ColorType} type
  * @returns {{r: number; g: number; b: number}[] | {h: number; s: number; v: number}[] | string[]}
  */
-export function hsvObjectsToSpecifiedType(hsvObjects: { h: number, s: number, v: number }[], type: ColorType)
-  : { r: number, g: number, b: number }[] | { h: number, s: number, v: number }[] | string[] {
+export function hsvObjectsToSpecifiedType(hsvObjects: HsvObject[], type: ColorType)
+  : RgbObject[] | HsvObject[] | string[] {
   // それぞれのtypeによってreturnする色を変更する
   switch (type){
   case ColorType.Hsv:
