@@ -281,7 +281,7 @@ describe('RecoColor test', () => {
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
-        it(`${element} getClashingColor is undefined`, () => { assert.strictEqual(color.getBlue(), undefined) });
+        it(`${element} getClashingColor is undefined`, () => { assert.strictEqual(color.getClashingColor(), undefined) });
       });
     });
   });
@@ -332,7 +332,7 @@ describe('RecoColor test', () => {
 
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index]);
-        it(`${element} getClashingColor is undefined`, () => { assert.strictEqual(color.getBlue(), undefined) });
+        it(`${element} getComplementaryColor is undefined`, () => { assert.strictEqual(color.getComplementaryColor(), undefined) });
       });
     });
   });
