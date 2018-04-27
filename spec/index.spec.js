@@ -3,6 +3,9 @@ const assert = chai.assert;
 const recoColor = require('../index');
 
 describe('RecoColor test', () => {
+  /**
+   * isRgb
+   */
   describe('isRgb test', () => {
     describe('isRgb true の場合のテスト', () => {
       const tests = [[0, 10, 255], 'rgb(0, 120, 255)', 'RGB(0, 255, 255)', 'RGB(0,255,255)', {r: 0, g: 0, b: 255}];
@@ -23,6 +26,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * isHex
+   */
   describe('isHex test', () => {
     describe('isHex true の場合のテスト', () => {
       const tests = ['#fff', '#000000', 'abc', '00f0ab'];
@@ -43,6 +50,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * isHsv
+   */
   describe('isHsv の test', () => {
     describe('isHsv true の場合のテスト', () => {
       const tests = ['hsv(360, 0, 0)', 'HSV(0, 100, 100)', {h: 360, s: 0, v:0}, {h: 100, s: 50, v:100}];
@@ -62,6 +73,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getOriginal
+   */
   describe('getOriginal test', () => {
     describe('最初に設定した値が取得出来るか', () => {
       const tests = ['#fff', '#000000', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', [0, 255, 255, 255], 'HSV(0, 100, 100)', {h: 100, s: 50, v:100}];
@@ -83,6 +98,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getType
+   */
   describe('getType test', () => {
     describe('それぞれのTypeを "RGB", "HEX", "HSV", "none" の中から取得する', () => {
       const tests = ['#fff', '#000000', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(0, 255, 255)', 'RGB(0,255,255)', {r: 0, g: 0, b: 255}, 'hsv(360, 0, 0)', {h: 360, s: 0, v:0}, [0, 255, 255, 255], '$fff', '#ffg', null];
@@ -95,6 +114,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getHex
+   */
   describe('getHex test', () => {
     describe('正常値の場合の HEX 値 を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
@@ -116,6 +139,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getRgb
+   */
   describe('getRgb test', () => {
     describe('正常値の場合の RGBオブジェクト を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
@@ -141,6 +168,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getRed
+   */
   describe('getRed test', () => {
     describe('正常値の場合の Red の値 を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
@@ -164,6 +195,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getGreen
+   */
   describe('getGreen test', () => {
     describe('正常値の場合の Green の値 を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
@@ -187,6 +222,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getBlue
+   */
   describe('getBlue test', () => {
     describe('正常値の場合の Blue の値 を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
@@ -210,6 +249,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getHsv
+   */
   describe('getHsv test', () => {
     describe('正常値の場合の Blue の値 を取得する', () => {
       const tests = ['#fff', 'abc', '00f0ab', [0, 10, 255], 'rgb(0, 120, 255)', 'RGB(180, 20,90)', {r: 20, g: 10, b: 180}, 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
@@ -235,6 +278,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getClashingColor
+   */
   describe('getClashingColor test', () => {
     describe('正常値の場合の getClashingColor の値 を取得する（オプション指定なし）', () => {
       const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)', 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
@@ -286,6 +333,10 @@ describe('RecoColor test', () => {
     });
   });
 
+
+  /**
+   * getComplementaryColor
+   */
   describe('getComplementaryColor test', () => {
     describe('正常値の場合の getComplementaryColor の値 を取得する（オプション指定なし）', () => {
       const tests = ['#fff', '000', [30, 10, 240], 'rgb(200, 10, 1)', 'HSV(0, 100, 100)', {h: 234, s: 50, v:96}];
@@ -338,6 +389,9 @@ describe('RecoColor test', () => {
   });
 
 
+  /**
+   * getTriad
+   */
   describe('getTriad test', () => {
     describe('正常値の場合の getTriad の値 を取得する（オプション指定なし）', () => {
       const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
