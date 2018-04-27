@@ -346,6 +346,55 @@ color.getComplementaryColor();  // undefined
 ```
 
 
+#### getTriad
+
+トライアドの値を RGBのオブジェクト・HEX値・HSVのオブジェクト のいずれかで取得  
+オプションで最初に指定したオリジナルの値を含めるか、RGB・HEXといったどのタイプで取得するかを指定する
+
+##### オプション
+
+| オプション  | 値の型  | defalut | 補足 |
+|:------------- |:---------------| -------------| -------------|
+| hasOriginal  | boolean | false | オリジナルの値を含める場合true |
+| type            | string   | 'RGB' | 取得する型  以下の3種類を指定可能<br> 'RGB', 'HSV, 'HEX' （大文字小文字問わず）|
+
+また、設定した値が小数点を含む値の場合、小数点第一位を四捨五入した値を返す  
+（設定した値が正しくない場合は `undefined` を返します）
+
+```javascript
+const color = new RecoColor("#f00");
+color.getTriad();
+// => [{r: 0, g: 255, b: 0}, {r: 0, g: 0, b: 255}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color.getTriad();
+// => [{r: 1, g: 200, b: 10}, {r: 10, g: 1, b: 200}]
+
+const color = new RecoColor({h: 234, s: 50, v:96});
+color.getTriad();
+// => [{r: 245, g: 122, b: 135}, {r: 135, g: 245, b: 122}]
+
+const color = new RecoColor("#f00");
+color.getTriad({hasOriginal: true});
+// => [{r: 255, g: 0, b: 0}, {r: 0, g: 255, b: 0}, {r: 0, g: 0, b: 255}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color.getTriad({type: 'hex'});
+// => ['01c80a', '0a01c8']
+
+const color = new RecoColor({h: 234, s: 50, v:96});
+color.getTriad({type: 'hsv'});
+// => [{h: 354, s: 50, v: 96}, {h: 114, s: 50, v: 96}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color.getTriad({hasOriginal: true, type: 'hex'});
+// => ['c80a01', '01c80a', '0a01c8']
+
+const color = new RecoColor("#ffff");
+color.getTriad();  // undefined
+```
+
+
 #### isRgb
 
 設定した値がRGB値か判定
