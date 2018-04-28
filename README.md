@@ -443,6 +443,57 @@ color. getTetrad();  // undefined
 ```
 
 
+#### getPentad
+
+ペンタードの値を RGBのオブジェクト・HEX値・HSVのオブジェクト のいずれかで取得  
+オプションで最初に指定したオリジナルの値を含めるか、RGB・HEXといったどのタイプで取得するかを指定する
+
+##### オプション
+
+| オプション  | 値の型  | defalut | 補足 |
+|:------------- |:---------------| -------------| -------------|
+| hasOriginal  | boolean | false | オリジナルの値を含める場合true |
+| type            | string   | 'RGB' | 取得する型  以下の3種類を指定可能<br> 'RGB', 'HSV, 'HEX' （大文字小文字問わず）|
+
+また、設定した値が小数点を含む値の場合、小数点第一位を四捨五入した値を返す  
+（設定した値が正しくない場合は `undefined` を返します）
+
+※ ペンタード配色はテトラード配色に白・黒を追加した配色を指す場合もありますが、ここでは色相差72℃の4色（hasOriginalがtrueの場合5色）を取得します
+
+```javascript
+const color = new RecoColor("#f00");
+color. getPentad();
+// => [{r: 204, g: 255, b: 0}, {r: 0, g: 255, b: 102}, {r: 0, g: 102, b: 255}, {r: 204, g: 0, b: 255}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color. getPentad();
+// => [{r: 151, g: 200, b: 1}, {r: 1, g: 200, b: 90}, {r: 1, g: 72, b: 200}, {r: 169, g: 1, b: 200}]
+
+const color = new RecoColor({h: 234, s: 50, v:96});
+color. getPentad();
+// => [{r: 245, g: 122, b: 233}, {r: 245, g: 159, b: 122}, {r: 184, g: 245, b: 122}, {r: 122, g: 245, b: 208}]
+
+const color = new RecoColor("#f00");
+color. getPentad({hasOriginal: true});
+// => [{r: 255, g: 0, b: 0}, {r: 204, g: 255, b: 0}, {r: 0, g: 255, b: 102}, {r: 0, g: 102, b: 255}, {r: 204, g: 0, b: 255}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color. getPentad({type: 'hex'});
+// => ['97c801', '01c85a', '0148c8', 'a901c8']
+
+const color = new RecoColor({h: 234, s: 50, v:96});
+color. getPentad({type: 'hsv'});
+// => [{h: 306, s: 50, v: 96}, {h: 18, s: 50, v: 96}, {h: 90, s: 50, v: 96}, {h: 162, s: 50, v: 96}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color. getPentad({hasOriginal: true, type: 'hex'});
+// => ['c80a01', '97c801', '01c85a', '0148c8', 'a901c8']
+
+const color = new RecoColor("#ffff");
+color. getPentad();  // undefined
+```
+
+
 #### isRgb
 
 設定した値がRGB値か判定
