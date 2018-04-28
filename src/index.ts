@@ -287,6 +287,35 @@ export default class RecoColor {
 
 
   /**
+   * ヘクサードの値を取得する
+   * hasOriginal・・trueの場合、オリジナルの値も含めて配列にして返す（デフォルト：false）
+   * type・・'RGB'・'HSV'・'HEX' 指定が可能（デフォルト：'RGB'）
+   *
+   * @param {{hasOriginal: boolean; type: string}} option
+   * @returns {RgbObject[] | HsvObject[] | string[]}
+   */
+  public getHexad(option: { hasOriginal: boolean, type: string } = { hasOriginal: false, type: 'RGB' })
+  : RgbObject[] | HsvObject[] | string[] {
+    if (isNullOrUndefined(this._rgbColor)) return;
+
+    // オリジナルのHSVの値から、一旦残り5つの色をオリジナルと同じ値で作成する
+    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
+    const originalHsvObjects: HsvObject[] = Array(5).fill(originalHsvObject);
+
+    // Pentadの残りにあたるHSVオブジェクトの配列を作成する
+    const hexadHsvObjects: HsvObject[] = originalHsvObjects.map((hsv, index) => {
+      // 順番にHueに対して値を追加する
+      return convert.addHueToHsvObject(hsv, (index + 1) * 60);
+    });
+    // originalの要素を含む場合は1番最初に追加する
+    if (option.hasOriginal) hexadHsvObjects.unshift(originalHsvObject);
+
+    const colorType: ColorType = getColorTypeFrom(option.type);
+    return convert.hsvObjectsToSpecifiedType(hexadHsvObjects, colorType);
+  }
+
+
+  /**
    * this._originalColor から this._rgbColor に値を設定する
    */
   private initSetting(): void {
