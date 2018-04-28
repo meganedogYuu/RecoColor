@@ -488,4 +488,105 @@ describe('RecoColor test', () => {
       });
     });
   });
+
+
+  /**
+   * getTetrad
+   */
+  describe('getTetrad test', () => {
+    describe('正常値の場合の getTetrad の値 を取得する（オプション指定なし）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [[{r: 128, g: 255, b: 0}, {r: 0, g: 255, b: 255}, {r: 128, g: 0, b: 255}], [{r: 92, g: 200, b: 1}, {r: 1, g: 191, b: 200}, {r: 110, g: 1, b: 200}], [{r: 245, g: 122, b: 196}, {r: 245, g: 233, b: 122}, {r: 122, g: 245, b: 171}]];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getTetrad();
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c.r, answer[i].r);
+            assert.strictEqual(c.g, answer[i].g);
+            assert.strictEqual(c.b, answer[i].b);
+          });
+        });
+      });
+    });
+
+    describe('正常値の場合の getTetrad の値 を取得する（hasOriginal: true）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [[{r: 255, g: 0, b: 0}, {r: 128, g: 255, b: 0}, {r: 0, g: 255, b: 255}, {r: 128, g: 0, b: 255}], [{r: 200, g: 10, b: 1}, {r: 92, g: 200, b: 1}, {r: 1, g: 191, b: 200}, {r: 110, g: 1, b: 200}], [{r: 122, g: 135, b: 245}, {r: 245, g: 122, b: 196}, {r: 245, g: 233, b: 122}, {r: 122, g: 245, b: 171}]];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getTetrad({hasOriginal: true});
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c.r, answer[i].r);
+            assert.strictEqual(c.g, answer[i].g);
+            assert.strictEqual(c.b, answer[i].b);
+          });
+        });
+      });
+    });
+
+    describe('正常値の場合の getTetrad の値 を取得する（type: hex）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [['80ff00', '00ffff', '8000ff'], ['5cc801', '01bfc8', '6e01c8'], ['f57ac4', 'f5e97a', '7af5ab']];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getTetrad({type: 'hex'});
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c, answer[i]);
+          });
+        });
+      });
+    });
+
+    describe('正常値の場合の getTetrad の値 を取得する（type: hsv）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [[{h: 90, s: 100, v: 100}, {h: 180, s: 100, v: 100}, {h: 270, s: 100, v: 100}], [{h: 93, s: 100, v: 78}, {h: 183, s: 100, v: 78}, {h: 273, s: 100, v: 78}], [{h: 324, s: 50, v: 96}, {h: 54, s: 50, v: 96}, {h: 144, s: 50, v: 96}]];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getTetrad({type: 'hsv'});
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c.h, answer[i].h);
+            assert.strictEqual(c.s, answer[i].s);
+            assert.strictEqual(c.v, answer[i].v);
+          });
+        });
+      });
+    });
+
+    describe('正常値の場合の getTetrad の値 を取得する（hasOriginal, type両方指定）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [['ff0000', '80ff00', '00ffff', '8000ff'], ['c80a01', '5cc801', '01bfc8', '6e01c8'], ['7a87f5', 'f57ac4', 'f5e97a', '7af5ab']];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getTetrad({hasOriginal:true, type: 'hex'});
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c, answer[i]);
+          });
+        });
+      });
+    });
+
+    describe('異常値の場合は undefined を取得する', () => {
+      const tests = ['#ffff', '#fffffff', '$fff', '#ffg', [0, 10, 255, 255], 'rgb(0, 120, 255, 0)', 'RGBA(180, 20, 90)', {r: 256, g: 10, b: 180}];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} getTetrad is undefined`, () => { assert.strictEqual(color.getTetrad(), undefined) });
+      });
+    });
+  });
 });
