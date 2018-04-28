@@ -589,4 +589,125 @@ describe('RecoColor test', () => {
       });
     });
   });
+
+
+  /**
+   * getPentad
+   */
+  describe('getPentad test', () => {
+    describe('正常値の場合の getPentad の値 を取得する（オプション指定なし）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [
+        [{r: 204, g: 255, b: 0}, {r: 0, g: 255, b: 102}, {r: 0, g: 102, b: 255}, {r: 204, g: 0, b: 255}],
+        [{r: 151, g: 200, b: 1}, {r: 1, g: 200, b: 90}, {r: 1, g: 72, b: 200}, {r: 169, g: 1, b: 200}],
+        [{r: 245, g: 122, b: 233}, {r: 245, g: 159, b: 122}, {r: 184, g: 245, b: 122}, {r: 122, g: 245, b: 208}]
+      ];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getPentad();
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c.r, answer[i].r);
+            assert.strictEqual(c.g, answer[i].g);
+            assert.strictEqual(c.b, answer[i].b);
+          });
+        });
+      });
+    });
+
+    describe('正常値の場合の getPentad の値 を取得する（hasOriginal: true）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [
+        [{r: 255, g: 0, b: 0}, {r: 204, g: 255, b: 0}, {r: 0, g: 255, b: 102}, {r: 0, g: 102, b: 255}, {r: 204, g: 0, b: 255}],
+        [{r: 200, g: 10, b: 1}, {r: 151, g: 200, b: 1}, {r: 1, g: 200, b: 90}, {r: 1, g: 72, b: 200}, {r: 169, g: 1, b: 200}],
+        [{r: 122, g: 135, b: 245}, {r: 245, g: 122, b: 233}, {r: 245, g: 159, b: 122}, {r: 184, g: 245, b: 122}, {r: 122, g: 245, b: 208}]
+      ];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getPentad({hasOriginal: true});
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c.r, answer[i].r);
+            assert.strictEqual(c.g, answer[i].g);
+            assert.strictEqual(c.b, answer[i].b);
+          });
+        });
+      });
+    });
+
+    describe('正常値の場合の getPentad の値 を取得する（type: hex）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [
+        ['ccff00', '00ff66', '0066ff', 'cc00ff'],
+        ['97c801', '01c85a', '0148c8', 'a901c8'],
+        ['f57ae9', 'f59f7a', 'b8f57a', '7af5d0']
+      ];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getPentad({type: 'hex'});
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c, answer[i]);
+          });
+        });
+      });
+    });
+
+    describe('正常値の場合の getPentad の値 を取得する（type: hsv）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [
+        [{h: 72, s: 100, v: 100}, {h: 144, s: 100, v: 100}, {h: 216, s: 100, v: 100}, {h: 288, s: 100, v: 100}],
+        [{h: 75, s: 100, v: 78}, {h: 147, s: 100, v: 78}, {h: 219, s: 100, v: 78}, {h: 291 , s: 100, v: 78}],
+        [{h: 306, s: 50, v: 96}, {h: 18, s: 50, v: 96}, {h: 90, s: 50, v: 96}, {h: 162, s: 50, v: 96}]
+      ];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getPentad({type: 'hsv'});
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c.h, answer[i].h);
+            assert.strictEqual(c.s, answer[i].s);
+            assert.strictEqual(c.v, answer[i].v);
+          });
+        });
+      });
+    });
+
+    describe('正常値の場合の getPentad の値 を取得する（hasOriginal, type両方指定）', () => {
+      const tests = ['#f00', 'rgb(200, 10, 1)', {h: 234, s: 50, v:96}];
+      const answers = [
+        ['ff0000', 'ccff00', '00ff66', '0066ff', 'cc00ff'],
+        ['c80a01', '97c801', '01c85a', '0148c8', 'a901c8'],
+        ['7a87f5', 'f57ae9', 'f59f7a', 'b8f57a', '7af5d0']
+      ];
+
+      tests.forEach((element, index) => {
+        const color = new recoColor(tests[index]);
+        const tetrad = color.getPentad({hasOriginal:true, type: 'hex'});
+        const answer = answers[index];
+        tetrad.forEach((c, i) => {
+          it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(answer[i])}`, () => {
+            assert.strictEqual(c, answer[i]);
+          });
+        });
+      });
+    });
+
+    describe('異常値の場合は undefined を取得する', () => {
+      const tests = ['#ffff', '#fffffff', '$fff', '#ffg', [0, 10, 255, 255], 'rgb(0, 120, 255, 0)', 'RGBA(180, 20, 90)', {r: 256, g: 10, b: 180}];
+
+      tests.forEach((element, index) => {
+        let color = new recoColor(tests[index]);
+        it(`${element} getPentad is undefined`, () => { assert.strictEqual(color.getPentad(), undefined) });
+      });
+    });
+  });
 });
