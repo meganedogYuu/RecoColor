@@ -342,6 +342,35 @@ export default class RecoColor {
 
 
   /**
+   * スプリット・コンプリメンタリーの値を取得する
+   * hasOriginal・・trueの場合、オリジナルの値も含めて配列にして返す（デフォルト：false）
+   * type・・'RGB'・'HSV'・'HEX' 指定が可能（デフォルト：'RGB'）
+   *
+   * @param {{hasOriginal: boolean; type: string}} option
+   * @returns {RgbObject[] | HsvObject[] | string[]}
+   */
+  public getSplitComplementary(option: { hasOriginal: boolean, type: string } = { hasOriginal: false, type: 'RGB' })
+  : RgbObject[] | HsvObject[] | string[] {
+    if (isNullOrUndefined(this._rgbColor)) return;
+
+    // オリジナルのHSVの値から、一旦残り5つの色をオリジナルと同じ値で作成する
+    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
+
+    // スプリット・コンプリメンタリーの残り2色を配列に追加
+    const scHsvObjects: HsvObject[] = [
+      convert.addHueToHsvObject(originalHsvObject, 150),
+      convert.addHueToHsvObject(originalHsvObject, 210)
+    ];
+
+    // originalの要素を含む場合は1番最初に追加する
+    if (option.hasOriginal) scHsvObjects.unshift(originalHsvObject);
+
+    const colorType: ColorType = getColorTypeFrom(option.type);
+    return convert.hsvObjectsToSpecifiedType(scHsvObjects, colorType);
+  }
+
+
+  /**
    * this._originalColor から this._rgbColor に値を設定する
    */
   private initSetting(): void {
