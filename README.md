@@ -346,6 +346,56 @@ color.getComplementaryColor();  // undefined
 ```
 
 
+#### getDyad
+
+ダイアードの値を RGBのオブジェクト・HEX値・HSVのオブジェクト のいずれかで取得  
+オプションで最初に指定したオリジナルの値を含めるか、RGB・HEXといったどのタイプで取得するかを指定する
+
+##### オプション
+
+| オプション  | 値の型  | defalut | 補足 |
+|:------------- |:---------------| -------------| -------------|
+| hasOriginal  | boolean | false | オリジナルの値を含める場合true |
+| type            | string   | 'RGB' | 取得する型  以下の3種類を指定可能<br> 'RGB', 'HSV, 'HEX' （大文字小文字問わず）|
+
+また、設定した値が小数点を含む値の場合、小数点第一位を四捨五入した値を返す  
+（設定した値が正しくない場合は `undefined` を返します）
+
+```javascript
+const color = new RecoColor("#f00");
+color.getDyad();
+// => [{r: 0, g: 255, b: 255}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color.getDyad();
+// => [{r: 1, g: 191, b: 200}]
+
+const color = new RecoColor({h: 234, s: 50, v:96});
+color.getDyad();
+// => [{r: 245, g: 233, b: 122}]
+
+const color = new RecoColor("#f00");
+color.getDyad({hasOriginal: true});
+// => [{r: 255, g: 0, b: 0}, {r: 0, g: 255, b: 255}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color.getDyad({type: 'hex'});
+// => ['01bfc8']
+
+const color = new RecoColor({h: 234, s: 50, v:96});
+color.getDyad({type: 'hsv'});
+// => [{h: 54, s: 50, v: 96}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color.getDyad({hasOriginal: true, type: 'hex'});
+// => ['c80a01', '01bfc8']
+
+const color = new RecoColor("#ffff");
+color.getDyad();  // undefined
+```
+
+
+
 #### getTriad
 
 トライアドの値を RGBのオブジェクト・HEX値・HSVのオブジェクト のいずれかで取得  
