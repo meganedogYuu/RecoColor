@@ -199,6 +199,32 @@ export default class RecoColor {
     return { r: highMath(rgb.r), g: highMath(rgb.g), b: highMath(rgb.b) };
   }
 
+
+  /**
+   * ダイアードの値を取得する
+   * hasOriginal・・trueの場合、オリジナルの値も含めて配列にして返す（デフォルト：false）
+   * type・・'RGB'・'HSV'・'HEX' 指定が可能（デフォルト：'RGB'）
+   *
+   * @param {{hasOriginal: boolean; type: string}} option
+   * @returns {RgbObject[] | HsvObject[] | string[]}
+   */
+  public getDyad(option: { hasOriginal: boolean, type: string } = { hasOriginal: false, type: 'RGB' })
+  : RgbObject[] | HsvObject[] | string[] {
+    if (isNullOrUndefined(this._rgbColor)) return;
+
+    // オリジナルのHSVの値から、一旦残り2つの色をオリジナルと同じ値で作成する
+    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
+    // Dyadの残りにあたるHSVオブジェクトの配列を作成する
+    const dyadHsvObjects: HsvObject[] = [convert.addHueToHsvObject(originalHsvObject, 180)];
+
+    // originalの要素を含む場合は1番最初に追加する
+    if (option.hasOriginal) dyadHsvObjects.unshift(originalHsvObject);
+
+    const colorType: ColorType = getColorTypeFrom(option.type);
+    return convert.hsvObjectsToSpecifiedType(dyadHsvObjects, colorType);
+  }
+
+
   /**
    * トライアドの値を取得する
    * hasOriginal・・trueの場合、オリジナルの値も含めて配列にして返す（デフォルト：false）
