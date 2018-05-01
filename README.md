@@ -593,6 +593,56 @@ color. getHexad();  // undefined
 ```
 
 
+#### getSplitComplementary
+
+スプリット・コンプリメンタリーの値を RGBのオブジェクト・HEX値・HSVのオブジェクト のいずれかで取得  
+オプションで最初に指定したオリジナルの値を含めるか、RGB・HEXといったどのタイプで取得するかを指定する
+
+##### オプション
+
+| オプション  | 値の型  | defalut | 補足 |
+|:------------- |:---------------| -------------| -------------|
+| hasOriginal  | boolean | false | オリジナルの値を含める場合true |
+| type            | string   | 'RGB' | 取得する型  以下の3種類を指定可能<br> 'RGB', 'HSV, 'HEX' （大文字小文字問わず）|
+
+また、設定した値が小数点を含む値の場合、小数点第一位を四捨五入した値を返す  
+（設定した値が正しくない場合は `undefined` を返します）
+
+
+```javascript
+const color = new RecoColor("#f00");
+color. getSplitComplementary();
+// =>[{r: 0, g: 255, b: 128}, {r: 0, g: 128, b: 255}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color. getSplitComplementary();
+// => [{r: 1, g: 200, b: 109}, {r: 1, g: 92, b: 200}]
+
+const color = new RecoColor({h: 234, s: 50, v:96});
+color. getSplitComplementary();
+// => [{r: 245, g: 171, b: 122}, {r: 196, g: 245, b: 122}]
+
+const color = new RecoColor("#f00");
+color. getSplitComplementary({hasOriginal: true});
+// => [{r: 255, g: 0, b: 0}, {r: 0, g: 255, b: 128}, {r: 0, g: 128, b: 255}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color. getSplitComplementary({type: 'hex'});
+// => ['01c86d', '015cc8']
+
+const color = new RecoColor({h: 234, s: 50, v:96});
+color. getSplitComplementary({type: 'hsv'});
+// => [{h: 24, s: 50, v: 96}, {h: 84, s: 50, v: 96}]
+
+const color = new RecoColor("rgb(200, 10, 1)");
+color. getSplitComplementary({hasOriginal: true, type: 'hex'});
+// => ['c80a01', '01c86d', '015cc8']
+
+const color = new RecoColor("#ffff");
+color. getSplitComplementary();  // undefined
+```
+
+
 #### isRgb
 
 設定した値がRGB値か判定
