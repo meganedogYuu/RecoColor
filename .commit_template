@@ -3,34 +3,39 @@
 
 
 # ==== Format ====
-# :emoji: Subject
+# <type>(<scope>): <subject>
 #
-# Commit body...
+# <body>
+#
+# <footer>
 
 
-# ==== Emojis ====
-# 🎉  :tada:  機能追加（大きな）
-# ✨  :sparkles:  機能追加（部分的）
-# 👍  :+1:  機能改善・機能修正
-# 🐛  :bug:  バグ修正
-# ♻️  :recycle:  リファクタリング
-# 🚿  :shower:  削除（機能・ファイル・コメント）
-# ✅  :white_check_mark:  テスト・CI（追加・更新・改善）
-# 📝  :memo:  ドキュメント・コメント（追加・更新）
-# 👕  :shirt:  Lintエラー・コードスタイルの修正
-# 🚀  :rocket:  パフォーマンス改善
-# 🆙  :up:  依存パッケージなどのアップデート
-# 🔒  :lock:  新機能の公開範囲の制限
-# 👮  :cop:  セキュリティ関連の改善
+# ==== ex ====
+# feat(ngInclude): add template url parameter to events
+#
+# The `src` (i.e. the url of the template to load) is now provided to the
+# `$includeContentRequested`, `$includeContentLoaded` and `$includeContentError`
+# events.
+#
+# Closes #8453
+# Closes #8454
 
 
-# ==== Messages ====
-# Add      新規 ファイル・機能 追加
-# Update   機能修正、既存機能追加（バグではない)
-# Clean    リファクタリング
-# Remove   削除など
-# Fix      バグ修正
-# Upgrade  バージョンアップ
+
+# ==== type ====
+# feat      新しい機能
+# fix       バグ修正
+# chore     変更
+# docs      ドキュメント
+# style     ;や{}を追加など書式設定
+# refactor  変数名変更などのリファクタリング
+# test      テストの追加・修正
+
+
+# ==== scope（example） ====
+# init・runner・watcher・config・web-server・proxy・etc.
+#
+# scopeは入力しなくても構わない、その場合()は省略
 
 
 # ==== The Seven Rules ====
