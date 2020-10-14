@@ -1,22 +1,21 @@
-import { isRgb, isHex, isHsv, getType, getColorTypeFrom } from './utility/check';
-import { isNullOrUndefined, highMath } from './utility/util';
-import { RgbColor } from './member/RgbColor';
-import { ColorType } from './member/ColorType';
-import * as convert from './utility/convert';
-import { RgbObject } from './interface/RgbObject';
-import { HsvObject } from './interface/HsvObject';
+import { isRgb, isHex, isHsv, getType, getColorTypeFrom } from './utility/check'
+import { isNullOrUndefined, highMath } from './utility/util'
+import { RgbColor } from './member/RgbColor'
+import { ColorType } from './member/ColorType'
+import * as convert from './utility/convert'
+import { RgbObject } from './interface/RgbObject'
+import { HsvObject } from './interface/HsvObject'
 
 export default class RecoColor {
-
-  private _originalColor: any;
-  private _option: { key?: string };
-  private _rgbColor;
+  private _originalColor: any
+  private _option: { key?: string }
+  private _rgbColor
 
   constructor(color: any, opts: { key?: string }) {
-    this._originalColor = (color) ? color : '';
-    this._option = opts || {};
+    this._originalColor = color ? color : ''
+    this._option = opts || {}
 
-    this.initSetting();
+    this.initSetting()
   }
 
   /**
@@ -25,8 +24,8 @@ export default class RecoColor {
    * @param {any} color 設定を行いたい色（ex: {r: 255, g :255, b:128}, "#ff0001", rgb(255, 255, 255)）
    */
   public set(color: any) {
-    this._originalColor = color;
-    this.initSetting();
+    this._originalColor = color
+    this.initSetting()
   }
 
   /**
@@ -35,7 +34,7 @@ export default class RecoColor {
    * @returns {boolean}
    */
   public isRgb(): boolean {
-    return isRgb(this._originalColor);
+    return isRgb(this._originalColor)
   }
 
   /**
@@ -44,7 +43,7 @@ export default class RecoColor {
    * @returns {boolean}
    */
   public isHex(): boolean {
-    return isHex(this._originalColor);
+    return isHex(this._originalColor)
   }
 
   /**
@@ -53,7 +52,7 @@ export default class RecoColor {
    * @returns {boolean}
    */
   public isHsv(): boolean {
-    return isHsv(this._originalColor);
+    return isHsv(this._originalColor)
   }
 
   /**
@@ -62,7 +61,7 @@ export default class RecoColor {
    * @returns {any}
    */
   public getOriginal(): any {
-    return this._originalColor;
+    return this._originalColor
   }
 
   /**
@@ -71,7 +70,7 @@ export default class RecoColor {
    * @returns {string}
    */
   public getType(): string {
-    return getType(this._originalColor);
+    return getType(this._originalColor)
   }
 
   /**
@@ -82,8 +81,8 @@ export default class RecoColor {
    * @returns {string}
    */
   public getHex(): string {
-    if (isNullOrUndefined(this._rgbColor)) return;
-    return convert.rgbObjectToHexString(this._rgbColor.getRgbObject());
+    if (isNullOrUndefined(this._rgbColor)) return
+    return convert.rgbObjectToHexString(this._rgbColor.getRgbObject())
   }
 
   /**
@@ -93,9 +92,13 @@ export default class RecoColor {
    * @returns {{r: number; g: number; b: number}}
    */
   public getRgb(): RgbObject {
-    if (isNullOrUndefined(this._rgbColor)) return;
+    if (isNullOrUndefined(this._rgbColor)) return
     // 小数点の計算を行った値を返す
-    return { r: highMath(this._rgbColor.r) , g: highMath(this._rgbColor.g), b: highMath(this._rgbColor.b) };
+    return {
+      r: highMath(this._rgbColor.r),
+      g: highMath(this._rgbColor.g),
+      b: highMath(this._rgbColor.b),
+    }
   }
 
   /**
@@ -105,9 +108,9 @@ export default class RecoColor {
    * @returns {number}
    */
   public getRed(): number {
-    if (isNullOrUndefined(this._rgbColor)) return;
+    if (isNullOrUndefined(this._rgbColor)) return
     // 小数点の計算を行った値を返す
-    return highMath(this._rgbColor.r);
+    return highMath(this._rgbColor.r)
   }
 
   /**
@@ -117,9 +120,9 @@ export default class RecoColor {
    * @returns {number}
    */
   public getGreen(): number {
-    if (isNullOrUndefined(this._rgbColor)) return;
+    if (isNullOrUndefined(this._rgbColor)) return
     // 小数点の計算を行った値を返す
-    return highMath(this._rgbColor.g);
+    return highMath(this._rgbColor.g)
   }
 
   /**
@@ -129,9 +132,9 @@ export default class RecoColor {
    * @returns {number}
    */
   public getBlue(): number {
-    if (isNullOrUndefined(this._rgbColor)) return;
+    if (isNullOrUndefined(this._rgbColor)) return
     // 小数点の計算を行った値を返す
-    return highMath(this._rgbColor.b);
+    return highMath(this._rgbColor.b)
   }
 
   /**
@@ -145,15 +148,13 @@ export default class RecoColor {
    * @returns {{h: number; s: number; v: number}}
    */
   public getHsv(): HsvObject {
-    if (isNullOrUndefined(this._rgbColor)) return;
+    if (isNullOrUndefined(this._rgbColor)) return
 
     // 丸めていない値を取得
-    const hsv = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
+    const hsv = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject())
     // 小数点の計算を行った値を返す
-    return { h: highMath(hsv.h), s: highMath(hsv.s), v: highMath(hsv.v) };
+    return { h: highMath(hsv.h), s: highMath(hsv.s), v: highMath(hsv.v) }
   }
-
-
 
   /**
    * 反対色を求める
@@ -163,18 +164,18 @@ export default class RecoColor {
    * @returns {{r: number; g: number; b: number}} | string
    */
   public getClashingColor(option: string = 'RGB'): RgbObject | string {
-    if (isNullOrUndefined(this._rgbColor)) return;
+    if (isNullOrUndefined(this._rgbColor)) return
     // 反対色の RgbColor を取得
-    const clashingColor: RgbColor = convert.getClashingColorFrom(this._rgbColor);
+    const clashingColor: RgbColor = convert.getClashingColorFrom(this._rgbColor)
 
     // option で HEX の指定がある場合HEX値を返す、それ以外の場合 RGBのオブジェクト を返す
     if (getColorTypeFrom(option) === ColorType.Hex) {
-      return convert.rgbObjectToHexString(clashingColor.getRgbObject());
+      return convert.rgbObjectToHexString(clashingColor.getRgbObject())
     }
 
     // 小数点の計算を行った値を返す
-    const rgb: RgbObject = clashingColor.getRgbObject();
-    return { r: highMath(rgb.r), g: highMath(rgb.g), b: highMath(rgb.b) };
+    const rgb: RgbObject = clashingColor.getRgbObject()
+    return { r: highMath(rgb.r), g: highMath(rgb.g), b: highMath(rgb.b) }
   }
 
   /**
@@ -185,20 +186,19 @@ export default class RecoColor {
    * @returns {{r: number; g: number; b: number}}
    */
   public getComplementaryColor(option: string = 'RGB'): RgbObject | string {
-    if (isNullOrUndefined(this._rgbColor)) return;
+    if (isNullOrUndefined(this._rgbColor)) return
     // 補色の RgbColor を取得
-    const complementaryColor: RgbColor = convert.getComplementaryColorFrom(this._rgbColor);
+    const complementaryColor: RgbColor = convert.getComplementaryColorFrom(this._rgbColor)
 
     // option で HEX の指定がある場合HEX値を返す、それ以外の場合 RGBのオブジェクト を返す
     if (getColorTypeFrom(option) === ColorType.Hex) {
-      return convert.rgbObjectToHexString(complementaryColor.getRgbObject());
+      return convert.rgbObjectToHexString(complementaryColor.getRgbObject())
     }
 
     // 小数点の計算を行った値を返す
-    const rgb: RgbObject = complementaryColor.getRgbObject();
-    return { r: highMath(rgb.r), g: highMath(rgb.g), b: highMath(rgb.b) };
+    const rgb: RgbObject = complementaryColor.getRgbObject()
+    return { r: highMath(rgb.r), g: highMath(rgb.g), b: highMath(rgb.b) }
   }
-
 
   /**
    * ダイアードの値を取得する
@@ -208,22 +208,22 @@ export default class RecoColor {
    * @param {{hasOriginal: boolean; type: string}} option
    * @returns {RgbObject[] | HsvObject[] | string[]}
    */
-  public getDyad(option: { hasOriginal: boolean, type: string } = { hasOriginal: false, type: 'RGB' })
-  : RgbObject[] | HsvObject[] | string[] {
-    if (isNullOrUndefined(this._rgbColor)) return;
+  public getDyad(
+    option: { hasOriginal: boolean; type: string } = { hasOriginal: false, type: 'RGB' }
+  ): RgbObject[] | HsvObject[] | string[] {
+    if (isNullOrUndefined(this._rgbColor)) return
 
     // オリジナルのHSVの値から、一旦残り2つの色をオリジナルと同じ値で作成する
-    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
+    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject())
     // Dyadの残りにあたるHSVオブジェクトの配列を作成する
-    const dyadHsvObjects: HsvObject[] = [convert.addHueToHsvObject(originalHsvObject, 180)];
+    const dyadHsvObjects: HsvObject[] = [convert.addHueToHsvObject(originalHsvObject, 180)]
 
     // originalの要素を含む場合は1番最初に追加する
-    if (option.hasOriginal) dyadHsvObjects.unshift(originalHsvObject);
+    if (option.hasOriginal) dyadHsvObjects.unshift(originalHsvObject)
 
-    const colorType: ColorType = getColorTypeFrom(option.type);
-    return convert.hsvObjectsToSpecifiedType(dyadHsvObjects, colorType);
+    const colorType: ColorType = getColorTypeFrom(option.type)
+    return convert.hsvObjectsToSpecifiedType(dyadHsvObjects, colorType)
   }
-
 
   /**
    * トライアドの値を取得する
@@ -233,26 +233,26 @@ export default class RecoColor {
    * @param {{hasOriginal: boolean; type: string}} option
    * @returns {RgbObject[] | HsvObject[] | string[]}
    */
-  public getTriad(option: { hasOriginal: boolean, type: string } = { hasOriginal: false, type: 'RGB' })
-  : RgbObject[] | HsvObject[] | string[] {
-    if (isNullOrUndefined(this._rgbColor)) return;
+  public getTriad(
+    option: { hasOriginal: boolean; type: string } = { hasOriginal: false, type: 'RGB' }
+  ): RgbObject[] | HsvObject[] | string[] {
+    if (isNullOrUndefined(this._rgbColor)) return
 
     // オリジナルのHSVの値から、一旦残り2つの色をオリジナルと同じ値で作成する
-    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
-    const originalHsvObjects: HsvObject[] = Array(2).fill(originalHsvObject);
+    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject())
+    const originalHsvObjects: HsvObject[] = Array(2).fill(originalHsvObject)
 
     // Triadの残りにあたるHSVオブジェクトの配列を作成する
     const triadHsvObjects: HsvObject[] = originalHsvObjects.map((hsv, index) => {
       // 順番にHueに対して値を追加する
-      return convert.addHueToHsvObject(hsv, (index + 1) * 120);
-    });
+      return convert.addHueToHsvObject(hsv, (index + 1) * 120)
+    })
     // originalの要素を含む場合は1番最初に追加する
-    if (option.hasOriginal) triadHsvObjects.unshift(originalHsvObject);
+    if (option.hasOriginal) triadHsvObjects.unshift(originalHsvObject)
 
-    const colorType: ColorType = getColorTypeFrom(option.type);
-    return convert.hsvObjectsToSpecifiedType(triadHsvObjects, colorType);
+    const colorType: ColorType = getColorTypeFrom(option.type)
+    return convert.hsvObjectsToSpecifiedType(triadHsvObjects, colorType)
   }
-
 
   /**
    * テトラードの値を取得する
@@ -262,26 +262,26 @@ export default class RecoColor {
    * @param {{hasOriginal: boolean; type: string}} option
    * @returns {RgbObject[] | HsvObject[] | string[]}
    */
-  public getTetrad(option: { hasOriginal: boolean, type: string } = { hasOriginal: false, type: 'RGB' })
-  : RgbObject[] | HsvObject[] | string[] {
-    if (isNullOrUndefined(this._rgbColor)) return;
+  public getTetrad(
+    option: { hasOriginal: boolean; type: string } = { hasOriginal: false, type: 'RGB' }
+  ): RgbObject[] | HsvObject[] | string[] {
+    if (isNullOrUndefined(this._rgbColor)) return
 
     // オリジナルのHSVの値から、一旦残り3つの色をオリジナルと同じ値で作成する
-    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
-    const originalHsvObjects: HsvObject[] = Array(3).fill(originalHsvObject);
+    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject())
+    const originalHsvObjects: HsvObject[] = Array(3).fill(originalHsvObject)
 
     // Tetradの残りにあたるHSVオブジェクトの配列を作成する
     const tetradHsvObjects: HsvObject[] = originalHsvObjects.map((hsv, index) => {
       // 順番にHueに対して値を追加する
-      return convert.addHueToHsvObject(hsv, (index + 1) * 90);
-    });
+      return convert.addHueToHsvObject(hsv, (index + 1) * 90)
+    })
     // originalの要素を含む場合は1番最初に追加する
-    if (option.hasOriginal) tetradHsvObjects.unshift(originalHsvObject);
+    if (option.hasOriginal) tetradHsvObjects.unshift(originalHsvObject)
 
-    const colorType: ColorType = getColorTypeFrom(option.type);
-    return convert.hsvObjectsToSpecifiedType(tetradHsvObjects, colorType);
+    const colorType: ColorType = getColorTypeFrom(option.type)
+    return convert.hsvObjectsToSpecifiedType(tetradHsvObjects, colorType)
   }
-
 
   /**
    * ペンタードの値を取得する
@@ -291,26 +291,26 @@ export default class RecoColor {
    * @param {{hasOriginal: boolean; type: string}} option
    * @returns {RgbObject[] | HsvObject[] | string[]}
    */
-  public getPentad(option: { hasOriginal: boolean, type: string } = { hasOriginal: false, type: 'RGB' })
-  : RgbObject[] | HsvObject[] | string[] {
-    if (isNullOrUndefined(this._rgbColor)) return;
+  public getPentad(
+    option: { hasOriginal: boolean; type: string } = { hasOriginal: false, type: 'RGB' }
+  ): RgbObject[] | HsvObject[] | string[] {
+    if (isNullOrUndefined(this._rgbColor)) return
 
     // オリジナルのHSVの値から、一旦残り4つの色をオリジナルと同じ値で作成する
-    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
-    const originalHsvObjects: HsvObject[] = Array(4).fill(originalHsvObject);
+    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject())
+    const originalHsvObjects: HsvObject[] = Array(4).fill(originalHsvObject)
 
     // Pentadの残りにあたるHSVオブジェクトの配列を作成する
     const pentadHsvObjects: HsvObject[] = originalHsvObjects.map((hsv, index) => {
       // 順番にHueに対して値を追加する
-      return convert.addHueToHsvObject(hsv, (index + 1) * 72);
-    });
+      return convert.addHueToHsvObject(hsv, (index + 1) * 72)
+    })
     // originalの要素を含む場合は1番最初に追加する
-    if (option.hasOriginal) pentadHsvObjects.unshift(originalHsvObject);
+    if (option.hasOriginal) pentadHsvObjects.unshift(originalHsvObject)
 
-    const colorType: ColorType = getColorTypeFrom(option.type);
-    return convert.hsvObjectsToSpecifiedType(pentadHsvObjects, colorType);
+    const colorType: ColorType = getColorTypeFrom(option.type)
+    return convert.hsvObjectsToSpecifiedType(pentadHsvObjects, colorType)
   }
-
 
   /**
    * ヘクサードの値を取得する
@@ -320,26 +320,26 @@ export default class RecoColor {
    * @param {{hasOriginal: boolean; type: string}} option
    * @returns {RgbObject[] | HsvObject[] | string[]}
    */
-  public getHexad(option: { hasOriginal: boolean, type: string } = { hasOriginal: false, type: 'RGB' })
-  : RgbObject[] | HsvObject[] | string[] {
-    if (isNullOrUndefined(this._rgbColor)) return;
+  public getHexad(
+    option: { hasOriginal: boolean; type: string } = { hasOriginal: false, type: 'RGB' }
+  ): RgbObject[] | HsvObject[] | string[] {
+    if (isNullOrUndefined(this._rgbColor)) return
 
     // オリジナルのHSVの値から、一旦残り5つの色をオリジナルと同じ値で作成する
-    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
-    const originalHsvObjects: HsvObject[] = Array(5).fill(originalHsvObject);
+    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject())
+    const originalHsvObjects: HsvObject[] = Array(5).fill(originalHsvObject)
 
     // Pentadの残りにあたるHSVオブジェクトの配列を作成する
     const hexadHsvObjects: HsvObject[] = originalHsvObjects.map((hsv, index) => {
       // 順番にHueに対して値を追加する
-      return convert.addHueToHsvObject(hsv, (index + 1) * 60);
-    });
+      return convert.addHueToHsvObject(hsv, (index + 1) * 60)
+    })
     // originalの要素を含む場合は1番最初に追加する
-    if (option.hasOriginal) hexadHsvObjects.unshift(originalHsvObject);
+    if (option.hasOriginal) hexadHsvObjects.unshift(originalHsvObject)
 
-    const colorType: ColorType = getColorTypeFrom(option.type);
-    return convert.hsvObjectsToSpecifiedType(hexadHsvObjects, colorType);
+    const colorType: ColorType = getColorTypeFrom(option.type)
+    return convert.hsvObjectsToSpecifiedType(hexadHsvObjects, colorType)
   }
-
 
   /**
    * スプリット・コンプリメンタリーの値を取得する
@@ -349,37 +349,39 @@ export default class RecoColor {
    * @param {{hasOriginal: boolean; type: string}} option
    * @returns {RgbObject[] | HsvObject[] | string[]}
    */
-  public getSplitComplementary(option: { hasOriginal: boolean, type: string } = { hasOriginal: false, type: 'RGB' })
-  : RgbObject[] | HsvObject[] | string[] {
-    if (isNullOrUndefined(this._rgbColor)) return;
+  public getSplitComplementary(
+    option: { hasOriginal: boolean; type: string } = { hasOriginal: false, type: 'RGB' }
+  ): RgbObject[] | HsvObject[] | string[] {
+    if (isNullOrUndefined(this._rgbColor)) return
 
     // オリジナルのHSVの値から、一旦残り5つの色をオリジナルと同じ値で作成する
-    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject());
+    const originalHsvObject = convert.rgbObjectToHsvObject(this._rgbColor.getRgbObject())
 
     // スプリット・コンプリメンタリーの残り2色を配列に追加
     const scHsvObjects: HsvObject[] = [
       convert.addHueToHsvObject(originalHsvObject, 150),
-      convert.addHueToHsvObject(originalHsvObject, 210)
-    ];
+      convert.addHueToHsvObject(originalHsvObject, 210),
+    ]
 
     // originalの要素を含む場合は1番最初に追加する
-    if (option.hasOriginal) scHsvObjects.unshift(originalHsvObject);
+    if (option.hasOriginal) scHsvObjects.unshift(originalHsvObject)
 
-    const colorType: ColorType = getColorTypeFrom(option.type);
-    return convert.hsvObjectsToSpecifiedType(scHsvObjects, colorType);
+    const colorType: ColorType = getColorTypeFrom(option.type)
+    return convert.hsvObjectsToSpecifiedType(scHsvObjects, colorType)
   }
-
 
   /**
    * this._originalColor から this._rgbColor に値を設定する
    */
   private initSetting(): void {
-    const obj: RgbObject
-      = isRgb(this._originalColor) ? convert.rgbToRgbObject(this._originalColor)
-      : isHex(this._originalColor) ? convert.hexToRgbObject(this._originalColor)
-      : isHsv(this._originalColor) ? convert.hsvToRgbObject(this._originalColor)
-      : undefined;
+    const obj: RgbObject = isRgb(this._originalColor)
+      ? convert.rgbToRgbObject(this._originalColor)
+      : isHex(this._originalColor)
+      ? convert.hexToRgbObject(this._originalColor)
+      : isHsv(this._originalColor)
+      ? convert.hsvToRgbObject(this._originalColor)
+      : undefined
 
-    if (!isNullOrUndefined(obj)) this._rgbColor = new RgbColor(obj);
+    if (!isNullOrUndefined(obj)) this._rgbColor = new RgbColor(obj)
   }
 }
