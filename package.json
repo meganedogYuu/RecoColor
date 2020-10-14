@@ -5,11 +5,11 @@
   "main": "./index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn src/index.ts",
-    "test": "mocha spec/*.js",
-    "watch": "gulp watch",
-    "build": "gulp ts-build",
-    "clean-build": "rm -rf ./lib && gulp ts-build",
-    "clean-install": "rm -rf ./node_modules && rm -rf ~/.npm && yarn install"
+    "clean": "rimraf dist/*",
+    "tsc": "tsc",
+    "build": "npm-run-all clean tsc",
+    "start": "node .",
+    "test": "mocha spec/*.js"
   },
   "repository": {
     "type": "git",
