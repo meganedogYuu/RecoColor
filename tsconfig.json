@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ES2019",
+    "module": "commonjs",
     "removeComments": true,
-    "module": "commonjs"
+    "sourceMap": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*"
