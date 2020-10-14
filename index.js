@@ -1,2 +1,2 @@
-const recoColor = require('./lib/index');
+const recoColor = require('./dist/index');
 module.exports = recoColor.default;
