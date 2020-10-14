@@ -4,13 +4,12 @@
   "description": "Convert color",
   "main": "./index.js",
   "scripts": {
-    "test": "mocha spec/*.js",
-    "watch": "gulp watch",
-    "build": "gulp ts-build",
-    "clean-build": "rm -rf ./lib && gulp ts-build",
-    "lint": "tslint 'src/**/*.ts'",
-    "prepublish": "gulp ts-build",
-    "clean-install": "rm -rf ./node_modules && rm -rf ~/.npm && yarn install"
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "clean": "rimraf dist/*",
+    "tsc": "tsc",
+    "build": "npm-run-all clean tsc",
+    "start": "node .",
+    "test": "mocha spec/*.js"
   },
   "repository": {
     "type": "git",
@@ -23,15 +22,20 @@
   "license": "MIT",
   "homepage": "https://github.com/meganedogYuu/recoColor",
   "devDependencies": {
+    "@types/node": "14",
     "chai": "^4.1.2",
-    "gulp": "^3.9.1",
-    "gulp-notify": "^3.0.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-typescript": "^3.2.3",
-    "gulp-watch": "^4.3.11",
     "mocha": "^4.1.0",
-    "tslint": "^5.8.0",
-    "tslint-config-airbnb": "^5.4.2",
-    "typescript": "^2.6.2"
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.1.2",
+    "rimraf": "^3.0.2",
+    "ts-node": "^9.0.0",
+    "ts-node-dev": "^1.0.0-pre.64",
+    "typescript": "^4.0.3"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "printWidth": 100,
+    "arrowParens": "avoid"
   }
 }

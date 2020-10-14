@@ -1,5 +1,4 @@
-import { HsvObject } from '../interface/HsvObject';
-
+import { HsvObject } from '../interface/HsvObject'
 
 /**
  * 受け取った配列が3ケタであるかの判定をする
@@ -8,7 +7,7 @@ import { HsvObject } from '../interface/HsvObject';
  * @returns {boolean}
  */
 export function isRgbLength(val: any[]): boolean {
-  return val.length === 3;
+  return val.length === 3
 }
 
 /**
@@ -18,7 +17,7 @@ export function isRgbLength(val: any[]): boolean {
  * @returns {boolean}
  */
 export function isRgbNumberFromNumber(num: number): boolean {
-  return 0 <= num && num <= 255;
+  return 0 <= num && num <= 255
 }
 
 /**
@@ -27,7 +26,7 @@ export function isRgbNumberFromNumber(num: number): boolean {
  * @returns {boolean}
  */
 export function isRgbNumberFromArray(arr: number[]): boolean {
-  return arr.every(e => isRgbNumberFromNumber(e));
+  return arr.every(e => isRgbNumberFromNumber(e))
 }
 
 /**
@@ -39,7 +38,7 @@ export function isRgbNumberFromArray(arr: number[]): boolean {
  * @returns {boolean}
  */
 export function isHsvNumberFromObject(obj: HsvObject): boolean {
-  return (0 <= obj.h && obj.h <= 360) && (0 <= obj.s && obj.s <= 100) && (0 <= obj.v && obj.v <= 100);
+  return 0 <= obj.h && obj.h <= 360 && 0 <= obj.s && obj.s <= 100 && 0 <= obj.v && obj.v <= 100
 }
 
 /**
@@ -50,8 +49,8 @@ export function isHsvNumberFromObject(obj: HsvObject): boolean {
  * @returns {string}
  */
 export function typeOf(obj): string {
-  const toString = Object.prototype.toString;
-  return toString.call(obj).slice(8, -1).toLowerCase();
+  const toString = Object.prototype.toString
+  return toString.call(obj).slice(8, -1).toLowerCase()
 }
 
 /**
@@ -61,7 +60,7 @@ export function typeOf(obj): string {
  * @returns {boolean}
  */
 export function isNullOrUndefined(obj: any): boolean {
-  return (obj === undefined || obj === null);
+  return obj === undefined || obj === null
 }
 
 /**
@@ -85,18 +84,18 @@ export function isNullOrUndefined(obj: any): boolean {
  */
 export function highMath(value: number, type: string = 'round', decimal: number = 0): number {
   // type の余計な空白を削除、小文字に変換
-  const lowerType: string = type.trim().toLowerCase();
+  const lowerType: string = type.trim().toLowerCase()
   // original が設定されている場合、そのままの値を返す
-  if (lowerType === 'original') return value;
+  if (lowerType === 'original') return value
   // 該当する文字列を設定
-  const t = (lowerType === 'ceil') ? 'ceil' : (lowerType === 'floor') ? 'floor' : 'round';
+  const t = lowerType === 'ceil' ? 'ceil' : lowerType === 'floor' ? 'floor' : 'round'
 
   switch (t) {
-  case 'round':
-    return decimal === 0 ? Math.round(value) : Math.round(value * (10 ** decimal)) / (10 ** decimal);
-  case 'ceil':
-    return decimal === 0 ? Math.ceil(value) : Math.ceil(value * (10 ** decimal)) / (10 ** decimal);
-  case 'floor':
-    return decimal === 0 ? Math.floor(value) : Math.floor(value * (10 ** decimal)) / (10 ** decimal);
+    case 'round':
+      return decimal === 0 ? Math.round(value) : Math.round(value * 10 ** decimal) / 10 ** decimal
+    case 'ceil':
+      return decimal === 0 ? Math.ceil(value) : Math.ceil(value * 10 ** decimal) / 10 ** decimal
+    case 'floor':
+      return decimal === 0 ? Math.floor(value) : Math.floor(value * 10 ** decimal) / 10 ** decimal
   }
 }

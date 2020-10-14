@@ -4,5 +4,5 @@
 export enum ColorType {
   Rgb,
   Hex,
-  Hsv
+  Hsv,
 }
