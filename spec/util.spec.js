@@ -1,6 +1,6 @@
 const chai = require('chai');
 const assert = chai.assert;
-const util = require('../lib/utility/util.js');
+const util = require('../dist/utility/util.js');
 
 describe('highMath の test', () => {
   describe('オプション指定なし', () => {

@@ -1,6 +1,12 @@
 const chai = require('chai');
 const assert = chai.assert;
+/*
+  FIXME:
+    import元を dist/index に変更する、そうする事で.tsで作られたファイルでも読み込みやすい。
+    そのためテストファイル自体も.tsにしてテストを行いたい
+ */
 const recoColor = require('../index');
+
 
 describe('RecoColor test', () => {
   /**
