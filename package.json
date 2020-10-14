@@ -4,11 +4,11 @@
   "description": "Convert color",
   "main": "./index.js",
   "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts",
     "test": "mocha spec/*.js",
     "watch": "gulp watch",
     "build": "gulp ts-build",
     "clean-build": "rm -rf ./lib && gulp ts-build",
-    "prepublish": "gulp ts-build",
     "clean-install": "rm -rf ./node_modules && rm -rf ~/.npm && yarn install"
   },
   "repository": {
@@ -22,6 +22,7 @@
   "license": "MIT",
   "homepage": "https://github.com/meganedogYuu/recoColor",
   "devDependencies": {
+    "@types/node": "14",
     "chai": "^4.1.2",
     "gulp": "^3.9.1",
     "gulp-notify": "^3.0.0",
