@@ -1,5 +1,3 @@
-//const chai = require('chai');
-//const assert = chai.assert;
 const check = require('../dist/utility/check.js')
 const ColorType = require('../dist/member/ColorType.js')
 
@@ -16,7 +14,7 @@ describe('isRgb の test', () => {
 
     rgbes.forEach(e => {
       it(`isRgb test ${e}`, () => {
-        assert.isTrue(check.isRgb(e))
+        expect(check.isRgb(e)).toBeTruthy()
       })
     })
   })
@@ -38,7 +36,7 @@ describe('isRgb の test', () => {
 
     rgbes.forEach(e => {
       it(`isRgb test ${e}`, () => {
-        assert.isFalse(check.isRgb(e))
+        expect(check.isRgb(e)).toBeFalsy()
       })
     })
   })
@@ -50,7 +48,7 @@ describe('isHex の test', () => {
 
     hexes.forEach(e => {
       it(`hexes test ${e}`, () => {
-        assert.isTrue(check.isHex(e))
+        expect(check.isHex(e)).toBeTruthy()
       })
     })
   })
@@ -59,7 +57,7 @@ describe('isHex の test', () => {
 
     hexes.forEach(e => {
       it(`hexes test ${e}`, () => {
-        assert.isFalse(check.isHex(e))
+        expect(check.isHex(e)).toBeFalsy()
       })
     })
   })
@@ -76,7 +74,7 @@ describe('isHsv の test', () => {
 
     hsvs.forEach(e => {
       it(`hsvs test ${e}`, () => {
-        assert.isTrue(check.isHsv(e))
+        expect(check.isHsv(e)).toBeTruthy()
       })
     })
   })
@@ -93,7 +91,7 @@ describe('isHsv の test', () => {
 
     hsvs.forEach(e => {
       it(`hsvs test ${e}`, () => {
-        assert.isFalse(check.isHsv(e))
+        expect(check.isHsv(e)).toBeFalsy()
       })
     })
   })
@@ -112,7 +110,7 @@ describe('getType の test', () => {
 
     any.forEach(e => {
       it(`${e} is ${correct}`, () => {
-        assert.strictEqual(check.getType(e), correct)
+        expect(check.getType(e)).toEqual(correct)
       })
     })
   })
@@ -123,7 +121,7 @@ describe('getType の test', () => {
 
     any.forEach(e => {
       it(`${e} is ${correct}`, () => {
-        assert.strictEqual(check.getType(e), correct)
+        expect(check.getType(e)).toEqual(correct)
       })
     })
   })
@@ -139,7 +137,7 @@ describe('getType の test', () => {
 
     any.forEach(e => {
       it(`${e} is ${correct}`, () => {
-        assert.strictEqual(check.getType(e), correct)
+        expect(check.getType(e)).toEqual(correct)
       })
     })
   })
@@ -150,7 +148,7 @@ describe('getType の test', () => {
 
     any.forEach(e => {
       it(`${e} is ${correct}`, () => {
-        assert.strictEqual(check.getType(e), correct)
+        expect(check.getType(e)).toEqual(correct)
       })
     })
   })
@@ -162,7 +160,7 @@ describe('getColorTypeFrom の test', () => {
 
     any.forEach(e => {
       it(`${e} is HEX`, () => {
-        assert.strictEqual(check.getColorTypeFrom(e), ColorType.ColorType.Hex)
+        expect(check.getColorTypeFrom(e)).toEqual(ColorType.ColorType.Hex)
       })
     })
   })
@@ -172,7 +170,7 @@ describe('getColorTypeFrom の test', () => {
 
     any.forEach(e => {
       it(`${e} is HSV`, () => {
-        assert.strictEqual(check.getColorTypeFrom(e), ColorType.ColorType.Hsv)
+        expect(check.getColorTypeFrom(e)).toEqual(ColorType.ColorType.Hsv)
       })
     })
   })
@@ -182,7 +180,7 @@ describe('getColorTypeFrom の test', () => {
 
     any.forEach(e => {
       it(`${e} is RGB`, () => {
-        assert.strictEqual(check.getColorTypeFrom(e), ColorType.ColorType.Rgb)
+        expect(check.getColorTypeFrom(e)).toEqual(ColorType.ColorType.Rgb)
       })
     })
   })
@@ -192,7 +190,7 @@ describe('getColorTypeFrom の test', () => {
 
     any.forEach(e => {
       it(`${e} is undefined`, () => {
-        assert.strictEqual(check.getColorTypeFrom(e), undefined)
+        expect(check.getColorTypeFrom(e)).toBeUndefined()
       })
     })
   })
