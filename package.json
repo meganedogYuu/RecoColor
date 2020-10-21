@@ -9,7 +9,7 @@
     "tsc": "tsc",
     "build": "npm-run-all clean tsc",
     "start": "node .",
-    "test": "mocha spec/*.js"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
