@@ -1,5 +1,5 @@
-const chai = require('chai');
-const assert = chai.assert;
+//const chai = require('chai');
+//const assert = chai.assert;
 const check = require('../dist/utility/check.js');
 const ColorType = require('../dist/member/ColorType.js');
 
