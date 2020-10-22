@@ -24,9 +24,9 @@ describe('rgbToRgbObject の test', () => {
     rgbes.forEach((element, index) => {
       it(`convert ${element} to RgbObject`, () => {
         const result = convert.rgbToRgbObject(element)
-        assert.strictEqual(result.r, answers[index].r)
-        assert.strictEqual(result.g, answers[index].g)
-        assert.strictEqual(result.b, answers[index].b)
+        expect(result.r).toEqual(answers[index].r)
+        expect(result.g).toEqual(answers[index].g)
+        expect(result.b).toEqual(answers[index].b)
       })
     })
   })
@@ -49,7 +49,7 @@ describe('rgbToRgbObject の test', () => {
     rgbes.forEach((element, index) => {
       it(`convert ${element} to RgbObject`, () => {
         const result = convert.rgbToRgbObject(element)
-        assert.strictEqual(result, undefined)
+        expect(result).toBeUndefined()
       })
     })
   })
@@ -68,9 +68,9 @@ describe('hexToRgbObject の test', () => {
     rgbes.forEach((element, index) => {
       it(`convert ${element} to RgbObject`, () => {
         const result = convert.hexToRgbObject(element)
-        assert.strictEqual(result.r, answers[index].r)
-        assert.strictEqual(result.g, answers[index].g)
-        assert.strictEqual(result.b, answers[index].b)
+        expect(result.r).toEqual(answers[index].r)
+        expect(result.g).toEqual(answers[index].g)
+        expect(result.b).toEqual(answers[index].b)
       })
     })
   })
@@ -80,7 +80,7 @@ describe('hexToRgbObject の test', () => {
     rgbes.forEach((element, index) => {
       it(`convert ${element} to RgbObject`, () => {
         const result = convert.hexToRgbObject(element)
-        assert.strictEqual(result, undefined)
+        expect(result).toBeUndefined()
       })
     })
   })
@@ -98,9 +98,9 @@ describe('hsvToRgbObject の test', () => {
     hsvs.forEach((element, index) => {
       it(`convert ${element} to RgbObject`, () => {
         const result = convert.hsvToRgbObject(element)
-        assert.strictEqual(Math.round(result.r), answers[index].r)
-        assert.strictEqual(Math.round(result.g), answers[index].g)
-        assert.strictEqual(Math.round(result.b), answers[index].b)
+        expect(Math.round(result.r)).toEqual(answers[index].r)
+        expect(Math.round(result.g)).toEqual(answers[index].g)
+        expect(Math.round(result.b)).toEqual(answers[index].b)
       })
     })
   })
@@ -116,7 +116,7 @@ describe('hsvToRgbObject の test', () => {
     hsvs.forEach(element => {
       it(`convert ${element} to RgbObject`, () => {
         const result = convert.hsvToRgbObject(element)
-        assert.strictEqual(result, undefined)
+        expect(result).toBeUndefined()
       })
     })
   })
@@ -142,9 +142,9 @@ describe('rgbObjectToHsvObject の test', () => {
         const result = convert.rgbObjectToHsvObject(element)
         // rgbColorToHsv は小数点に処理をせずに取得する
         // その状態のままだと比較がしづらいため切り捨てを行う
-        assert.strictEqual(Math.floor(result.h), answers[index].h)
-        assert.strictEqual(Math.floor(result.s), answers[index].s)
-        assert.strictEqual(Math.floor(result.v), answers[index].v)
+        expect(Math.floor(result.h)).toEqual(answers[index].h)
+        expect(Math.floor(result.s)).toEqual(answers[index].s)
+        expect(Math.floor(result.v)).toEqual(answers[index].v)
       })
     })
   })
@@ -164,7 +164,7 @@ describe('rgbObjectToHexString の test', () => {
     rgbes.forEach((element, index) => {
       it(`convert r:${element.r}, g:${element.g}, b:${element.b} to hex`, () => {
         const result = convert.rgbObjectToHexString(element)
-        assert.strictEqual(result, answers[index])
+        expect(result).toEqual(answers[index])
       })
     })
   })
@@ -190,9 +190,9 @@ describe('getClashingColorFrom の test', () => {
         const color = new rgbColor.RgbColor(element)
         const result = convert.getClashingColorFrom(color)
         const answer = new rgbColor.RgbColor(answers[index])
-        assert.strictEqual(result.r, answer.r)
-        assert.strictEqual(result.g, answer.g)
-        assert.strictEqual(result.b, answer.b)
+        expect(result.r).toEqual(answer.r)
+        expect(result.g).toEqual(answer.g)
+        expect(result.b).toEqual(answer.b)
       })
     })
   })
@@ -218,9 +218,9 @@ describe('getComplementaryColorFrom の test', () => {
         const color = new rgbColor.RgbColor(element)
         const result = convert.getComplementaryColorFrom(color)
         const answer = new rgbColor.RgbColor(answers[index])
-        assert.strictEqual(result.r, answer.r)
-        assert.strictEqual(result.g, answer.g)
-        assert.strictEqual(result.b, answer.b)
+        expect(result.r).toEqual(answer.r)
+        expect(result.g).toEqual(answer.g)
+        expect(result.b).toEqual(answer.b)
       })
     })
   })
@@ -245,9 +245,9 @@ describe('addHueToHsvObject の test', () => {
     questions.forEach((element, index) => {
       it(`convert {h:${element.h}, s:${element.s}, v:${element.v}} addValues ${addValues[index]} to {h:${answers.h}, s:${answers.s}, v:${answers.v}}`, () => {
         const result = convert.addHueToHsvObject(questions[index], addValues[index])
-        assert.strictEqual(result.h, answers[index].h)
-        assert.strictEqual(result.s, answers[index].s)
-        assert.strictEqual(result.v, answers[index].v)
+        expect(result.h).toEqual(answers[index].h)
+        expect(result.s).toEqual(answers[index].s)
+        expect(result.v).toEqual(answers[index].v)
       })
     })
   })
@@ -274,7 +274,7 @@ describe('hsvObjectsToSpecifiedType の test', () => {
       const answer = answers[index]
       it(`convert ${element} to ColorType.Hex answer: ${answer}`, () => {
         const result = convert.hsvObjectsToSpecifiedType(element, ColorType.ColorType.Hex)
-        result.forEach((hex, index) => assert.strictEqual(hex, answer[index]))
+        result.forEach((hex, index) => expect(hex).toEqual(answer[index]))
       })
     })
   })
@@ -306,9 +306,9 @@ describe('hsvObjectsToSpecifiedType の test', () => {
       it(`convert ${element} to ColorType.Rgb answer: ${answer}`, () => {
         const result = convert.hsvObjectsToSpecifiedType(element, ColorType.ColorType.Rgb)
         result.forEach((rgb, index) => {
-          assert.strictEqual(Math.round(rgb.r), answer[index].r)
-          assert.strictEqual(Math.round(rgb.g), answer[index].g)
-          assert.strictEqual(Math.round(rgb.b), answer[index].b)
+          expect(Math.round(rgb.r)).toEqual(answer[index].r)
+          expect(Math.round(rgb.g)).toEqual(answer[index].g)
+          expect(Math.round(rgb.b)).toEqual(answer[index].b)
         })
       })
     })
@@ -341,9 +341,9 @@ describe('hsvObjectsToSpecifiedType の test', () => {
       it(`convert ${element} to ColorType.Hsv answer: ${answer}`, () => {
         const result = convert.hsvObjectsToSpecifiedType(element, ColorType.ColorType.Hsv)
         result.forEach((hsv, index) => {
-          assert.strictEqual(hsv.h, answer[index].h)
-          assert.strictEqual(hsv.s, answer[index].s)
-          assert.strictEqual(hsv.v, answer[index].v)
+          expect(hsv.h).toEqual(answer[index].h)
+          expect(hsv.s).toEqual(answer[index].s)
+          expect(hsv.v).toEqual(answer[index].v)
         })
       })
     })
