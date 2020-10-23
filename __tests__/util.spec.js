@@ -10,7 +10,7 @@ describe('highMath の test', () => {
     questions.forEach((question, index) => {
       it(`${question} to ${answers[index]}`, () => {
         const result = util.highMath(question)
-        assert.strictEqual(result, answers[index])
+        expect(result).toEqual(answers[index])
       })
     })
   })
@@ -33,7 +33,7 @@ describe('highMath の test', () => {
     questions.forEach((question, index) => {
       it(`${question} to ${answers[index]} (type: ${types[index]})`, () => {
         const result = util.highMath(question, types[index])
-        assert.strictEqual(result, answers[index])
+        expect(result).toEqual(answers[index])
       })
     })
   })
@@ -46,7 +46,7 @@ describe('highMath の test', () => {
     answers.forEach((answer, index) => {
       it(`${question} to ${answer} (decimal: ${decimals[index]})`, () => {
         const result = util.highMath(question, 'round', decimals[index])
-        assert.strictEqual(result, answer)
+        expect(result).toEqual(answer)
       })
     })
   })
@@ -60,7 +60,7 @@ describe('highMath の test', () => {
     answers.forEach((answer, index) => {
       it(`${question} to ${answer} (types: ${types[index]}, decimal: ${decimals[index]})`, () => {
         const result = util.highMath(question, types[index], decimals[index])
-        assert.strictEqual(result, answer)
+        expect(result).toEqual(answer)
       })
     })
   })
