@@ -1,5 +1,3 @@
-// const chai = require('chai');
-// const assert = chai.assert;
 /*
   FIXME:
     import元を dist/index に変更する、そうする事で.tsで作られたファイルでも読み込みやすい。
@@ -24,7 +22,7 @@ describe('RecoColor test', () => {
       tests.forEach(element => {
         let color = new recoColor(element)
         it(`${element} isRgb true`, () => {
-          assert.isTrue(color.isRgb())
+          expect(color.isRgb()).toBeTruthy()
         })
       })
     })
@@ -50,7 +48,7 @@ describe('RecoColor test', () => {
       tests.forEach(element => {
         let color = new recoColor(element)
         it(`${element} isRgb false`, () => {
-          assert.isFalse(color.isRgb())
+          expect(color.isRgb()).toBeFalsy()
         })
       })
     })
@@ -66,7 +64,7 @@ describe('RecoColor test', () => {
       tests.forEach(element => {
         let color = new recoColor(element)
         it(`${element} isHex true`, () => {
-          assert.isTrue(color.isHex())
+          expect(color.isHex()).toBeTruthy()
         })
       })
     })
@@ -87,7 +85,7 @@ describe('RecoColor test', () => {
       tests.forEach(element => {
         let color = new recoColor(element)
         it(`${element} isHex false`, () => {
-          assert.isFalse(color.isHex())
+          expect(color.isHex()).toBeFalsy()
         })
       })
     })
@@ -108,7 +106,7 @@ describe('RecoColor test', () => {
       tests.forEach(element => {
         let color = new recoColor(element)
         it(`${element} isHsv true`, () => {
-          assert.isTrue(color.isHsv())
+          expect(color.isHsv()).toBeTruthy()
         })
       })
     })
@@ -128,7 +126,7 @@ describe('RecoColor test', () => {
       tests.forEach(element => {
         let color = new recoColor(element)
         it(`${element} isHsv false`, () => {
-          assert.isFalse(color.isHsv())
+          expect(color.isHsv()).toBeFalsy()
         })
       })
     })
@@ -154,7 +152,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(element)
         it(`getOriginal of ${element}`, () => {
-          assert.strictEqual(color.getOriginal(), tests[index])
+          expect(color.getOriginal()).toBe(tests[index])
         })
       })
     })
@@ -176,7 +174,7 @@ describe('RecoColor test', () => {
         let color = new recoColor('ddd')
         color.set(tests[index])
         it(`getOriginal of ${element}`, () => {
-          assert.strictEqual(color.getOriginal(), tests[index])
+          expect(color.getOriginal()).toBe(tests[index])
         })
       })
     })
@@ -225,7 +223,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`getType of ${element}`, () => {
-          assert.strictEqual(color.getType(), answers[index])
+          expect(color.getType()).toBe(answers[index])
         })
       })
     })
@@ -262,7 +260,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} hex is ${answers[index]}`, () => {
-          assert.strictEqual(color.getHex(), answers[index])
+          expect(color.getHex()).toBe(answers[index])
         })
       })
     })
@@ -282,7 +280,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} hex is undefined`, () => {
-          assert.strictEqual(color.getHex(), undefined)
+          expect(color.getHex()).toBeUndefined()
         })
       })
     })
@@ -319,9 +317,9 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} RGB Object is ${answers[index]}`, () => {
-          assert.strictEqual(color.getRgb().r, answers[index].r)
-          assert.strictEqual(color.getRgb().g, answers[index].g)
-          assert.strictEqual(color.getRgb().b, answers[index].b)
+          expect(color.getRgb().r).toBe(answers[index].r)
+          expect(color.getRgb().g).toBe(answers[index].g)
+          expect(color.getRgb().b).toBe(answers[index].b)
         })
       })
     })
@@ -341,7 +339,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} RGB Object is undefined`, () => {
-          assert.strictEqual(color.getRgb(), undefined)
+          expect(color.getRgb()).toBeUndefined()
         })
       })
     })
@@ -378,7 +376,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} red is ${answers[index].r}`, () => {
-          assert.strictEqual(color.getRed(), answers[index].r)
+          expect(color.getRed()).toBe(answers[index].r)
         })
       })
     })
@@ -398,7 +396,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} red is undefined`, () => {
-          assert.strictEqual(color.getRgb(), undefined)
+          expect(color.getRed()).toBeUndefined()
         })
       })
     })
@@ -435,7 +433,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} green is ${answers[index].g}`, () => {
-          assert.strictEqual(color.getGreen(), answers[index].g)
+          expect(color.getGreen()).toBe(answers[index].g)
         })
       })
     })
@@ -455,7 +453,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} green is undefined`, () => {
-          assert.strictEqual(color.getGreen(), undefined)
+          expect(color.getGreen()).toBeUndefined()
         })
       })
     })
@@ -492,7 +490,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} blue is ${answers[index].b}`, () => {
-          assert.strictEqual(color.getBlue(), answers[index].b)
+          expect(color.getBlue()).toBe(answers[index].b)
         })
       })
     })
@@ -512,7 +510,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} blue is undefined`, () => {
-          assert.strictEqual(color.getBlue(), undefined)
+          expect(color.getBlue()).toBeUndefined()
         })
       })
     })
@@ -549,9 +547,9 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} hsv is h: ${answers[index].h}, s: ${answers[index].s}, v: ${answers[index].v}`, () => {
-          assert.strictEqual(color.getHsv().h, answers[index].h)
-          assert.strictEqual(color.getHsv().s, answers[index].s)
-          assert.strictEqual(color.getHsv().v, answers[index].v)
+          expect(color.getHsv().h).toBe(answers[index].h)
+          expect(color.getHsv().s).toBe(answers[index].s)
+          expect(color.getHsv().v).toBe(answers[index].v)
         })
       })
     })
@@ -571,7 +569,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} hsv is undefined`, () => {
-          assert.strictEqual(color.getHsv(), undefined)
+          expect(color.getHsv()).toBeUndefined()
         })
       })
     })
@@ -602,9 +600,9 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getClashingColor is r: ${answers[index].r} g: ${answers[index].g} b: ${answers[index].b}`, () => {
-          assert.strictEqual(color.getClashingColor().r, answers[index].r)
-          assert.strictEqual(color.getClashingColor().g, answers[index].g)
-          assert.strictEqual(color.getClashingColor().b, answers[index].b)
+          expect(color.getClashingColor().r).toBe(answers[index].r)
+          expect(color.getClashingColor().g).toBe(answers[index].g)
+          expect(color.getClashingColor().b).toBe(answers[index].b)
         })
       })
     })
@@ -623,7 +621,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getClashingColor is ${answers[index]}`, () => {
-          assert.strictEqual(color.getClashingColor('HEX'), answers[index])
+          expect(color.getClashingColor('HEX')).toBe(answers[index])
         })
       })
     })
@@ -649,9 +647,9 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getClashingColor is r: ${answers[index].r} g: ${answers[index].g} b: ${answers[index].b}`, () => {
-          assert.strictEqual(color.getClashingColor('Hez').r, answers[index].r)
-          assert.strictEqual(color.getClashingColor('Hez').g, answers[index].g)
-          assert.strictEqual(color.getClashingColor('Hez').b, answers[index].b)
+          expect(color.getClashingColor('Hez').r).toBe(answers[index].r)
+          expect(color.getClashingColor('Hez').g).toBe(answers[index].g)
+          expect(color.getClashingColor('Hez').b).toBe(answers[index].b)
         })
       })
     })
@@ -671,7 +669,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getClashingColor is undefined`, () => {
-          assert.strictEqual(color.getClashingColor(), undefined)
+          expect(color.getClashingColor()).toBeUndefined()
         })
       })
     })
@@ -702,9 +700,9 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getComplementaryColor is r: ${answers[index].r} g: ${answers[index].g} b: ${answers[index].b}`, () => {
-          assert.strictEqual(color.getComplementaryColor().r, answers[index].r)
-          assert.strictEqual(color.getComplementaryColor().g, answers[index].g)
-          assert.strictEqual(color.getComplementaryColor().b, answers[index].b)
+          expect(color.getComplementaryColor().r).toBe(answers[index].r)
+          expect(color.getComplementaryColor().g).toBe(answers[index].g)
+          expect(color.getComplementaryColor().b).toBe(answers[index].b)
         })
       })
     })
@@ -723,7 +721,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getComplementaryColor is ${answers[index]}`, () => {
-          assert.strictEqual(color.getComplementaryColor('HEX'), answers[index])
+          expect(color.getComplementaryColor('HEX')).toBe(answers[index])
         })
       })
     })
@@ -749,9 +747,9 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getComplementaryColor is r: ${answers[index].r} g: ${answers[index].g} b: ${answers[index].b}`, () => {
-          assert.strictEqual(color.getComplementaryColor().r, answers[index].r)
-          assert.strictEqual(color.getComplementaryColor().g, answers[index].g)
-          assert.strictEqual(color.getComplementaryColor().b, answers[index].b)
+          expect(color.getComplementaryColor().r).toBe(answers[index].r)
+          expect(color.getComplementaryColor().g).toBe(answers[index].g)
+          expect(color.getComplementaryColor().b).toBe(answers[index].b)
         })
       })
     })
@@ -771,7 +769,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getComplementaryColor is undefined`, () => {
-          assert.strictEqual(color.getComplementaryColor(), undefined)
+          expect(color.getComplementaryColor()).toBeUndefined()
         })
       })
     })
@@ -797,9 +795,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getDyad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -830,9 +828,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getDyad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -850,7 +848,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getDyad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -872,9 +870,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getDyad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.h, answer[i].h)
-            assert.strictEqual(c.s, answer[i].s)
-            assert.strictEqual(c.v, answer[i].v)
+            expect(c.h).toBe(answer[i].h)
+            expect(c.s).toBe(answer[i].s)
+            expect(c.v).toBe(answer[i].v)
           })
         })
       })
@@ -896,7 +894,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getDyad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -917,7 +915,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getDyad is undefined`, () => {
-          assert.strictEqual(color.getDyad(), undefined)
+          expect(color.getDyad()).toBeUndefined()
         })
       })
     })
@@ -952,9 +950,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTriad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -988,9 +986,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTriad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -1012,7 +1010,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTriad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1043,9 +1041,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTriad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.h, answer[i].h)
-            assert.strictEqual(c.s, answer[i].s)
-            assert.strictEqual(c.v, answer[i].v)
+            expect(c.h).toBe(answer[i].h)
+            expect(c.s).toBe(answer[i].s)
+            expect(c.v).toBe(answer[i].v)
           })
         })
       })
@@ -1067,7 +1065,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTriad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1088,7 +1086,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getTriad is undefined`, () => {
-          assert.strictEqual(color.getTriad(), undefined)
+          expect(color.getTriad()).toBeUndefined()
         })
       })
     })
@@ -1126,9 +1124,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -1165,9 +1163,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -1189,7 +1187,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1223,9 +1221,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.h, answer[i].h)
-            assert.strictEqual(c.s, answer[i].s)
-            assert.strictEqual(c.v, answer[i].v)
+            expect(c.h).toBe(answer[i].h)
+            expect(c.s).toBe(answer[i].s)
+            expect(c.v).toBe(answer[i].v)
           })
         })
       })
@@ -1247,7 +1245,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getTetrad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1268,7 +1266,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getTetrad is undefined`, () => {
-          assert.strictEqual(color.getTetrad(), undefined)
+          expect(color.getTetrad()).toBeUndefined()
         })
       })
     })
@@ -1309,9 +1307,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -1351,9 +1349,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -1375,7 +1373,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1412,9 +1410,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.h, answer[i].h)
-            assert.strictEqual(c.s, answer[i].s)
-            assert.strictEqual(c.v, answer[i].v)
+            expect(c.h).toBe(answer[i].h)
+            expect(c.s).toBe(answer[i].s)
+            expect(c.v).toBe(answer[i].v)
           })
         })
       })
@@ -1436,7 +1434,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getPentad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1457,7 +1455,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getPentad is undefined`, () => {
-          assert.strictEqual(color.getPentad(), undefined)
+          expect(color.getPentad()).toBeUndefined()
         })
       })
     })
@@ -1501,9 +1499,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getHexad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -1546,9 +1544,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getHexad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -1570,7 +1568,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getHexad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1610,9 +1608,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getHexad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.h, answer[i].h)
-            assert.strictEqual(c.s, answer[i].s)
-            assert.strictEqual(c.v, answer[i].v)
+            expect(c.h).toBe(answer[i].h)
+            expect(c.s).toBe(answer[i].s)
+            expect(c.v).toBe(answer[i].v)
           })
         })
       })
@@ -1634,7 +1632,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getHexad element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1655,7 +1653,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getHexad is undefined`, () => {
-          assert.strictEqual(color.getHexad(), undefined)
+          expect(color.getHexad()).toBeUndefined()
         })
       })
     })
@@ -1690,9 +1688,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getSplitComplementary element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -1726,9 +1724,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getSplitComplementary element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.r, answer[i].r)
-            assert.strictEqual(c.g, answer[i].g)
-            assert.strictEqual(c.b, answer[i].b)
+            expect(c.r).toBe(answer[i].r)
+            expect(c.g).toBe(answer[i].g)
+            expect(c.b).toBe(answer[i].b)
           })
         })
       })
@@ -1750,7 +1748,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getSplitComplementary element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1781,9 +1779,9 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getSplitComplementary element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c.h, answer[i].h)
-            assert.strictEqual(c.s, answer[i].s)
-            assert.strictEqual(c.v, answer[i].v)
+            expect(c.h).toBe(answer[i].h)
+            expect(c.s).toBe(answer[i].s)
+            expect(c.v).toBe(answer[i].v)
           })
         })
       })
@@ -1805,7 +1803,7 @@ describe('RecoColor test', () => {
           it(`${JSON.stringify(element)} getSplitComplementary element: ${i} is ${JSON.stringify(
             answer[i]
           )}`, () => {
-            assert.strictEqual(c, answer[i])
+            expect(c).toBe(answer[i])
           })
         })
       })
@@ -1826,7 +1824,7 @@ describe('RecoColor test', () => {
       tests.forEach((element, index) => {
         let color = new recoColor(tests[index])
         it(`${element} getSplitComplementary is undefined`, () => {
-          assert.strictEqual(color.getSplitComplementary(), undefined)
+          expect(color.getSplitComplementary()).toBeUndefined()
         })
       })
     })
